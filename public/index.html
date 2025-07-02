@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orobor - Tennis Strings Reborn</title>
+  <meta name="description" content="Orobor transforms discarded tennis strings into sustainable fashion. Join the circular economy movement.">
+  <link rel="stylesheet" href="/css/index.css">
+  
+</head>
+<body>
+    <img class="image-gradient" src="./imgs/gradient.png" alt="gradient">
+    <div class="layer-blur"></div>
+    <div class="container">
+     <header>
+      <h1 class="brand">OROBOR</h1>
+      <nav>
+        <a href="#">HOME</a>
+        <a href="#">ABOUT</a>
+        <a href="#">SEND STRINGS</a>
+        <a href="#">SHOP</a>
+        
+      </nav>
+
+      <button class="btn-signIn">Sign In</button>
+     </header>
+
+     <main>
+        <div class="content">
+          <div class="tag-box">
+            <div class="tag">INTRODUCING</div>
+          </div>
+
+          <h1>STRINGING FUTURES TOGETHER</h1>
+
+          <p class="description">
+            Serving up a circular future one restring at a time.
+
+          </p>
+
+          <div class="buttons">
+            <a href="" class="btn-about">About Us</a>
+            <a href="" class="btn-impact">See our Impact</a>
+    
+    
+          </div>
+        </div>
+        
+        <spline-viewer class="world" url="https://prod.spline.design/tLFdX7c9ST2AG8p8/scene.splinecode"></spline-viewer>
+      </main>
+
+      <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.18/build/spline-viewer.js"></script>
+
+
+      
+    </div>
+
+    <!-- About Us Section -->
+    <section class="about-section scroll-section">
+      <div class="about-content">
+        <h2 class="about-header">Who Are We?</h2>
+        <div class="about-text-wrapper">
+          <p class="about-text">
+            Orobor, founded by tennis players at Boston University, is dedicated to revolutionizing recycling in the tennis and textile industries by transforming used tennis strings into high-purity polyester suitable for clothing manufacturing. Through innovation and collaboration, we aim to reduce waste, advance the circular economy, and inspire sustainable practices across industries—all while staying rooted in the values of teamwork and dedication we've learned on the court.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section scroll-section">
+      <h2>Our Process</h2>
+      <div class="process-steps">
+        <div class="process-step">
+          <h3>Collect</h3>
+          <p>We partner with tennis facilities and players to collect used polyester tennis strings, ensuring they are diverted from landfills and repurposed for recycling into high-quality materials.</p>
+        </div>
+        <div class="process-step">
+          <h3>Repurpose</h3>
+          <p>Using advanced recycling techniques, we break down polyester tennis strings to remove impurities and additives, transforming them into high-purity polyester.</p>
+        </div>
+        <div class="process-step">
+          <h3>Collaborate</h3>
+          <p>We aim to collaborate with clothing companies to integrate our high-quality recycled polyester into their supply chains, helping them create sustainable apparel.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+      // Animate About Us header from left
+      gsap.from('.about-header', {
+        x: -120,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.about-section',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      });
+      // Animate About Us text fade in
+      gsap.from('.about-text', {
+        opacity: 0,
+        y: 40,
+        duration: 1.2,
+        delay: 0.3,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.about-section',
+          start: 'top 70%',
+          toggleActions: 'play none none none'
+        }
+      });
+      // Animate other scroll sections (except about-section)
+      gsap.utils.toArray('.scroll-section').forEach(section => {
+        if (!section.classList.contains('about-section')) {
+          gsap.from(section, {
+            opacity: 0,
+            y: 80,
+            duration: 1,
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              toggleActions: 'play none none none'
+            }
+          });
+        }
+      });
+      gsap.utils.toArray('.process-step').forEach((step, i) => {
+        gsap.from(step, {
+          opacity: 0,
+          y: 60,
+          duration: 0.8,
+          delay: i * 0.2,
+          scrollTrigger: {
+            trigger: step,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        });
+      });
+    </script>
+
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.18/build/spline-viewer.js"></script>
+
+    
+
+    
+
+</body>
+</html> 

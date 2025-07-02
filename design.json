@@ -1,0 +1,214 @@
+{
+    "designSystem": {
+      "name": "Lab Minimalist Design System",
+      "version": "1.0.0",
+      "description": "A minimal, geometric design system with bold color blocking and asymmetric layouts",
+      
+      "brandIdentity": {
+        "primaryBrand": "lab.",
+        "logoStyle": {
+          "font": "lowercase",
+          "weight": "bold",
+          "style": "sans-serif",
+          "punctuation": "period after brand name"
+        }
+      },
+  
+      "colorPalette": {
+        "primary": {
+          "white": "#FFFFFF",
+          "black": "#000000",
+          "red": "#FF4500",
+          "description": "High contrast palette with vibrant red accent"
+        },
+        "usage": {
+          "backgrounds": ["white", "red blocks"],
+          "text": ["black on white", "white on red"],
+          "accents": ["red geometric shapes", "red overlay blocks"]
+        }
+      },
+  
+      "typography": {
+        "hierarchy": {
+          "brand": {
+            "size": "extra-large",
+            "weight": "bold",
+            "case": "lowercase",
+            "style": "geometric sans-serif"
+          },
+          "headings": {
+            "size": "large",
+            "weight": "bold",
+            "case": "uppercase",
+            "tracking": "wide"
+          },
+          "body": {
+            "size": "small-medium",
+            "weight": "regular",
+            "case": "mixed",
+            "style": "clean sans-serif"
+          },
+          "navigation": {
+            "size": "small",
+            "weight": "medium",
+            "case": "uppercase",
+            "tracking": "wide"
+          }
+        },
+        "characteristics": {
+          "fontFamily": "Modern geometric sans-serif",
+          "contrast": "High contrast between text and background",
+          "readability": "Clean, minimal, highly legible"
+        }
+      },
+  
+      "layout": {
+        "principles": {
+          "asymmetry": "Deliberate asymmetric compositions",
+          "whitespace": "Generous white space usage",
+          "geometry": "Strong geometric shapes and divisions",
+          "blocking": "Color blocking for visual hierarchy"
+        },
+        "grid": {
+          "type": "Flexible asymmetric grid",
+          "columns": "Variable, content-driven",
+          "gutters": "Large, breathing room emphasized",
+          "breakpoints": "Responsive with maintained proportions"
+        },
+        "composition": {
+          "balance": "Asymmetric balance with weighted elements",
+          "focal_points": "Single strong focal point per section",
+          "flow": "Diagonal and angular content flow",
+          "hierarchy": "Size, color, and position-based hierarchy"
+        }
+      },
+  
+      "visualElements": {
+        "shapes": {
+          "rectangles": {
+            "style": "Clean, sharp corners",
+            "usage": "Content containers, color blocks",
+            "proportions": "Various aspect ratios, often wide"
+          },
+          "geometric_overlays": {
+            "style": "Solid color blocks",
+            "opacity": "Fully opaque",
+            "positioning": "Overlapping, asymmetric placement"
+          }
+        },
+        "imagery": {
+          "treatment": "High contrast, dramatic lighting",
+          "style": "Editorial, artistic photography",
+          "integration": "Seamlessly integrated with geometric elements",
+          "cropping": "Strategic, often partial subject framing"
+        }
+      },
+  
+      "interactions": {
+        "navigation": {
+          "style": "Minimal, top-aligned",
+          "behavior": "Clean hover states",
+          "typography": "Small, uppercase, spaced"
+        },
+        "buttons": {
+          "primary": {
+            "background": "Black or red",
+            "text": "White",
+            "shape": "Rectangular, sharp corners"
+          },
+          "secondary": {
+            "background": "Transparent",
+            "border": "Thin black line",
+            "text": "Black"
+          }
+        },
+        "hover_effects": {
+          "style": "Subtle, refined",
+          "timing": "Quick, responsive",
+          "feedback": "Color shifts or slight transforms"
+        }
+      },
+  
+      "spacing": {
+        "scale": "Generous, breathing room prioritized",
+        "rhythm": {
+          "small": "8px",
+          "medium": "16px",
+          "large": "32px",
+          "xlarge": "64px",
+          "xxlarge": "128px"
+        },
+        "principles": {
+          "margin": "Large margins around content blocks",
+          "padding": "Generous internal spacing",
+          "gaps": "Significant gaps between elements"
+        }
+      },
+  
+      "responsiveDesign": {
+        "approach": "Mobile-first with maintained proportions",
+        "breakpoints": {
+          "mobile": "320px - 768px",
+          "tablet": "768px - 1024px",
+          "desktop": "1024px+"
+        },
+        "adaptations": {
+          "mobile": {
+            "layout": "Stacked, single column",
+            "typography": "Adjusted sizes, maintained hierarchy",
+            "spacing": "Compressed but proportional",
+            "navigation": "Simplified, potentially collapsed"
+          },
+          "desktop": {
+            "layout": "Asymmetric multi-column",
+            "typography": "Full hierarchy expression",
+            "spacing": "Generous, full spacing scale",
+            "navigation": "Full horizontal navigation"
+          }
+        }
+      },
+  
+      "designPatterns": {
+        "hero_sections": {
+          "structure": "Large brand element + asymmetric content + geometric color block",
+          "imagery": "Dramatic, high-contrast photography",
+          "text_placement": "Offset, not centered"
+        },
+        "content_blocks": {
+          "structure": "Geometric containers with generous padding",
+          "alignment": "Mixed, creating visual tension",
+          "color_usage": "Strategic red accents on white base"
+        },
+        "navigation": {
+          "position": "Top, minimal",
+          "content": "Logo left, menu items right",
+          "style": "Clean, uppercase, spaced text"
+        }
+      },
+  
+      "animationPrinciples": {
+        "timing": "Quick, responsive (200-300ms)",
+        "easing": "Ease-out for natural feel",
+        "effects": [
+          "Subtle hover color changes",
+          "Smooth page transitions",
+          "Gentle element reveals",
+          "Minimal, purposeful motion"
+        ]
+      },
+  
+      "accessibilityGuidelines": {
+        "contrast": "High contrast maintained throughout",
+        "typography": "Large, legible font sizes",
+        "interaction": "Clear, obvious interactive elements",
+        "focus": "Visible focus states for keyboard navigation"
+      },
+  
+      "implementationNotes": {
+        "css_approach": "Flexbox and CSS Grid for layouts",
+        "naming_convention": "BEM or utility-based classes",
+        "component_structure": "Modular, reusable components",
+        "performance": "Optimized images, minimal CSS/JS"
+      }
+    }
+  }

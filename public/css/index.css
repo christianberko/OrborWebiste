@@ -1,0 +1,437 @@
+/* Orobor Minimalist Design System - Forest Green Edition */
+
+
+
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,301,701,300,501,401,901,400&display=swap');
+
+/* ROOT STYLES */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family:'Satoshi' ;
+  background-color: black;
+  color: whitesmoke;
+  min-height: 100vh;
+  line-height: 1.5;
+  
+}
+
+.image-gradient{
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.layer-blur{
+  height: 0;
+  width: 30rem;
+  position: absolute;
+  top:20%;
+  right: 0;
+  box-shadow:0 0 700px 15px white ;
+  rotate: -30deg;
+  z-index: 1;
+}
+
+.container{
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* HEADER STYLES */
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5rem;
+  z-index: 999;
+}
+
+header h1{
+  margin: 0;
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: .3rem;
+}
+
+nav{
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-left: -5%;
+}
+
+nav a{
+  font-size: 1.2rem;
+  letter-spacing: .1rem;
+  transition: color .2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+nav a:hover{
+  color: #a7a7a7;
+}
+
+.btn-signIn{
+  background-color: whitesmoke;
+  color:black;
+  padding: .8rem 2rem;
+  border-radius: 50px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color .2s ease;
+  cursor: pointer;
+}
+
+.btn-signIn:hover{
+  background-color: white;
+}
+
+/* MAIN CONTENT STYLES */
+
+main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(90vh - 6rem);
+}
+
+.content{
+  max-width: 40rem;
+  margin-left: 10%;
+  z-index: 999;
+}
+
+.tag-box{
+  position: relative;
+  width: 18rem;
+  height: 2.5rem;
+  border-radius: 50px;
+  color: rgba(255,255,255,0.9);
+  background: linear-gradient(-45deg, #FFA63D, #FF3D77, #338AFF);
+  background-size: 600%;
+  animation: anime 15s linear infinite;
+}
+
+@keyframes anime {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+ 
+.tag-box .tag{
+  position: absolute;
+  inset: 3px 3px 3px 3px;
+  background-color: black;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+  color: whitesmoke;
+}
+
+.tag-box .tag:hover{
+  /* background: #036615; */
+}
+
+.content h1{
+  font-size: 3rem;
+  font-weight: 100;
+  letter-spacing: 0.1rem;
+  margin: 2rem auto;
+  line-height: 1.2;
+  text-shadow: 0 0 10px rgba(128,128,  128  , .418);
+
+}
+
+.description{
+  font-size: 1.2rem;
+  letter-spacing: 0.05rem;
+  max-width: 35rem;
+  color:gray;
+
+}
+/* HERO BUTTONS  */
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.btn-about{
+  text-decoration: none;
+  border: 2px solid whitesmoke;
+  padding:0.7rem 1.2rem;
+  font-weight: 600;
+  
+  
+  border-radius: 50px;
+  color: whitesmoke;
+  font-size: 1.2rem;
+
+}
+
+
+
+.btn-impact{
+  text-decoration: none;
+  background-color: whitesmoke;
+  padding: 0.7rem 1.2rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  transition: background-color 2s ease;
+  border-radius: 50px;
+  color: black;
+  
+}
+
+/* HERO BUTTONS  */
+
+/* HERO SECTION RESPONSIVE STYLES   */
+
+
+
+
+
+
+/* 3D WORLD OBJECT  */
+.world{
+  position: absolute;
+  top:70px;
+  right:-25%;
+
+  
+  
+}
+
+/* SCROLL SECTIONS - About Us & Process */
+.scroll-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+/* About Us Section Layout */
+.about-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 100%);
+  backdrop-filter: blur(10px);
+  padding: 0;
+}
+
+.about-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+}
+
+.about-header {
+  position: absolute;
+  top: 4rem;
+  left: 5rem;
+  font-size: 5rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  background: linear-gradient(45deg, #ffffff, #a7a7a7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(255,255,255,0.3);
+  z-index: 2;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.about-text-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.about-text {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+  max-width: 50rem;
+  margin: 0 auto;
+  letter-spacing: 0.02rem;
+  text-align: center;
+  z-index: 1;
+  background: rgba(0,0,0,0.5);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+}
+
+@media (max-width: 900px) {
+  .about-header {
+    font-size: 3rem;
+    left: 2rem;
+    top: 2rem;
+  }
+  .about-text {
+    font-size: 1.1rem;
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-header {
+    font-size: 2rem;
+    left: 1rem;
+    top: 1rem;
+  }
+  .about-text-wrapper {
+    height: 80vh;
+  }
+  .about-text {
+    font-size: 1rem;
+    padding: 1rem 0.5rem;
+  }
+}
+
+.process-section {
+  background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+  backdrop-filter: blur(10px);
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.process-section h2 {
+  font-size: 3.5rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  background: linear-gradient(45deg, #ffffff, #a7a7a7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  max-width: 80rem;
+  width: 100%;
+}
+
+.process-step {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.process-step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FFA63D, #FF3D77, #338AFF);
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.process-step:hover {
+  transform: translateY(-10px);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.2);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.process-step h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  letter-spacing: 0.05rem;
+}
+
+.process-step p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #d0d0d0;
+  letter-spacing: 0.02rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .scroll-section {
+    padding: 2rem 1rem;
+    min-height: auto;
+  }
+  
+  .about-content h2,
+  .process-section h2 {
+    font-size: 2.5rem;
+  }
+  
+  .about-content p {
+    font-size: 1.1rem;
+  }
+  
+  .process-steps {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .process-step {
+    padding: 2rem;
+  }
+  
+  .process-step h3 {
+    font-size: 1.8rem;
+  }
+  
+  .process-step p {
+    font-size: 1rem;
+  }
+}
