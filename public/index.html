@@ -6,151 +6,211 @@
   <title>Orobor - Tennis Strings Reborn</title>
   <meta name="description" content="Orobor transforms discarded tennis strings into sustainable fashion. Join the circular economy movement.">
   <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   
 </head>
 <body>
-    <img class="image-gradient" src="./imgs/gradient.png" alt="gradient">
-    <div class="layer-blur"></div>
-    <div class="container">
-     <header>
-      <h1 class="brand">OROBOR</h1>
-      <nav>
-        <a href="#">HOME</a>
-        <a href="#">ABOUT</a>
-        <a href="#">SEND STRINGS</a>
-        <a href="#">SHOP</a>
-        
-      </nav>
-
-      <button class="btn-signIn">Sign In</button>
-     </header>
-
-     <main>
-        <div class="content">
-          <div class="tag-box">
-            <div class="tag">INTRODUCING</div>
+    <!-- Hero Section with Video Background -->
+    <section class="hero-section video-hero">
+      <video class="hero-bg-video" src="/imgs/strings.mp4" autoplay muted loop playsinline></video>
+      <div class="container">
+        <header>
+          <div class="header-logo-title" data-aos="fade-down" data-aos-duration="1500">
+            <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="orobor-logo-svg orobor-logo-white" />
+            <h1  class="brand">OROBOR</h1>
           </div>
-
-          <h1>STRINGING FUTURES TOGETHER</h1>
-
-          <p class="description">
-            Serving up a circular future one restring at a time.
-
-          </p>
-
-          <div class="buttons">
-            <a href="" class="btn-about">About Us</a>
-            <a href="" class="btn-impact">See our Impact</a>
-    
-    
+          <nav>
+            <a data-aos="fade-down" data-aos-duration="1500" href="#">HOME</a>
+            <a data-aos="fade-down" data-aos-duration="2000" href="#">OUR TEAM</a>
+            <a data-aos="fade-down" data-aos-duration="2500" href="#">BECOME A PARTNER</a>
+            <a data-aos="fade-down" data-aos-duration="3000" href="#">COLLECTION LOCATIONS</a>
+            <a data-aos="fade-down" data-aos-duration="3000" href="#">SHOP</a>
+          </nav>
+          <button data-aos="fade-down" data-aos-duration="3000" class="btn-signIn"><a href="SignIn.html">SIGN IN</a></button>
+        </header>
+        <main>
+          <div class="content">
+            <!-- <div data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1500" class="tag-box">
+              <div class="tag">INTRODUCING</div>
+            </div> -->
+            <h1 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="2000">STRINGING FUTURES TOGETHER</h1>
+            <p data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="2500" class="description">
+              Serving up a circular future one restring at a time.
+            </p>
+            <div data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="3000"class="buttons">
+              <a href="#about" class="btn-about">About Us</a>
+              <a href="" class="btn-impact">See our Impact</a>
+            </div>
           </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- What is Orbor Section -->
+    <section class="what-is-orbor-section scroll-section">
+      <div class="what-is-orbor-container">
+        <p class="reveal-type">
+         Orobor collects and transforms used polyester tennis string into virgin-quality materials for clothing manufacturing
+        </p>
+      </div>
+    </section>
+
+    <!-- Process Section (3-Column Grid) -->
+    <section class="process-section process-grid-section">
+      <div class="section-header">Our Process</div>
+      <h1 class="process-title">OUR PROCESS</h1>
+      <div class="process-grid-container">
+        <div class="process-grid-card" data-step="1">
+          <img src="/imgs/Racquet.jpg" alt="Collection" class="process-grid-img" />
+          <h2 class="process-grid-title">Collect</h2>
+          <p class="process-grid-desc">We partner with tennis facilities and players to collect used polyester tennis strings, ensuring they are diverted from landfills and repurposed for recycling into high-quality materials.</p>
         </div>
-        
-        <spline-viewer class="world" url="https://prod.spline.design/tLFdX7c9ST2AG8p8/scene.splinecode"></spline-viewer>
-      </main>
-
-      <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.18/build/spline-viewer.js"></script>
-
-
-      
-    </div>
-
-    <!-- About Us Section -->
-    <section class="about-section scroll-section">
-      <div class="about-content">
-        <h2 class="about-header">Who Are We?</h2>
-        <div class="about-text-wrapper">
-          <p class="about-text">
-            Orobor, founded by tennis players at Boston University, is dedicated to revolutionizing recycling in the tennis and textile industries by transforming used tennis strings into high-purity polyester suitable for clothing manufacturing. Through innovation and collaboration, we aim to reduce waste, advance the circular economy, and inspire sustainable practices across industries—all while staying rooted in the values of teamwork and dedication we've learned on the court.
-          </p>
+        <div class="process-grid-card" data-step="2">
+          <img src="/imgs/recycle.jpg" alt="Transformation" class="process-grid-img" />
+          <h2 class="process-grid-title">Repurpose</h2>
+          <p class="process-grid-desc">Our advanced recycling technology breaks down the polyester strings and transforms them into virgin-quality materials ready for manufacturing sustainable clothing.</p>
+        </div>
+        <div class="process-grid-card" data-step="3">
+          <img src="/imgs/clothes.jpg" alt="Creation" class="process-grid-img" />
+          <h2 class="process-grid-title">Collaborate</h2>
+          <p class="process-grid-desc">The recycled materials are crafted into high-quality, sustainable fashion items, completing the circular economy and giving tennis strings a second life.</p>
         </div>
       </div>
     </section>
 
-    <!-- Process Section -->
-    <section class="process-section scroll-section">
-      <h2>Our Process</h2>
-      <div class="process-steps">
-        <div class="process-step">
-          <h3>Collect</h3>
-          <p>We partner with tennis facilities and players to collect used polyester tennis strings, ensuring they are diverted from landfills and repurposed for recycling into high-quality materials.</p>
+    <!-- Metrics Section -->
+    <section class="metrics-section scroll-section">
+      <div class="metrics-container">
+        <div class="metrics-left">
+          <div class="metrics-sticky">
+            <h2 class="metrics-header orbor-difference">The Orbor Difference</h2>
+            <p class="metrics-blurb">Orbor is pioneering a new era of circularity in sports and fashion—turning tennis string waste into high-quality, traceable materials that power a cleaner, more transparent future.</p>
+          </div>
         </div>
-        <div class="process-step">
-          <h3>Repurpose</h3>
-          <p>Using advanced recycling techniques, we break down polyester tennis strings to remove impurities and additives, transforming them into high-purity polyester.</p>
-        </div>
-        <div class="process-step">
-          <h3>Collaborate</h3>
-          <p>We aim to collaborate with clothing companies to integrate our high-quality recycled polyester into their supply chains, helping them create sustainable apparel.</p>
+        <div class="metrics-right">
+          <div class="metric" id="metric-recycled">
+            <span class="metric-icon">
+              <!-- Tennis string/ball icon -->
+              <i class="fa-solid fa-droplet fa-3x"></i>
+            </span>
+            <span class="metric-value">50%</span>
+            <span class="metric-label">Less Water</span>
+          </div>
+          <div class="metric" id="metric-postconsumer">
+            <span class="metric-icon">
+              <!-- Recycling arrows icon -->
+              <i class="fa-solid fa-plug-circle-bolt fa-3x"></i>
+            </span> 
+            <span class="metric-value">75%</span>
+            <span class="metric-label">Less Energy</span>
+          </div>
+          <div class="metric" id="metric-traceable">
+            <span class="metric-icon">
+              <!-- Traceable/location icon -->
+              <i class="fa-solid fa-map-pin fa-3x"></i>
+            </span>
+            <span class="metric-value">100%</span>
+            <span class="metric-label">Traceable</span>
+          </div>
+          <div class="metric" id="metric-co2">
+            <span class="metric-icon">
+              <!-- CO2/leaf icon -->
+              <i class="fa-solid fa-leaf fa-3x"></i>
+            </span>
+            <span class="metric-value">60%</span>
+            <span class="metric-label">Less CO₂</span>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Renewable Energy Section -->
+    <section class="renewable-section">
+      <div class="renewable-container">
+        <div class="renewable-text">
+          <span class="text-part">Our recycling process is</span>
+          <span class="text-part bold-text">powered by</span>
+          <span class="text-part highlight-text">100% ocean derived</span>
+          <span class="text-part highlight-text">renewable electricity</span>
+          <span class="text-part">—</span>
+          <span class="text-part">no fossil fuels</span>
+        </div>
+        <div class="energy-icon">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Environmental Impact Section Header -->
+    <section class="impact-horizontal-section">
+      <div class="impact-section-header-overlay">Environmental Impact</div>
+      <div class="impact-slide" style="background-image: url('/imgs/factory.jpg')">
+        <div class="impact-slide-overlay"></div>
+        <div class="impact-slide-content impact-slide-content--left">
+          <h2 class="impact-slide-title">Toxic Emissions</h2>
+          <p class="impact-slide-description">Incinerating tennis strings contributes to climate change by releasing approximately 2.5 kg of CO₂ per kg of polyester, along with toxic pollutants, into the atmosphere.</p>
+        </div>
+      </div>
+      <div class="impact-slide" style="background-image: url('/imgs/trees.jpg')">
+        <div class="impact-slide-overlay"></div>
+        <div class="impact-slide-content impact-slide-content--center">
+          <h2 class="impact-slide-title">Carbon Footprint</h2>
+          <p class="impact-slide-description">Reduce CO₂ emissions from virgin polyester by 50%, helping to combat climate change and its impacts on weather, sea levels, ecosystems, and global livelihoods.</p>
+        </div>
+      </div>
+      <div class="impact-slide" style="background-image: url('/imgs/plastics.jpg')">
+        <div class="impact-slide-overlay"></div>
+        <div class="impact-slide-content impact-slide-content--right">
+          <h2 class="impact-slide-title">Micro Plastics</h2>
+          <p class="impact-slide-description">Prevent billions of microplastics from tennis strings entering our waterways, damaging marine ecosystems and entering the food chain, where they pose a threat to biodiversity and human health.</p>
+        </div>
+      </div>
+      <div class="impact-progress-indicator"></div>
+    </section>
+    
     <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <!-- All GSAP and animation logic is now in this file: -->
+    <script src="./js/gsap-animations.js"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.18/build/spline-viewer.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-      gsap.registerPlugin(ScrollTrigger);
-      // Animate About Us header from left
-      gsap.from('.about-header', {
-        x: -120,
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.about-section',
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      });
-      // Animate About Us text fade in
-      gsap.from('.about-text', {
-        opacity: 0,
-        y: 40,
-        duration: 1.2,
-        delay: 0.3,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.about-section',
-          start: 'top 70%',
-          toggleActions: 'play none none none'
-        }
-      });
-      // Animate other scroll sections (except about-section)
-      gsap.utils.toArray('.scroll-section').forEach(section => {
-        if (!section.classList.contains('about-section')) {
-          gsap.from(section, {
-            opacity: 0,
-            y: 80,
-            duration: 1,
-            scrollTrigger: {
-              trigger: section,
-              start: 'top 80%',
-              toggleActions: 'play none none none'
-            }
-          });
-        }
-      });
-      gsap.utils.toArray('.process-step').forEach((step, i) => {
-        gsap.from(step, {
-          opacity: 0,
-          y: 60,
-          duration: 0.8,
-          delay: i * 0.2,
-          scrollTrigger: {
-            trigger: step,
-            start: 'top 85%',
-            toggleActions: 'play none none none'
+      AOS.init();
+    </script>
+
+    <!-- About Us Section (Hero Video Banner) -->
+    <section class="about-section split-layout" id="about">
+      <div class="about-container">
+        <div class="about-image-col">
+          <img src="/imgs/staff.jpg" alt="Orobor Staff" class="about-staff-img" />
+        </div>
+        <div class="about-text-col">
+          <h2 class="about-header-brown">Who Are We?</h2>
+          <div class="about-underline-brown"></div>
+          <p class="about-main-text">
+            Orobor, founded by tennis players at <span class="about-highlight">Boston University</span>, is dedicated to <span class="about-highlight">revolutionizing recycling</span> in the tennis and textile industries by transforming used tennis strings into high-purity polyester suitable for clothing manufacturing. Through innovation and collaboration, we aim to reduce waste, advance the <span class="about-highlight">circular economy</span>, and inspire sustainable practices across industries—all while staying rooted in the values of teamwork and dedication we've learned on the court.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Enable smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href').slice(1);
+          const target = document.getElementById(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
           }
         });
       });
     </script>
-
-<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.18/build/spline-viewer.js"></script>
-
-    
-
-    
-
 </body>
 </html> 

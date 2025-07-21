@@ -1,0 +1,132 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signin-container {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px 0 rgba(140, 79, 0, 0.07), 0 1.5px 8px 0 rgba(140, 79, 0, 0.04);
+  padding: 3rem 2.5rem 2.5rem 2.5rem;
+  max-width: 370px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.signin-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #8c4f00;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+}
+
+.signin-brand i {
+  color: #c9a063;
+  font-size: 2.2rem;
+}
+
+.orobor-logo-small {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.orobor-logo-svg {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.orobor-logo-brown {
+  filter: sepia(1) saturate(8) hue-rotate(5deg) brightness(0.7);
+}
+
+.signin-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.signin-form h2 {
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #8c4f00;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.04em;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.input-group label {
+  font-size: 1rem;
+  color: #5a3a13;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.input-group input {
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #e2c9a0;
+  font-size: 1rem;
+  background: #f7f3ee;
+  color: #181818;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.input-group input:focus {
+  border: 1.5px solid #c9a063;
+  background: #fff;
+}
+
+.btn-signin {
+  margin-top: 0.7rem;
+  width: 100%;
+  padding: 0.8rem 0;
+  background: linear-gradient(90deg, #c9a063 0%, #8c4f00 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(140, 79, 0, 0.07);
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-signin:hover {
+  background: linear-gradient(90deg, #8c4f00 0%, #c9a063 100%);
+  color: #fff7e6;
+}
+
+@media (max-width: 500px) {
+  .signin-container {
+    padding: 2rem 0.7rem 1.5rem 0.7rem;
+    max-width: 98vw;
+  }
+  .signin-form h2 {
+    font-size: 1.2rem;
+  }
+} 
