@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orobor - Tennis Strings Reborn</title>
+  <meta name="description" content="Orobor transforms discarded tennis strings into sustainable fashion. Join the circular economy movement.">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/collection.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" >
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+  <header>
+    <div class="header-logo-title">
+      <img src="imgs/OroborLogo.svg" alt="Orobor Logo" class="orobor-logo-svg orobor-logo-white" />
+      <h1 class="brand">OROBOR</h1>
+    </div>
+    <nav>
+      <a href="index.html">HOME</a>
+      <a href="OurTeam.html">OUR TEAM</a>
+      <a href="collection.html">COLLECTION LOCATIONS</a>
+      <a href="#">SEND STRINGS</a>
+    </nav>
+    <button class="btn-signIn"><a href="SignIn.html">SIGN IN</a></button>
+  </header>
+
+  <div class="map-header">
+    <h1>String Collection Partners</h1>
+  </div>
+
+  <div class="container">
+    <!-- Full-screen map -->
+    <div id="map"></div>
+    
+    <!-- Floating search bar -->
+    <div class="search-overlay">
+      <input type="text" id="search-input" placeholder="Search tennis locations...">
+      <div class="search-results" id="search-results"></div>
+    </div>
+    
+    <!-- Floating filters button -->
+    <!-- <button class="filters-toggle" id="filters-toggle">
+      <span class="icon">⚙️</span>
+      <span class="text">Filters</span>
+    </button> -->
+    
+    <!-- Floating location counter -->
+    <div class="location-counter" id="location-counter">
+      <span class="count" id="location-count">0</span>
+      <span class="label">Locations</span>
+    </div>
+    
+    <!-- Expandable location panel -->
+    <div class="location-panel" id="location-panel">
+      <div class="panel-drag-handle"></div>
+      <div class="location-panel-header">
+        <h2>Tennis String Collection Points</h2>
+        <button class="panel-close" id="panel-close">×</button>
+      </div>
+      <div id="location-list"></div>
+    </div>
+    
+    <!-- Backdrop for panel -->
+    <div class="panel-backdrop" id="panel-backdrop"></div>
+  </div>
+
+  <div class="partner-section-cards">
+    <div class="cards-header">
+      <h2>Become a Collection Partner</h2>
+      <p>Join the circular economy movement and make your tennis facility part of the solution.</p>
+    </div>
+    
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-leaf"></i>
+        </div>
+        <h3>Environmental Impact</h3>
+        <p>Help reduce tennis string waste and support sustainable fashion while making a real difference for our planet.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Community Engagement</h3>
+        <p>Attract eco-conscious players and build a sustainable community around your tennis facility.</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h3>Brand Recognition</h3>
+        <p>Position your facility as a leader in tennis sustainability and enhance your reputation.</p>
+      </div>
+    </div>
+    
+    <a href="partner.html" class="cta-button-cards">
+      Start Partnership
+      <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+    
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+  <script src="js/map.js"></script>
+</body>
+</html>

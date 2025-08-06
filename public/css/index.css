@@ -19,11 +19,11 @@ body{
 }
 
 /* Typography hierarchy */
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   color: #181818;
-}
+} */
 
 .image-gradient{
   position: absolute;
@@ -59,11 +59,13 @@ header{
   align-items: center;
   padding: 1rem 5rem;
   z-index: 999;
+  background: transparent;
+  box-shadow: none;
 }
 
 header h1{
   margin: 0;
-  font-size: 2.75rem;
+  font-size: 2.7rem;
   font-weight: 900;
   letter-spacing: .3rem;
   color: white;
@@ -74,14 +76,17 @@ nav{
   gap: 3rem;
   align-items: center;
   margin-left: -5%;
+  background: transparent;
+  box-shadow: none;
 }
 
 nav a{
-  font-size: .9rem;
+  font-size: .85rem;
   letter-spacing: .1rem;
   transition: color .2s ease;
   text-decoration: none;
-  color: #181818;
+  color: white;
+  
 }
 
 nav a:hover{
@@ -92,14 +97,33 @@ nav a:hover{
   background: transparent;
   color: #fff;
   border: 2px solid #fff;
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: .8rem;
   letter-spacing: .09rem;
   font-weight: 500;
   padding: .6rem 2rem;
   transition: background 0.2s, color 0.2s;
   cursor: pointer;
+  text-decoration: none;
+  
 }
+
+.btn-signIn a{
+  text-decoration: none;
+}
+
+.btn-signIn a:visited {
+  color: inherit; /* Keep the same color when visited */
+  text-decoration: none;
+}
+
+.btn-signIn a:hover,
+.btn-signIn a:focus,
+.btn-signIn a:active {
+  color: inherit; /* Maintain consistent color */
+  text-decoration: none;
+}
+
 
 .btn-signIn:hover {
   background: #f2f2f2;
@@ -189,13 +213,13 @@ main{
   text-decoration: none;
   border: 2px solid #fff;
   padding:0.7rem 1.2rem;
-  font-weight: 300;
-  
-  
+  font-weight: 600;
   border-radius: 50px;
   color: #fff;
   font-size: 1.2rem;
-
+  transition: all 0.3s ease;
+  box-shadow: black;
+  letter-spacing: 0.1rem;
 }
 
 
@@ -206,12 +230,29 @@ main{
   padding: 0.7rem 1.2rem;
   font-size: 1.2rem;
   letter-spacing: 0.1rem;
-  font-weight: 300;
-  transition: background-color 2s ease;
+  font-weight: 400;
   border-radius: 50px;
   color: black;
+  transition: all 0.3s ease;
+  box-shadow: black;
   
-  
+}
+
+.btn-about:hover{
+  transform: translateY(-2px);
+    background: transparent;
+    border: 2px solid black;
+    color: white;
+    box-shadow: black; 
+    background-color: black;
+}
+
+.btn-impact:hover{
+  transform: translateY(-2px);
+   
+    
+   
+    box-shadow: black; /* Complementary blue shadow */
 }
 
 /* HERO BUTTONS  */
@@ -224,14 +265,7 @@ main{
 
 
 /* 3D WORLD OBJECT  */
-.world{
-  position: absolute;
-  top:70px;
-  right:-25%;
 
-  
-  
-}
 
 /* SCROLL SECTIONS - About Us & Process */
 .scroll-section {
@@ -400,11 +434,11 @@ main{
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0rem;
+  padding: 1rem 0rem;
 }
 
 .reveal-type {
-  font-size: 4.2rem;
+  font-size: 4.3rem;
   font-weight: 600;
   color: #181818;
   text-align: center;
@@ -1528,8 +1562,7 @@ main{
   padding: 0;
   box-sizing: border-box;
 }
-.hero-section header,
-.hero-section nav,
+
 .hero-section .content,
 .hero-section .content h1,
 .hero-section .content p,
@@ -1539,9 +1572,9 @@ main{
 .hero-section .content {
   color: #fff !important;
 }
-.hero-section nav a {
+/* .hero-section nav a {
   color: #fff !important;
-}
+} */
 
 .parallax-process {
   width: 100vw;
