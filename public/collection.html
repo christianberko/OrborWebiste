@@ -19,13 +19,35 @@
       <img src="imgs/OroborLogo.svg" alt="Orobor Logo" class="orobor-logo-svg orobor-logo-white" />
       <h1 class="brand">OROBOR</h1>
     </div>
-    <nav>
+    
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
       <a href="index.html">HOME</a>
       <a href="OurTeam.html">OUR TEAM</a>
       <a href="collection.html">COLLECTION LOCATIONS</a>
       <a href="#">SEND STRINGS</a>
     </nav>
-    <button class="btn-signIn"><a href="SignIn.html">SIGN IN</a></button>
+    
+    <!-- Mobile Hamburger Button -->
+    <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    
+    <!-- Mobile Navigation Menu -->
+    <nav class="mobile-nav" id="mobile-nav">
+      <div class="mobile-nav-content">
+        <a href="index.html">HOME</a>
+        <a href="OurTeam.html">OUR TEAM</a>
+        <a href="collection.html">COLLECTION LOCATIONS</a>
+        <a href="#">SEND STRINGS</a>
+        <a href="SignIn.html" class="mobile-signin">SIGN IN</a>
+      </div>
+    </nav>
+    
+    <!-- Desktop Sign In Button -->
+    <button class="btn-signIn desktop-signin"><a href="SignIn.html">SIGN IN</a></button>
   </header>
 
   <div class="map-header">
@@ -42,11 +64,30 @@
       <div class="search-results" id="search-results"></div>
     </div>
     
-    <!-- Floating filters button -->
-    <!-- <button class="filters-toggle" id="filters-toggle">
-      <span class="icon">⚙️</span>
-      <span class="text">Filters</span>
-    </button> -->
+    <!-- State filter dropdown -->
+    <div class="state-filter-container">
+      <select id="state-filter" class="state-filter">
+        <option value="all">All States</option>
+        <option value="Arizona">Arizona</option>
+        <option value="California">California</option>
+        <option value="Connecticut">Connecticut</option>
+        <option value="D.C.">D.C.</option>
+        <option value="Florida">Florida</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Hawaii">Hawaii</option>
+        <option value="Illinois">Illinois</option>
+        <option value="Louisiana">Louisiana</option>
+        <option value="Maryland">Maryland</option>
+        <option value="Minnesota">Minnesota</option>
+        <option value="New York">New York</option>
+        <option value="North Carolina">North Carolina</option>
+        <option value="South Carolina">South Carolina</option>
+        <option value="Texas">Texas</option>
+        <option value="Vermont">Vermont</option>
+        <option value="Virginia">Virginia</option>
+        <option value="Wisconsin">Wisconsin</option>
+      </select>
+    </div>
     
     <!-- Floating location counter -->
     <div class="location-counter" id="location-counter">
@@ -110,5 +151,54 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
   <script src="js/map.js"></script>
+  
+  <script>
+    // Mobile hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburgerBtn = document.getElementById('hamburger-btn');
+      const mobileNav = document.getElementById('mobile-nav');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-content a');
+
+      // Toggle mobile menu
+      hamburgerBtn.addEventListener('click', function() {
+        hamburgerBtn.classList.toggle('active');
+        mobileNav.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (mobileNav.classList.contains('active')) {
+          document.body.classList.add('menu-open');
+        } else {
+          document.body.classList.remove('menu-open');
+        }
+      });
+
+      // Close mobile menu when clicking on a link
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          hamburgerBtn.classList.remove('active');
+          mobileNav.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      mobileNav.addEventListener('click', function(e) {
+        if (e.target === mobileNav) {
+          hamburgerBtn.classList.remove('active');
+          mobileNav.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        }
+      });
+
+      // Close mobile menu on escape key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+          hamburgerBtn.classList.remove('active');
+          mobileNav.classList.remove('active');
+          document.body.classList.remove('menu-open');
+        }
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,7 +1,19 @@
 /* ourteam.css - styles specific to Our Team page */
 
+.team-header {
+  margin-top: 2rem;
+  font-size: 3rem;
+  font-weight: 700;
+  color: whitesmoke;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-wrap: balance;
+}
+
 .ourteam-main {
-  padding: 4rem 2rem 2rem 2rem;
+  padding: 0rem 2rem 2rem 2rem;
   background: transparent;
   min-height: 80vh;
 }
@@ -58,6 +70,7 @@
   font-weight: 800;
   color: #8c4f00;
   margin-bottom: 0.5rem;
+  text-wrap: balance;
 }
 
 .team-title {
@@ -65,40 +78,122 @@
   font-weight: 500;
   color: #c9a063;
   margin-bottom: 0.7rem;
+  text-wrap: balance;
 }
 
 .team-desc {
-  font-size: 1.05rem;
-  font-weight: 400;
+  font-size: 1.075rem;
+  font-weight: 500;
   color: whitesmoke;
   max-width: 90%;
+  text-wrap: balance;
+}
+
+/* Mobile Layout Styles */
+.team-mobile-layout {
+  display: none;
+}
+
+.team-mobile-pair {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  gap: 1.5rem;
+}
+
+.team-img-mobile {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 1rem;
+  border: 2px solid whitesmoke;
+  box-shadow: 0 4px 24px 0 rgba(140, 79, 0, 0.10);
+  background: #fff;
+}
+
+.team-text-mobile {
+  text-align: center;
+  max-width: 90%;
+  text-wrap: balance;
 }
 
 @media (max-width: 900px) {
+  .team-header {
+    margin-top: 2rem;
+    font-size: 2rem;
+    margin-bottom: 4rem;
+  }
+  
+  /* Hide desktop layout on mobile */
   .team-split-layout {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    display: none;
   }
-  .team-images-col, .team-text-col {
-    flex: unset;
-    width: 100%;
-    padding: 0;
-    align-items: center;
+  
+  /* Show mobile layout */
+  .team-mobile-layout {
+    display: block;
   }
-  .team-img {
-    width: 380px;
-    height: 380px;
-    margin-bottom: 1rem;
+  
+  .team-mobile-pair {
+    margin-bottom: 4rem;
   }
-  .team-member-text {
-    min-height: 380px;
-    align-items: center;
+  
+  .team-img-mobile {
+    width: 350px;
+    height: 350px;
+  }
+  
+  .team-desc {
     text-align: center;
+    max-width: 85%;
+    margin: 0 auto;
   }
 }
 
 @media (max-width: 600px) {
+  .team-header {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .team-mobile-pair {
+    margin-bottom: 3rem;
+  }
+  
+  .team-img-mobile {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .team-text-mobile {
+    max-width: 95%;
+    padding: 0 1rem;
+  }
+  
+  .team-desc {
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  
+  .team-name {
+    font-size: 1.6rem;
+  }
+  
+  .team-title {
+    font-size: 1rem;
+  }
+}
+
+/* @media (max-width: 600px) {
+
+  .team-header {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+  }
   .team-img {
     width: 320px;
     height: 320px;
@@ -115,7 +210,7 @@
   .team-desc {
     font-size: 0.95rem;
   }
-}
+} */
 
 /* Add more team-specific styles below */
 

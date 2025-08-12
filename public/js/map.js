@@ -2,6 +2,8 @@ let map;
 let locations = [];
 let markers = [];
 let markersLayer;
+let currentStateFilter = 'all';
+let currentSearchTerm = '';
 
 // Initialize map when page loads
 document.addEventListener('DOMContentLoaded', initMap);
@@ -52,6 +54,9 @@ async function initMap() {
 
         // Set up floating search functionality
         setupFloatingSearch();
+
+        // Set up state filter functionality
+        setupStateFilter();
 
         // Set up floating interface interactions
         setupFloatingInterface();
@@ -104,10 +109,18 @@ function populateLocationPanel() {
     const listContainer = document.getElementById('location-list');
     listContainer.innerHTML = '';
     
-    locations.forEach((location, index) => {
+    const filteredLocations = getFilteredLocations();
+    
+    filteredLocations.forEach((location) => {
+        const originalIndex = locations.findIndex(loc => 
+            loc.name === location.name && 
+            loc.city === location.city && 
+            loc.state === location.state
+        );
+        
         const div = document.createElement('div');
         div.className = 'location-item';
-        div.dataset.index = index;
+        div.dataset.index = originalIndex;
         div.innerHTML = `
             <h4>${location.name}</h4>
             <p>${location.city}, ${location.state}</p>
@@ -115,7 +128,7 @@ function populateLocationPanel() {
         `;
         
         div.addEventListener('click', () => {
-            const marker = markers[index];
+            const marker = markers[originalIndex];
             map.setView([location.coordinates.latitude, location.coordinates.longitude], 15);
             marker.marker.openPopup();
             
@@ -139,25 +152,22 @@ function setupFloatingSearch() {
     const searchResults = document.getElementById('search-results');
     
     searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase().trim();
+        currentSearchTerm = e.target.value.toLowerCase().trim();
         
-        if (searchTerm.length === 0) {
+        if (currentSearchTerm.length === 0) {
             searchResults.classList.remove('active');
-            showAllMarkers();
+            applyFilters();
             return;
         }
         
-        if (searchTerm.length < 2) {
+        if (currentSearchTerm.length < 2) {
             return;
         }
         
-        const filteredLocations = locations.filter(location => {
-            const searchText = `${location.name} ${location.city} ${location.state}`.toLowerCase();
-            return searchText.includes(searchTerm);
-        });
+        const filteredLocations = getFilteredLocations();
         
-        displaySearchResults(filteredLocations, searchTerm);
-        filterMarkersOnMap(searchTerm);
+        displaySearchResults(filteredLocations, currentSearchTerm);
+        applyFilters();
     });
     
     // Enhanced click outside to close
@@ -171,9 +181,26 @@ function setupFloatingSearch() {
     searchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             searchInput.value = '';
+            currentSearchTerm = '';
             searchResults.classList.remove('active');
-            showAllMarkers();
+            applyFilters();
         }
+    });
+}
+
+function setupStateFilter() {
+    const stateFilter = document.getElementById('state-filter');
+    
+    stateFilter.addEventListener('change', (e) => {
+        currentStateFilter = e.target.value;
+        applyFilters();
+        
+        // Clear search results dropdown when filter changes
+        const searchResults = document.getElementById('search-results');
+        searchResults.classList.remove('active');
+        
+        // Update location panel with filtered results
+        populateLocationPanel();
     });
 }
 
@@ -223,6 +250,48 @@ function highlightText(text, searchTerm) {
     return text.replace(regex, '<mark style="background: rgba(23, 173, 78, 0.2); padding: 1px 3px; border-radius: 3px; color:rgb(21, 135, 62); font-weight: 600;">$1</mark>');
 }
 
+function getFilteredLocations() {
+    return locations.filter(location => {
+        // Apply state filter
+        const stateMatch = currentStateFilter === 'all' || location.state === currentStateFilter;
+        
+        // Apply search filter
+        let searchMatch = true;
+        if (currentSearchTerm.length >= 2) {
+            const searchText = `${location.name} ${location.city} ${location.state}`.toLowerCase();
+            searchMatch = searchText.includes(currentSearchTerm);
+        }
+        
+        return stateMatch && searchMatch;
+    });
+}
+
+function applyFilters() {
+    const filteredLocations = getFilteredLocations();
+    
+    // Update markers on map
+    markersLayer.clearLayers();
+    
+    markers.forEach(({ marker, location }) => {
+        const stateMatch = currentStateFilter === 'all' || location.state === currentStateFilter;
+        
+        let searchMatch = true;
+        if (currentSearchTerm.length >= 2) {
+            const searchText = `${location.name} ${location.city} ${location.state}`.toLowerCase();
+            searchMatch = searchText.includes(currentSearchTerm);
+        } else if (currentSearchTerm.length === 0) {
+            searchMatch = true;
+        }
+        
+        if (stateMatch && searchMatch) {
+            markersLayer.addLayer(marker);
+        }
+    });
+    
+    // Update location counter
+    document.getElementById('location-count').textContent = filteredLocations.length;
+}
+
 function filterMarkersOnMap(searchTerm) {
     markersLayer.clearLayers();
     
@@ -244,13 +313,23 @@ function filterMarkersOnMap(searchTerm) {
 }
 
 function showAllMarkers() {
-    markersLayer.clearLayers();
-    markers.forEach(({ marker }) => {
-        markersLayer.addLayer(marker);
-    });
+    currentStateFilter = 'all';
+    currentSearchTerm = '';
     
-    // Reset counter
-    document.getElementById('location-count').textContent = locations.length;
+    // Reset the state filter dropdown
+    const stateFilter = document.getElementById('state-filter');
+    if (stateFilter) {
+        stateFilter.value = 'all';
+    }
+    
+    // Reset search input
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.value = '';
+    }
+    
+    applyFilters();
+    populateLocationPanel();
 }
 
 function setupFloatingInterface() {
@@ -299,8 +378,8 @@ function setupFloatingInterface() {
             `translateX(-50%) translateY(${parallax}px)`;
         document.querySelector('.location-counter').style.transform = 
             `translateY(${-parallax * 0.5}px)`;
-        // document.querySelector('.filters-toggle').style.transform = 
-        //     `translateY(${parallax * 0.3}px)`;
+        document.querySelector('.state-filter-container').style.transform = 
+            `translateY(${parallax * 0.3}px)`;
         
         ticking = false;
     }

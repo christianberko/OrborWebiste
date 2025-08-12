@@ -21,14 +21,35 @@
             <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="orobor-logo-svg orobor-logo-white" />
             <h1  class="brand">OROBOR</h1>
           </div>
-          <nav>
+          
+          <!-- Desktop Navigation -->
+          <nav class="desktop-nav">
             <a data-aos="fade-down" data-aos-duration="1500" href="index.html">HOME</a>
             <a data-aos="fade-down" data-aos-duration="2000" href="OurTeam.html">OUR TEAM</a>
             <a data-aos="fade-down" data-aos-duration="2500" href="collection.html">COLLECTION LOCATIONS</a>
             <a data-aos="fade-down" data-aos-duration="3000" href="#">SEND STRING</a>
-            <!-- <a data-aos="fade-down" data-aos-duration="3000" href="#">SHOP</a> -->
           </nav>
-          <button data-aos="fade-down" data-aos-duration="3000" class="btn-signIn"><a href="SignIn.html">SIGN IN</a></button>
+          
+          <!-- Mobile Hamburger Button -->
+          <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+          
+          <!-- Mobile Navigation Menu -->
+          <nav class="mobile-nav" id="mobile-nav">
+            <div class="mobile-nav-content">
+              <a href="index.html">HOME</a>
+              <a href="OurTeam.html">OUR TEAM</a>
+              <a href="collection.html">COLLECTION LOCATIONS</a>
+              <a href="#">SEND STRING</a>
+              <a href="SignIn.html" class="mobile-signin">SIGN IN</a>
+            </div>
+          </nav>
+          
+          <!-- Desktop Sign In Button -->
+          <button data-aos="fade-down" data-aos-duration="3000" class="btn-signIn desktop-signin"><a href="SignIn.html">SIGN IN</a></button>
         </header>
         <main>
           <div class="content">
@@ -95,32 +116,41 @@
               <!-- Tennis string/ball icon -->
               <i class="fa-solid fa-droplet fa-3x"></i>
             </span>
-            <span class="metric-value">50%</span>
-            <span class="metric-label">Less Water</span>
+            <div class="metric-label-container">
+              <span class="metric-value">50%</span>
+              <span class="metric-label">Less Water</span>
+            </div>
+            
           </div>
           <div class="metric" id="metric-postconsumer">
             <span class="metric-icon">
               <!-- Recycling arrows icon -->
               <i class="fa-solid fa-plug-circle-bolt fa-3x"></i>
             </span> 
-            <span class="metric-value">75%</span>
-            <span class="metric-label">Less Energy</span>
+            <div class="metric-label-container">
+              <span class="metric-value">75%</span>
+              <span class="metric-label">Less Energy</span>
+            </div>
           </div>
           <div class="metric" id="metric-traceable">
             <span class="metric-icon">
               <!-- Traceable/location icon -->
               <i class="fa-solid fa-map-pin fa-3x"></i>
             </span>
-            <span class="metric-value">100%</span>
-            <span class="metric-label">Traceable</span>
+            <div class="metric-label-container">
+              <span class="metric-value">100%</span>
+              <span class="metric-label">Traceable</span>
+            </div>
           </div>
           <div class="metric" id="metric-co2">
             <span class="metric-icon">
               <!-- CO2/leaf icon -->
               <i class="fa-solid fa-leaf fa-3x"></i>
             </span>
-            <span class="metric-value">60%</span>
-            <span class="metric-label">Less CO₂</span>
+            <div class="metric-label-container">
+              <span class="metric-value">60%</span>
+              <span class="metric-label">Less CO₂</span>
+            </div>
           </div>
         </div>
       </div>
@@ -211,6 +241,139 @@
           }
         });
       });
+
+      // Mobile hamburger menu functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-content a');
+
+        // Toggle mobile menu
+        hamburgerBtn.addEventListener('click', function() {
+          hamburgerBtn.classList.toggle('active');
+          mobileNav.classList.toggle('active');
+          
+          // Prevent body scroll when menu is open
+          if (mobileNav.classList.contains('active')) {
+            document.body.classList.add('menu-open');
+          } else {
+            document.body.classList.remove('menu-open');
+          }
+        });
+
+        // Close mobile menu when clicking on a link
+        mobileNavLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            hamburgerBtn.classList.remove('active');
+            mobileNav.classList.remove('active');
+            document.body.classList.remove('menu-open');
+          });
+        });
+
+        // Close mobile menu when clicking outside
+        mobileNav.addEventListener('click', function(e) {
+          if (e.target === mobileNav) {
+            hamburgerBtn.classList.remove('active');
+            mobileNav.classList.remove('active');
+            document.body.classList.remove('menu-open');
+          }
+        });
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+            hamburgerBtn.classList.remove('active');
+            mobileNav.classList.remove('active');
+            document.body.classList.remove('menu-open');
+          }
+        });
+      });
     </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Column 1: Brand -->
+        <div class="footer-column">
+          <div class="footer-brand">
+            <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="footer-logo" />
+            <h3 class="footer-tagline">Tennis Strings Reborn</h3>
+            <p class="footer-mission">Transforming discarded tennis strings into sustainable fashion through innovative recycling technology.</p>
+          </div>
+          <div class="footer-social">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Contact -->
+        <div class="footer-column">
+          <h4 class="footer-heading">Contact Us</h4>
+          <div class="footer-contact">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>123 Tennis Court Way<br>Boston, MA 02215</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <span>(617) 555-0123</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <span>info@orobor.com</span>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-recycle"></i>
+              <span>Collection Hotline:<br>1-800-OROBOR</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: Hours & Location -->
+        <div class="footer-column">
+          <h4 class="footer-heading">Hours & Location</h4>
+          <div class="footer-hours">
+            <div class="hours-item">
+              <strong>Main Office:</strong><br>
+              Mon-Fri: 9AM-6PM<br>
+              Sat: 10AM-4PM<br>
+              Sun: Closed
+            </div>
+            <div class="hours-item">
+              <strong>Collection Drop-off:</strong><br>
+              24/7 at partner locations
+            </div>
+            <div class="hours-item">
+              <strong>Processing Facility:</strong><br>
+              Mon-Fri: 8AM-8PM<br>
+              Sat-Sun: Closed
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-content">
+          <p class="copyright">© 2024 Orobor. All rights reserved.</p>
+          <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Accessibility</a>
+          </div>
+          <p class="footer-powered">Powered by 100% Renewable Energy</p>
+        </div>
+      </div>
+    </footer>
 </body>
 </html> 
