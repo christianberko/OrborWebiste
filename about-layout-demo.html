@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us Layout Options - Orobor</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 2rem;
+    }
+    
+    .layout-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .option-btn {
+      padding: 1rem;
+      border: 2px solid #3498db;
+      background: white;
+      color: #3498db;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .option-btn:hover {
+      background: #3498db;
+      color: white;
+    }
+    
+    .option-btn.active {
+      background: #3498db;
+      color: white;
+    }
+    
+    .instructions {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border-left: 4px solid #3498db;
+    }
+    
+    .instructions h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    
+    .instructions code {
+      background: #e9ecef;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-container">
+    <h1>About Us Section Layout Options</h1>
+    
+    <div class="instructions">
+      <h3>How to Use These Layouts:</h3>
+      <p>To switch between layouts, simply change the class on the About Us section in your <code>index.html</code> file:</p>
+      <ul>
+        <li><strong>Current:</strong> <code>class="about-section split-layout"</code></li>
+        <li><strong>Option 1:</strong> <code>class="about-section centered-card"</code></li>
+        <li><strong>Option 2:</strong> <code>class="about-section hero-background"</code></li>
+        <li><strong>Option 3:</strong> <code>class="about-section timeline-layout"</code></li>
+        <li><strong>Option 4:</strong> <code>class="about-section magazine-layout"</code></li>
+      </ul>
+    </div>
+    
+    <div class="layout-options">
+      <button class="option-btn" onclick="showLayout('split-layout')">Current: Split Layout</button>
+      <button class="option-btn" onclick="showLayout('centered-card')">Option 1: Centered Card</button>
+      <button class="option-btn" onclick="showLayout('hero-background')">Option 2: Hero Background</button>
+      <button class="option-btn" onclick="showLayout('timeline-layout')">Option 3: Timeline</button>
+      <button class="option-btn" onclick="showLayout('magazine-layout')">Option 4: Magazine</button>
+    </div>
+    
+    <div id="layout-descriptions">
+      <div id="split-layout-desc" class="layout-desc">
+        <h3>Current: Split Layout</h3>
+        <p>A traditional side-by-side layout with image on the left and text on the right. Features a glass-morphism effect on the text container with subtle shadows and backdrop blur.</p>
+        <ul>
+          <li>Clean, professional appearance</li>
+          <li>Good balance between image and text</li>
+          <li>Responsive design that stacks on mobile</li>
+          <li>Subtle background patterns and gradients</li>
+        </ul>
+      </div>
+      
+      <div id="centered-card-desc" class="layout-desc" style="display: none;">
+        <h3>Option 1: Centered Card Layout</h3>
+        <p>A modern, centered card design with the image as a circular profile picture and text centered below. Perfect for a more personal, approachable feel.</p>
+        <ul>
+          <li>Circular profile image with blue border</li>
+          <li>Centered text layout for better readability</li>
+          <li>Glass-morphism card container</li>
+          <li>Clean, modern aesthetic</li>
+        </ul>
+      </div>
+      
+      <div id="hero-background-desc" class="layout-desc" style="display: none;">
+        <h3>Option 2: Hero Background Layout</h3>
+        <p>A dramatic hero-style layout with the staff image as a full background and text overlay in a glass card. Creates a more immersive, storytelling experience.</p>
+        <ul>
+          <li>Full-screen background image</li>
+          <li>Parallax scrolling effect</li>
+          <li>Glass-morphism text overlay</li>
+          <li>Dramatic, immersive feel</li>
+        </ul>
+      </div>
+      
+      <div id="timeline-layout-desc" class="layout-desc" style="display: none;">
+        <h3>Option 3: Timeline Layout</h3>
+        <p>A creative timeline-style layout with a central line connecting the image and text sections. Features timeline markers and a unique visual flow.</p>
+        <ul>
+          <li>Central timeline line with gradient</li>
+          <li>Timeline markers on text section</li>
+          <li>Positioned elements for visual flow</li>
+          <li>Creative, unique design approach</li>
+        </ul>
+      </div>
+      
+      <div id="magazine-layout-desc" class="layout-desc" style="display: none;">
+        <h3>Option 4: Magazine Layout</h3>
+        <p>A sophisticated magazine-style layout with larger typography, elegant spacing, and a subtle geometric background pattern. Perfect for a premium, editorial feel.</p>
+        <ul>
+          <li>Large, bold typography</li>
+          <li>Subtle geometric background patterns</li>
+          <li>Image with offset shadow effect</li>
+          <li>Premium, editorial aesthetic</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function showLayout(layoutType) {
+      // Update active button
+      document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Show corresponding description
+      document.querySelectorAll('.layout-desc').forEach(desc => {
+        desc.style.display = 'none';
+      });
+      document.getElementById(layoutType + '-desc').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

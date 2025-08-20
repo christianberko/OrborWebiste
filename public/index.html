@@ -17,17 +17,19 @@
       <video class="hero-bg-video" src="/imgs/strings.mp4" autoplay muted loop playsinline></video>
       <div class="container">
         <header>
-          <div class="header-logo-title" data-aos="fade-down" data-aos-duration="1500">
+          <div class="header-logo-title" >
             <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="orobor-logo-svg orobor-logo-white" />
             <h1  class="brand">OROBOR</h1>
           </div>
           
           <!-- Desktop Navigation -->
           <nav class="desktop-nav">
-            <a data-aos="fade-down" data-aos-duration="1500" href="index.html">HOME</a>
-            <a data-aos="fade-down" data-aos-duration="2000" href="OurTeam.html">OUR TEAM</a>
-            <a data-aos="fade-down" data-aos-duration="2500" href="collection.html">COLLECTION LOCATIONS</a>
-            <a data-aos="fade-down" data-aos-duration="3000" href="#">SEND STRING</a>
+            <a  href="index.html">HOME</a>
+            <a  href="OurTeam.html">OUR TEAM</a>
+            <a  href="collection.html">COLLECTION LOCATIONS</a>
+            <a  href="partner.html">SEND STRING</a>
+            <!-- Dashboard link - only visible to authenticated founders -->
+            <a  href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="display: none;">DASHBOARD</a>
           </nav>
           
           <!-- Mobile Hamburger Button -->
@@ -43,13 +45,34 @@
               <a href="index.html">HOME</a>
               <a href="OurTeam.html">OUR TEAM</a>
               <a href="collection.html">COLLECTION LOCATIONS</a>
-              <a href="#">SEND STRING</a>
-              <a href="SignIn.html" class="mobile-signin">SIGN IN</a>
+              <a href="partner.html">SEND STRING</a>
+              <!-- Dashboard link for mobile - only visible to authenticated founders -->
+              <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="display: none;">DASHBOARD</a>
+              <div class="mobile-auth-loading" id="mobile-auth-loading" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i>
+              </div>
+              <a href="SignIn.html" class="mobile-signin" id="mobile-signin" style="display: none;">SIGN IN</a>
+              <!-- Mobile user menu - only visible to authenticated founders -->
+              <div class="mobile-user-menu" id="mobile-user-menu" style="display: none;">
+                <span class="mobile-user-email" id="mobile-user-email"></span>
+                <button class="mobile-signout-btn" id="mobile-signout-btn">SIGN OUT</button>
+              </div>
             </div>
           </nav>
           
-          <!-- Desktop Sign In Button -->
-          <button data-aos="fade-down" data-aos-duration="3000" class="btn-signIn desktop-signin"><a href="SignIn.html">SIGN IN</a></button>
+          <!-- Desktop Sign In/User Button -->
+          <div  class="auth-button-container">
+            <div class="auth-loading" id="auth-loading" style="display: none;">
+              <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <button class="btn-signIn desktop-signin" id="desktop-signin" style="display: none;">
+              <a href="SignIn.html">SIGN IN</a>
+            </button>
+            <div class="user-menu" id="user-menu" style="display: none;">
+              <span class="user-email" id="user-email"></span>
+              <button class="btn-signout" id="btn-signout">SIGN OUT</button>
+            </div>
+          </div>
         </header>
         <main>
           <div class="content">
@@ -78,31 +101,81 @@
       </div>
     </section>
 
-    <!-- Process Section (3-Column Grid) -->
-    <section class="process-section process-grid-section">
-      <div class="section-header">Our Process</div>
-      <h1 class="process-title">OUR PROCESS</h1>
-      <div class="process-grid-container">
-        <div class="process-grid-card" data-step="1">
-          <img src="/imgs/Racquet.jpg" alt="Collection" class="process-grid-img" />
-          <h2 class="process-grid-title">Collect</h2>
-          <p class="process-grid-desc">We partner with tennis facilities and players to collect used polyester tennis strings, ensuring they are diverted from landfills and repurposed for recycling into high-quality materials.</p>
+    <!-- Process Section (Magazine/Editorial Layout) -->
+    <section class="process-section process-editorial">
+      <div class="process-editorial-container">
+        <!-- Process Header -->
+        <div class="process-header-editorial">
+          <h1 class="process-main-title">Our Process</h1>
+          <p class="process-subtitle">From collection to creation, we're building a circular future</p>
         </div>
-        <div class="process-grid-card" data-step="2">
-          <img src="/imgs/recycle.jpg" alt="Transformation" class="process-grid-img" />
-          <h2 class="process-grid-title">Repurpose</h2>
-          <p class="process-grid-desc">Our advanced recycling technology breaks down the polyester strings and transforms them into virgin-quality materials ready for manufacturing sustainable clothing.</p>
+
+        <!-- Step 1: Collect -->
+        <div class="process-step step-collect">
+          <div class="step-image">
+            <img src="/imgs/Racquet.jpg" alt="Tennis Racket Collection" class="step-img" />
+            <div class="image-overlay"></div>
+            <div class="step-number">01</div>
+          </div>
+          <div class="step-content">
+            <h2 class="step-title">Collect</h2>
+            <p class="step-description">
+              We partner with tennis facilities and players to collect used polyester tennis strings, 
+              ensuring they are diverted from landfills and repurposed for recycling into high-quality materials.
+            </p>
+            <div class="step-accent">
+              <span class="accent-line"></span>
+              <span class="accent-text">First Step</span>
+            </div>
+          </div>
         </div>
-        <div class="process-grid-card" data-step="3">
-          <img src="/imgs/clothes.jpg" alt="Creation" class="process-grid-img" />
-          <h2 class="process-grid-title">Collaborate</h2>
-          <p class="process-grid-desc">The recycled materials are crafted into high-quality, sustainable fashion items, completing the circular economy and giving tennis strings a second life.</p>
+
+        <!-- Step 2: Repurpose -->
+        <div class="process-step step-repurpose">
+          <div class="step-content">
+            <h2 class="step-title">Repurpose</h2>
+            <p class="step-description">
+              Our advanced recycling technology breaks down the polyester strings and transforms them 
+              into virgin-quality materials ready for manufacturing sustainable clothing.
+            </p>
+            <div class="step-accent">
+              <span class="accent-line"></span>
+              <span class="accent-text">Transformation</span>
+            </div>
+          </div>
+          <div class="step-image">
+            <img src="/imgs/recycle.jpg" alt="Recycling Process" class="step-img" />
+            <div class="image-overlay"></div>
+            <div class="step-number">02</div>
+          </div>
+        </div>
+
+        <!-- Step 3: Collaborate -->
+        <div class="process-step step-collaborate">
+          <div class="step-image">
+            <img src="/imgs/clothes.jpg" alt="Sustainable Fashion" class="step-img" />
+            <div class="image-overlay"></div>
+            <div class="step-number">03</div>
+          </div>
+          <div class="step-content">
+            <h2 class="step-title">Collaborate</h2>
+            <p class="step-description">
+              The recycled materials are crafted into high-quality, sustainable fashion items, 
+              completing the circular economy and giving tennis strings a second life.
+            </p>
+            <div class="step-accent">
+              <span class="accent-line"></span>
+              <span class="accent-text">New Life</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Metrics Section -->
-    <section class="metrics-section scroll-section">
+    <section class="metrics-section scroll-section video-metrics-section">
+      <video class="metrics-bg-video" src="/imgs/ballBouncing.mp4" autoplay muted loop playsinline></video>
+      <div class="metrics-overlay"></div>
       <div class="metrics-container">
         <div class="metrics-left">
           <div class="metrics-sticky">
@@ -173,31 +246,134 @@
       </div>
     </section>
 
-    <!-- Environmental Impact Section Header -->
-    <section class="impact-horizontal-section">
-      <div class="impact-section-header-overlay">Environmental Impact</div>
-      <div class="impact-slide" style="background-image: url('/imgs/factory.jpg')">
-        <div class="impact-slide-overlay"></div>
-        <div class="impact-slide-content impact-slide-content--left">
-          <h2 class="impact-slide-title">Toxic Emissions</h2>
-          <p class="impact-slide-description">Incinerating tennis strings contributes to climate change by releasing approximately 2.5 kg of CO₂ per kg of polyester, along with toxic pollutants, into the atmosphere.</p>
+    <!-- Environmental Impact Section -->
+    <section class="impact-section">
+      <div class="impact-header">
+        <h2 class="impact-title">Environmental Impact</h2>
+        <p class="impact-subtitle">Our commitment to reducing environmental harm through innovative recycling</p>
+      </div>
+      
+      <div class="impact-cards-grid">
+        <!-- Card 1: Toxic Emissions -->
+        <div class="impact-card" data-impact="emissions">
+          <div class="card-header">
+            <div class="card-icon">
+              <i class="fas fa-smog"></i>
+            </div>
+            <h3 class="card-title">Toxic Emissions</h3>
+          </div>
+          
+          <div class="card-content">
+            <p class="card-description">Incinerating tennis strings releases approximately 2.5 kg of CO₂ per kg of polyester, along with toxic pollutants, into the atmosphere.</p>
+            
+            <div class="impact-stats">
+              <div class="stat-item">
+                <span class="stat-number" data-target="2.5">0</span>
+                <span class="stat-unit">kg CO₂</span>
+                <span class="stat-label">per kg polyester</span>
+              </div>
+            </div>
+            
+            <div class="progress-section">
+              <div class="progress-label">Current Impact Level</div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-percentage="85"></div>
+              </div>
+              <div class="progress-text">85% of tennis strings are incinerated</div>
+            </div>
+          </div>
+          
+          <div class="card-overlay">
+            <div class="overlay-content">
+              <h4>Our Solution</h4>
+              <p>By recycling tennis strings instead of incineration, we eliminate 100% of toxic emissions from this waste stream.</p>
+              <div class="solution-impact">
+                <span class="impact-badge">100% Reduction</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Carbon Footprint -->
+        <div class="impact-card" data-impact="carbon">
+          <div class="card-header">
+            <div class="card-icon">
+              <i class="fas fa-leaf"></i>
+            </div>
+            <h3 class="card-title">Carbon Footprint</h3>
+          </div>
+          
+          <div class="card-content">
+            <p class="card-description">Reduce CO₂ emissions from virgin polyester by 50%, helping to combat climate change and its impacts on weather, sea levels, and ecosystems.</p>
+            
+            <div class="impact-stats">
+              <div class="stat-item">
+                <span class="stat-number" data-target="50">0</span>
+                <span class="stat-unit">%</span>
+                <span class="stat-label">CO₂ reduction</span>
+              </div>
+            </div>
+            
+            <div class="progress-section">
+              <div class="progress-label">Emission Reduction</div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-percentage="50"></div>
+              </div>
+              <div class="progress-text">50% less emissions than virgin polyester</div>
+            </div>
+          </div>
+          
+          <div class="card-overlay">
+            <div class="overlay-content">
+              <h4>Our Impact</h4>
+              <p>Every kg of recycled tennis string saves 1.25 kg of CO₂ emissions compared to virgin polyester production.</p>
+              <div class="solution-impact">
+                <span class="impact-badge">1.25 kg CO₂ Saved</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Micro Plastics -->
+        <div class="impact-card" data-impact="microplastics">
+          <div class="card-header">
+            <div class="card-icon">
+              <i class="fas fa-water"></i>
+            </div>
+            <h3 class="card-title">Micro Plastics</h3>
+          </div>
+          
+          <div class="card-content">
+            <p class="card-description">Prevent billions of microplastics from tennis strings entering our waterways, damaging marine ecosystems and entering the food chain.</p>
+            
+            <div class="impact-stats">
+              <div class="stat-item">
+                <span class="stat-number" data-target="100">0</span>
+                <span class="stat-unit">%</span>
+                <span class="stat-label">prevention rate</span>
+              </div>
+            </div>
+            
+            <div class="progress-section">
+              <div class="progress-label">Microplastic Prevention</div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-percentage="100"></div>
+              </div>
+              <div class="progress-text">100% of microplastics prevented</div>
+            </div>
+          </div>
+          
+          <div class="card-overlay">
+            <div class="overlay-content">
+              <h4>Our Prevention</h4>
+              <p>By capturing tennis strings before they break down, we prevent billions of microplastic particles from entering marine ecosystems.</p>
+              <div class="solution-impact">
+                <span class="impact-badge">Zero Microplastics</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="impact-slide" style="background-image: url('/imgs/trees.jpg')">
-        <div class="impact-slide-overlay"></div>
-        <div class="impact-slide-content impact-slide-content--center">
-          <h2 class="impact-slide-title">Carbon Footprint</h2>
-          <p class="impact-slide-description">Reduce CO₂ emissions from virgin polyester by 50%, helping to combat climate change and its impacts on weather, sea levels, ecosystems, and global livelihoods.</p>
-        </div>
-      </div>
-      <div class="impact-slide" style="background-image: url('/imgs/plastics.jpg')">
-        <div class="impact-slide-overlay"></div>
-        <div class="impact-slide-content impact-slide-content--right">
-          <h2 class="impact-slide-title">Micro Plastics</h2>
-          <p class="impact-slide-description">Prevent billions of microplastics from tennis strings entering our waterways, damaging marine ecosystems and entering the food chain, where they pose a threat to biodiversity and human health.</p>
-        </div>
-      </div>
-      <div class="impact-progress-indicator"></div>
     </section>
     
     <!-- GSAP & ScrollTrigger -->
@@ -211,10 +387,68 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
       AOS.init();
+      
+      // Animated counters and progress bars for impact cards
+      document.addEventListener('DOMContentLoaded', function() {
+        const observerOptions = {
+          threshold: 0.5,
+          rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const card = entry.target;
+              
+              // Animate counter
+              const statNumber = card.querySelector('.stat-number');
+              if (statNumber) {
+                const target = parseFloat(statNumber.getAttribute('data-target'));
+                animateCounter(statNumber, target);
+              }
+              
+              // Animate progress bar
+              const progressFill = card.querySelector('.progress-fill');
+              if (progressFill) {
+                const percentage = progressFill.getAttribute('data-percentage');
+                progressFill.style.width = percentage + '%';
+              }
+              
+              observer.unobserve(card);
+            }
+          });
+        }, observerOptions);
+
+        // Observe all impact cards
+        document.querySelectorAll('.impact-card').forEach(card => {
+          observer.observe(card);
+        });
+
+        function animateCounter(element, target) {
+          const duration = 2000;
+          const start = 0;
+          const increment = target / (duration / 16);
+          let current = start;
+
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            
+            if (target % 1 === 0) {
+              element.textContent = Math.floor(current);
+            } else {
+              element.textContent = current.toFixed(1);
+            }
+          }, 16);
+        }
+      });
     </script>
 
-    <!-- About Us Section (Hero Video Banner) -->
-    <section class="about-section split-layout" id="about">
+    <!-- About Us Section (Magazine Layout) -->
+    <section class="about-section magazine-layout" id="about">
       <div class="about-container">
         <div class="about-image-col">
           <img src="/imgs/staff.jpg" alt="Orobor Staff" class="about-staff-img" />
@@ -242,11 +476,150 @@
         });
       });
 
-      // Mobile hamburger menu functionality
+      // Authentication and navigation management
       document.addEventListener('DOMContentLoaded', function() {
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const mobileNav = document.getElementById('mobile-nav');
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-content a');
+        
+        // Navigation elements
+        const navDashboard = document.getElementById('nav-dashboard');
+        const mobileDashboard = document.getElementById('mobile-dashboard');
+        const desktopSignin = document.getElementById('desktop-signin');
+        const mobileSignin = document.getElementById('mobile-signin');
+        const userMenu = document.getElementById('user-menu');
+        const userEmail = document.getElementById('user-email');
+        const btnSignout = document.getElementById('btn-signout');
+        const mobileUserMenu = document.getElementById('mobile-user-menu');
+        const mobileUserEmail = document.getElementById('mobile-user-email');
+        const mobileSignoutBtn = document.getElementById('mobile-signout-btn');
+        const authLoading = document.getElementById('auth-loading');
+        const mobileAuthLoading = document.getElementById('mobile-auth-loading');
+
+        // Show loading state initially
+        showLoadingState();
+
+        // Check authentication status on page load
+        checkAuthStatus();
+
+        // Sign out functionality
+        btnSignout.addEventListener('click', async function() {
+          try {
+            const response = await fetch('/api/auth/signout', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              }
+            });
+
+            if (response.ok) {
+              // Update UI to show signed out state
+              updateNavigationState(false);
+              // Redirect to home page
+              window.location.href = '/';
+            } else {
+              console.error('Sign out failed');
+            }
+          } catch (error) {
+            console.error('Sign out error:', error);
+          }
+        });
+
+        // Mobile sign out functionality
+        mobileSignoutBtn.addEventListener('click', async function() {
+          try {
+            const response = await fetch('/api/auth/signout', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              }
+            });
+
+            if (response.ok) {
+              // Update UI to show signed out state
+              updateNavigationState(false);
+              // Close mobile menu
+              hamburgerBtn.classList.remove('active');
+              mobileNav.classList.remove('active');
+              document.body.classList.remove('menu-open');
+              // Redirect to home page
+              window.location.href = '/';
+            } else {
+              console.error('Sign out failed');
+            }
+          } catch (error) {
+            console.error('Sign out error:', error);
+          }
+        });
+
+        async function checkAuthStatus() {
+          try {
+            const response = await fetch('/api/auth/status');
+            const data = await response.json();
+            
+            if (data.authenticated && data.user) {
+              // User is signed in - show dashboard and user menu
+              updateNavigationState(true, data.user.email);
+            } else {
+              // User is not signed in - show sign in button
+              updateNavigationState(false);
+            }
+          } catch (error) {
+            console.error('Auth status check failed:', error);
+            // Default to signed out state on error
+            updateNavigationState(false);
+          }
+        }
+
+        function showLoadingState() {
+          // Hide all auth elements
+          desktopSignin.style.display = 'none';
+          mobileSignin.style.display = 'none';
+          userMenu.style.display = 'none';
+          mobileUserMenu.style.display = 'none';
+          navDashboard.style.display = 'none';
+          mobileDashboard.style.display = 'none';
+          
+          // Show loading spinners
+          authLoading.style.display = 'inline-block';
+          mobileAuthLoading.style.display = 'block';
+        }
+
+        function updateNavigationState(isAuthenticated, userEmail = '') {
+          // Hide loading spinners
+          authLoading.style.display = 'none';
+          mobileAuthLoading.style.display = 'none';
+          
+          if (isAuthenticated) {
+            // Show dashboard links
+            navDashboard.style.display = 'inline-block';
+            mobileDashboard.style.display = 'block';
+            
+            // Hide sign in buttons
+            desktopSignin.style.display = 'none';
+            mobileSignin.style.display = 'none';
+            
+            // Show user menu
+            userMenu.style.display = 'flex';
+            userEmail.textContent = userEmail;
+            
+            // Show mobile user menu
+            mobileUserMenu.style.display = 'flex';
+            mobileUserEmail.textContent = userEmail;
+          } else {
+            // Hide dashboard links
+            navDashboard.style.display = 'none';
+            mobileDashboard.style.display = 'none';
+            
+            // Show sign in buttons
+            desktopSignin.style.display = 'inline-block';
+            mobileSignin.style.display = 'block';
+            
+            // Hide user menu
+            userMenu.style.display = 'none';
+            mobileUserMenu.style.display = 'none';
+          }
+        }
 
         // Toggle mobile menu
         hamburgerBtn.addEventListener('click', function() {
@@ -296,23 +669,21 @@
         <!-- Column 1: Brand -->
         <div class="footer-column">
           <div class="footer-brand">
-            <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="footer-logo" />
+            <div class="footer-brand-header">
+              <h2 class="footer-brand-text">OROBOR</h2>
+              <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="footer-logo" />
+            </div>
             <h3 class="footer-tagline">Tennis Strings Reborn</h3>
             <p class="footer-mission">Transforming discarded tennis strings into sustainable fashion through innovative recycling technology.</p>
           </div>
           <div class="footer-social">
-            <a href="#" class="social-link" aria-label="Facebook">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="social-link" aria-label="Instagram">
-              <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" class="social-link" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/company/orobor/" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
               <i class="fab fa-linkedin-in"></i>
             </a>
-            <a href="#" class="social-link" aria-label="Twitter">
-              <i class="fab fa-twitter"></i>
-            </a>
+            <!-- <a href="https://www.instagram.com/orobor.co/" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a> -->
+           
           </div>
         </div>
 
@@ -322,7 +693,7 @@
           <div class="footer-contact">
             <div class="contact-item">
               <i class="fas fa-map-marker-alt"></i>
-              <span>123 Tennis Court Way<br>Boston, MA 02215</span>
+              <span>Boston, MA </span>
             </div>
             <div class="contact-item">
               <i class="fas fa-phone"></i>
@@ -330,12 +701,11 @@
             </div>
             <div class="contact-item">
               <i class="fas fa-envelope"></i>
-              <span>info@orobor.com</span>
+              <span>jakob@orobor.com <br>
+                jonah@orobor.com
+                
             </div>
-            <div class="contact-item">
-              <i class="fas fa-recycle"></i>
-              <span>Collection Hotline:<br>1-800-OROBOR</span>
-            </div>
+           
           </div>
         </div>
 
@@ -366,12 +736,6 @@
       <div class="footer-bottom">
         <div class="footer-bottom-content">
           <p class="copyright">© 2024 Orobor. All rights reserved.</p>
-          <div class="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Accessibility</a>
-          </div>
-          <p class="footer-powered">Powered by 100% Renewable Energy</p>
         </div>
       </div>
     </footer>

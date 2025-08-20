@@ -24,6 +24,8 @@
       <a href="/OurTeam.html">OUR TEAM</a>
       <a href="/collection.html">COLLECTION LOCATIONS</a>
       <a href="#">SEND STRINGS</a>
+      <!-- Dashboard link - only visible to authenticated founders -->
+      <a href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="display: none;">DASHBOARD</a>
     </nav>
     
     <!-- Mobile Hamburger Button -->
@@ -40,20 +42,442 @@
         <a href="/OurTeam.html">OUR TEAM</a>
         <a href="/collection.html">COLLECTION LOCATIONS</a>
         <a href="#">SEND STRINGS</a>
-        <a href="SignIn.html" class="mobile-signin">SIGN IN</a>
+        <!-- Dashboard link for mobile - only visible to authenticated founders -->
+        <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="display: none;">DASHBOARD</a>
+        <div class="mobile-auth-loading" id="mobile-auth-loading" style="display: none;">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
+        <a href="SignIn.html" class="mobile-signin" id="mobile-signin" style="display: none;">SIGN IN</a>
+        <!-- Mobile user menu - only visible to authenticated founders -->
+        <div class="mobile-user-menu" id="mobile-user-menu" style="display: none;">
+          <span class="mobile-user-email" id="mobile-user-email"></span>
+          <button class="mobile-signout-btn" id="mobile-signout-btn">SIGN OUT</button>
+        </div>
       </div>
     </nav>
     
-    <!-- Desktop Sign In Button -->
-    <button class="btn-signIn desktop-signin"><a href="SignIn.html">SIGN IN</a></button>
+    <!-- Desktop Sign In/User Button -->
+    <div class="auth-button-container">
+      <div class="auth-loading" id="auth-loading" style="display: none;">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      <button class="btn-signIn desktop-signin" id="desktop-signin" style="display: none;">
+        <a href="SignIn.html">SIGN IN</a>
+      </button>
+      <div class="user-menu" id="user-menu" style="display: none;">
+        <span class="user-email" id="user-email"></span>
+        <button class="btn-signout" id="btn-signout">SIGN OUT</button>
+      </div>
+    </div>
   </header>
+
+  <!-- UPS Shipping Label Form -->
+  <div class="shipping-form-container">
+    <div class="form-header">
+      <h1>Create UPS Shipping Label</h1>
+      <p>Fill out the form below to generate a shipping label for your tennis strings</p>
+    </div>
+
+    <form id="ups-shipping-form" class="shipping-form">
+      <!-- Sender Information (Shipper & Ship From - usually the same) -->
+      <div class="form-section">
+        <h2><i class="fas fa-user"></i> Sender Information</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="sender-name">Your Name/Company *</label>
+            <input type="text" id="sender-name" name="sender-name" required>
+          </div>
+          <div class="form-group">
+            <label for="sender-phone">Phone Number *</label>
+            <input type="tel" id="sender-phone" name="sender-phone" required>
+          </div>
+        </div>
+        
+        <div class="address-section">
+          <h3>Sender Address</h3>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="sender-address">Street Address *</label>
+              <input type="text" id="sender-address" name="sender-address" required>
+            </div>
+            <div class="form-group">
+              <label for="sender-city">City *</label>
+              <input type="text" id="sender-city" name="sender-city" required>
+            </div>
+            <div class="form-group">
+              <label for="sender-state">State *</label>
+              <select id="sender-state" name="sender-state" required>
+                <option value="">Select State</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sender-zip">ZIP Code *</label>
+              <input type="text" id="sender-zip" name="sender-zip" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recipient Information -->
+      <div class="form-section">
+        <h2><i class="fas fa-map-marker-alt"></i> Recipient Information</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="recipient-name">Recipient Name *</label>
+            <input type="text" id="recipient-name" name="recipient-name" required>
+          </div>
+          <div class="form-group">
+            <label for="recipient-phone">Phone Number *</label>
+            <input type="tel" id="recipient-phone" name="recipient-phone" required>
+          </div>
+        </div>
+        
+        <div class="address-section">
+          <h3>Recipient Address</h3>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="recipient-address">Street Address *</label>
+              <input type="text" id="recipient-address" name="recipient-address" required>
+            </div>
+            <div class="form-group">
+              <label for="recipient-city">City *</label>
+              <input type="text" id="recipient-city" name="recipient-city" required>
+            </div>
+            <div class="form-group">
+              <label for="recipient-state">State *</label>
+              <select id="recipient-state" name="recipient-state" required>
+                <option value="">Select State</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="recipient-zip">ZIP Code *</label>
+              <input type="text" id="recipient-zip" name="recipient-zip" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Package Information -->
+      <div class="form-section">
+        <h2><i class="fas fa-box"></i> Package Information</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="package-description">Description</label>
+            <input type="text" id="package-description" name="package-description" placeholder="e.g., Tennis Strings" value="Tennis Strings">
+          </div>
+          <div class="form-group">
+            <label for="service-type">Service Type *</label>
+            <select id="service-type" name="service-type" required>
+              <option value="03">Ground (3-5 days)</option>
+              <option value="02">2nd Day Air</option>
+              <option value="01">Next Day Air</option>
+              <option value="12">3 Day Select</option>
+            </select>
+          </div>
+                     <div class="form-group">
+             <label for="package-weight">Weight (lbs) *</label>
+             <input type="number" id="package-weight" name="package-weight" min="0.1" step="0.1" required placeholder="1.0">
+           </div>
+
+        </div>
+
+        <div class="dimensions-section">
+          <h3>Package Dimensions (inches)</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="package-length">Length *</label>
+              <input type="number" id="package-length" name="package-length" min="0.1" step="0.1" required placeholder="12">
+            </div>
+            <div class="form-group">
+              <label for="package-width">Width *</label>
+              <input type="number" id="package-width" name="package-width" min="0.1" step="0.1" required placeholder="8">
+            </div>
+            <div class="form-group">
+              <label for="package-height">Height *</label>
+              <input type="number" id="package-height" name="package-height" min="0.1" step="0.1" required placeholder="2">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="button" id="preview-btn" class="btn-secondary">
+          <i class="fas fa-eye"></i> Preview Request
+        </button>
+        <button type="submit" id="create-label-btn" class="btn-primary">
+          <i class="fas fa-shipping-fast"></i> Create Shipping Label
+        </button>
+      </div>
+    </form>
+
+    <!-- Preview Modal -->
+    <div id="preview-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>UPS API Request Preview</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <pre id="request-preview"></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Creating shipping label...</p>
+      </div>
+    </div>
+  </div>
   
   <script>
-    // Mobile hamburger menu functionality
+    // Mobile hamburger menu functionality and authentication
     document.addEventListener('DOMContentLoaded', function() {
       const hamburgerBtn = document.getElementById('hamburger-btn');
       const mobileNav = document.getElementById('mobile-nav');
       const mobileNavLinks = document.querySelectorAll('.mobile-nav-content a');
+      
+      // Navigation elements
+      const navDashboard = document.getElementById('nav-dashboard');
+      const mobileDashboard = document.getElementById('mobile-dashboard');
+      const desktopSignin = document.getElementById('desktop-signin');
+      const mobileSignin = document.getElementById('mobile-signin');
+      const userMenu = document.getElementById('user-menu');
+      const userEmail = document.getElementById('user-email');
+      const btnSignout = document.getElementById('btn-signout');
+      const mobileUserMenu = document.getElementById('mobile-user-menu');
+      const mobileUserEmail = document.getElementById('mobile-user-email');
+      const mobileSignoutBtn = document.getElementById('mobile-signout-btn');
+      const authLoading = document.getElementById('auth-loading');
+      const mobileAuthLoading = document.getElementById('mobile-auth-loading');
+
+      // Show loading state initially
+      showLoadingState();
+
+      // Check authentication status on page load
+      checkAuthStatus();
+
+      // Sign out functionality
+      btnSignout.addEventListener('click', async function() {
+        try {
+          const response = await fetch('/api/auth/signout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+
+          if (response.ok) {
+            // Update UI to show signed out state
+            updateNavigationState(false);
+            // Redirect to home page
+            window.location.href = '/';
+          } else {
+            console.error('Sign out failed');
+          }
+        } catch (error) {
+          console.error('Sign out error:', error);
+        }
+      });
+
+      // Mobile sign out functionality
+      mobileSignoutBtn.addEventListener('click', async function() {
+        try {
+          const response = await fetch('/api/auth/signout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+
+          if (response.ok) {
+            // Update UI to show signed out state
+            updateNavigationState(false);
+            // Close mobile menu
+            hamburgerBtn.classList.remove('active');
+            mobileNav.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            // Redirect to home page
+            window.location.href = '/';
+          } else {
+            console.error('Sign out failed');
+          }
+        } catch (error) {
+          console.error('Sign out error:', error);
+        }
+      });
+
+      async function checkAuthStatus() {
+        try {
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          if (data.authenticated && data.user) {
+            // User is signed in - show dashboard and user menu
+            updateNavigationState(true, data.user.email);
+          } else {
+            // User is not signed in - show sign in button
+            updateNavigationState(false);
+          }
+        } catch (error) {
+          console.error('Auth status check failed:', error);
+          // Default to signed out state on error
+          updateNavigationState(false);
+        }
+      }
+
+      function showLoadingState() {
+        // Hide all auth elements
+        desktopSignin.style.display = 'none';
+        mobileSignin.style.display = 'none';
+        userMenu.style.display = 'none';
+        mobileUserMenu.style.display = 'none';
+        navDashboard.style.display = 'none';
+        mobileDashboard.style.display = 'none';
+        
+        // Show loading spinners
+        authLoading.style.display = 'inline-block';
+        mobileAuthLoading.style.display = 'block';
+      }
+
+      function updateNavigationState(isAuthenticated, userEmail = '') {
+        // Hide loading spinners
+        authLoading.style.display = 'none';
+        mobileAuthLoading.style.display = 'none';
+        
+        if (isAuthenticated) {
+          // Show dashboard links
+          navDashboard.style.display = 'inline-block';
+          mobileDashboard.style.display = 'block';
+          
+          // Hide sign in buttons
+          desktopSignin.style.display = 'none';
+          mobileSignin.style.display = 'none';
+          
+          // Show user menu
+          userMenu.style.display = 'flex';
+          userEmail.textContent = userEmail;
+          
+          // Show mobile user menu
+          mobileUserMenu.style.display = 'flex';
+          mobileUserEmail.textContent = userEmail;
+        } else {
+          // Hide dashboard links
+          navDashboard.style.display = 'none';
+          mobileDashboard.style.display = 'none';
+          
+          // Show sign in buttons
+          desktopSignin.style.display = 'inline-block';
+          mobileSignin.style.display = 'block';
+          
+          // Hide user menu
+          userMenu.style.display = 'none';
+          mobileUserMenu.style.display = 'none';
+        }
+      }
 
       // Toggle mobile menu
       hamburgerBtn.addEventListener('click', function() {
@@ -94,7 +518,241 @@
           document.body.classList.remove('menu-open');
         }
       });
+
+             // UPS Shipping Form Functionality
+       const form = document.getElementById('ups-shipping-form');
+       const previewBtn = document.getElementById('preview-btn');
+       const createLabelBtn = document.getElementById('create-label-btn');
+       const previewModal = document.getElementById('preview-modal');
+       const requestPreview = document.getElementById('request-preview');
+       const loadingOverlay = document.getElementById('loading-overlay');
+       const closeModal = document.querySelector('.close');
+
+
+      // Preview button functionality
+      previewBtn.addEventListener('click', function() {
+        const formData = collectFormData();
+        const upsRequest = buildUPSRequest(formData);
+        requestPreview.textContent = JSON.stringify(upsRequest, null, 2);
+        previewModal.style.display = 'block';
+      });
+
+      // Close modal
+      closeModal.addEventListener('click', function() {
+        previewModal.style.display = 'none';
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener('click', function(event) {
+        if (event.target === previewModal) {
+          previewModal.style.display = 'none';
+        }
+      });
+
+      // Form submission
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = collectFormData();
+        const upsRequest = buildUPSRequest(formData);
+        
+        // Show loading overlay
+        loadingOverlay.style.display = 'flex';
+        
+        try {
+          // Send request to your backend
+          const response = await fetch('/api/ups/create-label', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(upsRequest)
+          });
+          
+          const result = await response.json();
+          
+                     if (response.ok) {
+             // Handle successful label creation
+             alert('Shipping label created successfully!');
+             console.log('Label data:', result);
+             
+             // Display the label image if available
+             if (result.labelImage) {
+               const labelWindow = window.open('', '_blank');
+               labelWindow.document.write(`
+                 <html>
+                   <head><title>UPS Shipping Label</title></head>
+                   <body style="margin: 0; padding: 20px; text-align: center;">
+                     <h2>UPS Shipping Label</h2>
+                     <p><strong>Tracking Number:</strong> ${result.trackingNumber}</p>
+                     <p><strong>Total Charges:</strong> ${result.totalCharges} ${result.currency}</p>
+                     <img src="data:image/gif;base64,${result.labelImage}" style="max-width: 100%; border: 1px solid #ccc;">
+                     <br><br>
+                     <button onclick="window.print()">Print Label</button>
+                   </body>
+                 </html>
+               `);
+             }
+           } else {
+             // Handle error
+             const errorMessage = result.error || result.details || 'Unknown error occurred';
+             alert('Error creating shipping label: ' + errorMessage);
+             console.error('UPS API Error:', result);
+           }
+        } catch (error) {
+          console.error('Network error:', error);
+          alert('Network error occurred while creating the label.');
+        } finally {
+          // Hide loading overlay
+          loadingOverlay.style.display = 'none';
+        }
+      });
+
+      function collectFormData() {
+        const formData = {};
+        const formElements = form.elements;
+        
+        for (let element of formElements) {
+          if (element.name && element.value) {
+            formData[element.name] = element.value;
+          }
+        }
+        
+        return formData;
+      }
+
+      function buildUPSRequest(formData) {
+        return {
+          ShipmentRequest: {
+            Request: {
+              SubVersion: '1801',
+              RequestOption: 'nonvalidate',
+              TransactionReference: {
+                CustomerContext: ''
+              }
+            },
+            Shipment: {
+              Description: formData['package-description'] || 'Tennis Strings Shipment',
+              Shipper: {
+                Name: formData['sender-name'],
+                AttentionName: '',
+                TaxIdentificationNumber: '',
+                Phone: {
+                  Number: formData['sender-phone'],
+                  Extension: ''
+                },
+                ShipperNumber: 'V3798C',
+                FaxNumber: '',
+                Address: {
+                  AddressLine: [formData['sender-address']],
+                  City: formData['sender-city'],
+                  StateProvinceCode: formData['sender-state'],
+                  PostalCode: formData['sender-zip'],
+                  CountryCode: 'US'
+                }
+              },
+              ShipTo: {
+                Name: formData['recipient-name'],
+                AttentionName: '',
+                Phone: {
+                  Number: formData['recipient-phone']
+                },
+                Address: {
+                  AddressLine: [formData['recipient-address']],
+                  City: formData['recipient-city'],
+                  StateProvinceCode: formData['recipient-state'],
+                  PostalCode: formData['recipient-zip'],
+                  CountryCode: 'US'
+                },
+                Residential: 'N'
+              },
+              ShipFrom: {
+                Name: formData['sender-name'],
+                AttentionName: '',
+                Phone: {
+                  Number: formData['sender-phone']
+                },
+                FaxNumber: '',
+                Address: {
+                  AddressLine: [formData['sender-address']],
+                  City: formData['sender-city'],
+                  StateProvinceCode: formData['sender-state'],
+                  PostalCode: formData['sender-zip'],
+                  CountryCode: 'US'
+                }
+              },
+              PaymentInformation: {
+                ShipmentCharge: {
+                  Type: '01',
+                  BillShipper: {
+                    AccountNumber: 'V3798C'
+                  }
+                }
+              },
+              Service: {
+                Code: formData['service-type'],
+                Description: getServiceDescription(formData['service-type'])
+              },
+              Package: {
+                Description: formData['package-description'] || '',
+                Packaging: {
+                  Code: '02',
+                  Description: 'Package'
+                },
+                Dimensions: {
+                  UnitOfMeasurement: {
+                    Code: 'IN',
+                    Description: 'Inches'
+                  },
+                  Length: formData['package-length'],
+                  Width: formData['package-width'],
+                  Height: formData['package-height']
+                },
+                PackageWeight: {
+                  UnitOfMeasurement: {
+                    Code: 'LBS',
+                    Description: 'Pounds'
+                  },
+                  Weight: formData['package-weight']
+                }
+              }
+            },
+            LabelSpecification: {
+              LabelImageFormat: {
+                Code: 'GIF',
+                Description: 'GIF'
+              },
+              HTTPUserAgent: 'Mozilla/4.5'
+            }
+          }
+        };
+      }
+
+      function getServiceDescription(code) {
+        const services = {
+          '01': 'Next Day Air',
+          '02': '2nd Day Air',
+          '03': 'Ground',
+          '12': '3 Day Select',
+          '59': '2nd Day Air AM'
+        };
+        return services[code] || 'Ground';
+      }
+
+      function getPackagingDescription(code) {
+        const packaging = {
+          '02': 'Package',
+          '01': 'UPS Letter',
+          '03': 'UPS Tube',
+          '04': 'UPS Pak',
+          '21': 'UPS Express Box',
+          '24': 'UPS 25KG Box',
+          '25': 'UPS 10KG Box'
+        };
+        return packaging[code] || 'Package';
+      }
     });
   </script>
 </body>
+</html>
 </html>

@@ -3,7 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(135deg, #ece9e6 0%, #ffffff 100%);
+  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,7 @@ body {
 .signin-container {
   background: #fff;
   border-radius: 18px;
-  box-shadow: 0 4px 32px 0 rgba(140, 79, 0, 0.07), 0 1.5px 8px 0 rgba(140, 79, 0, 0.04);
+  box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.1), 0 1.5px 8px 0 rgba(0, 0, 0, 0.05);
   padding: 3rem 2.5rem 2.5rem 2.5rem;
   max-width: 370px;
   width: 100%;
@@ -28,13 +28,13 @@ body {
   gap: 0.7rem;
   font-size: 2rem;
   font-weight: 800;
-  color: #8c4f00;
+  color: #181818;
   letter-spacing: 0.15em;
   margin-bottom: 0.5rem;
 }
 
 .signin-brand i {
-  color: #c9a063;
+  color: #181818;
   font-size: 2.2rem;
 }
 
@@ -53,7 +53,7 @@ body {
 }
 
 .orobor-logo-brown {
-  filter: sepia(1) saturate(8) hue-rotate(5deg) brightness(0.7);
+  filter: brightness(0) saturate(100%);
 }
 
 .signin-form {
@@ -67,7 +67,7 @@ body {
   text-align: center;
   font-size: 1.7rem;
   font-weight: 700;
-  color: #8c4f00;
+  color: #181818;
   margin-bottom: 1.2rem;
   letter-spacing: 0.04em;
 }
@@ -80,7 +80,7 @@ body {
 
 .input-group label {
   font-size: 1rem;
-  color: #5a3a13;
+  color: #2c3e50;
   font-weight: 500;
   margin-bottom: 0.2rem;
 }
@@ -88,37 +88,79 @@ body {
 .input-group input {
   padding: 0.7rem 1rem;
   border-radius: 8px;
-  border: 1.5px solid #e2c9a0;
+  border: 1.5px solid #e0e0e0;
   font-size: 1rem;
-  background: #f7f3ee;
+  background: #f8f9fa;
   color: #181818;
   outline: none;
   transition: border 0.2s;
 }
 
 .input-group input:focus {
-  border: 1.5px solid #c9a063;
+  border: 1.5px solid #181818;
   background: #fff;
+}
+
+/* Error and Success Messages */
+.error-message {
+  background: #fee;
+  color: #c53030;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #fed7d7;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.success-message {
+  background: #f0fff4;
+  color: #2f855a;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #c6f6d5;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .btn-signin {
   margin-top: 0.7rem;
   width: 100%;
   padding: 0.8rem 0;
-  background: linear-gradient(90deg, #c9a063 0%, #8c4f00 100%);
+  background: linear-gradient(90deg, #181818 0%, #2c3e50 100%);
   color: #fff;
   font-size: 1.1rem;
   font-weight: 700;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 2px 8px 0 rgba(140, 79, 0, 0.07);
-  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+  position: relative;
 }
 
-.btn-signin:hover {
-  background: linear-gradient(90deg, #8c4f00 0%, #c9a063 100%);
-  color: #fff7e6;
+.btn-signin:hover:not(:disabled) {
+  background: linear-gradient(90deg, #2c3e50 0%, #181818 100%);
+  color: #fff;
+}
+
+.btn-signin:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.btn-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-loading i {
+  font-size: 1rem;
 }
 
 @media (max-width: 500px) {

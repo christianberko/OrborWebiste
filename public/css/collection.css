@@ -1,10 +1,25 @@
-nav a{
-    color: black;
+.desktop-nav a{
+    color: black !important;
+    transition: color 0.2s ease;
+}
+
+.desktop-nav a:hover {
+    color: #666666 !important;
+}
+
+.mobile-nav-content a {
+    color: black !important;
+    transition: color 0.2s ease;
+}
+
+.mobile-nav-content a:hover {
+    color: #666666 !important;
 }
 
 body{
    
-    background: #EDEDED;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 20%, #e8e8e8 40%, #d0d0d0 60%, #a0a0a0 80%, #000000 100%);
+    min-height: 100vh;
 }
 
 header h1{
@@ -51,7 +66,7 @@ header h1{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
     background-clip: text;
-    text-transform: uppercase;
+    
     position: relative;
 }
 
@@ -237,8 +252,8 @@ header h1{
 /* State filter dropdown */
 .state-filter-container {
     position: absolute;
-    top: 30px;
-    left: 300px;
+    top: 25px;
+    left: 250px;
     z-index: 1000;
 }
 
@@ -534,6 +549,72 @@ header h1{
 }
 
 /* Mobile responsiveness */
+
+
+@media (max-width: 1400px) {
+    .search-overlay{
+        width: 300px;
+        left: 50%;
+    }
+    .state-filter-container{
+        left: 20%;
+    }
+
+    .state-filter{
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .search-overlay{
+        width: 250px;
+        left: 50%;
+    }
+    .state-filter-container{
+        left: 20%;
+    }
+    .state-filter {
+        padding: 12px 16px;
+        padding-right: 36px;
+        min-width: 140px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .search-overlay{
+        width: 180px;
+        left: 50%;
+    }
+    .state-filter-container{
+        left: 20%;
+    }
+    .state-filter {
+        padding: 10px 14px;
+        padding-right: 36px;
+        min-width: 120px;
+        font-size: 11px;
+    }
+
+    #search-input{
+
+        font-size:11px ;
+    }
+
+    .location-counter {
+       
+        min-width: 140px;
+        padding: 14px 18px;
+        right: 123px;
+    }
+    
+    .location-counter .count {
+        font-size: 20px;
+    }
+
+}
+
 @media (max-width: 768px) {
     .map-header {
         margin: 30px 0 20px 0;
@@ -555,37 +636,35 @@ header h1{
         margin-bottom: 40px;
     }
     
-    .search-overlay {
-        width: calc(100% - 40px);
-        left: 20px;
-        transform: none;
-        top: 20px;
+    .search-overlay{
+        width: 180px;
+        left: 50%;
     }
-    
-    #search-input {
-        padding: 16px 24px;
-        font-size: 16px; /* Prevents zoom on iOS */
+    .state-filter-container{
+        left: 20%;
     }
-    
-    .state-filter-container {
-        left: 20px;
-        top: 20px;
-    }
-    
     .state-filter {
-        padding: 12px 16px;
+        padding: 10px 14px;
         padding-right: 36px;
-        min-width: 140px;
-        font-size: 13px;
-    }
-    
-    .location-counter {
-        bottom: 20px;
-        right: 20px;
         min-width: 120px;
+        font-size: 11px;
+    }
+
+    #search-input{
+
+        font-size:11px ;
+    }
+
+    .location-counter {
+       
+        min-width: 140px;
         padding: 14px 18px;
+        right: 123px;
     }
     
+    .location-counter .count {
+        font-size: 20px;
+    }
     .location-counter .count {
         font-size: 20px;
     }

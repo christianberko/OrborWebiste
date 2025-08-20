@@ -16,6 +16,7 @@
   padding: 0rem 2rem 2rem 2rem;
   background: transparent;
   min-height: 80vh;
+  margin-bottom: 10rem;
 }
 
 .team-split-layout {
@@ -38,8 +39,8 @@
 }
 
 .team-img {
-  width: 460px;
-  height: 460px;
+  width: 400px;
+  height: 400px;
   object-fit: cover;
   border-radius: 1.25rem;
   border: 2px solid whitesmoke;
@@ -68,7 +69,7 @@
 .team-name {
   font-size: 2rem;
   font-weight: 800;
-  color: #8c4f00;
+  color: whitesmoke;
   margin-bottom: 0.5rem;
   text-wrap: balance;
 }
@@ -76,7 +77,7 @@
 .team-title {
   font-size: 1.2rem;
   font-weight: 500;
-  color: #c9a063;
+  color: whitesmoke;
   margin-bottom: 0.7rem;
   text-wrap: balance;
 }

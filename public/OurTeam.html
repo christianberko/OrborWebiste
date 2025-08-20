@@ -25,6 +25,8 @@
       <a href="OurTeam.html">OUR TEAM</a>
       <a href="collection.html">COLLECTION LOCATIONS</a>
       <a href="#">SEND STRING</a>
+      <!-- Dashboard link - only visible to authenticated founders -->
+      <a href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="display: none;">DASHBOARD</a>
     </nav>
     
     <!-- Mobile Hamburger Button -->
@@ -41,12 +43,33 @@
         <a href="OurTeam.html">OUR TEAM</a>
         <a href="collection.html">COLLECTION LOCATIONS</a>
         <a href="#">SEND STRING</a>
-        <a href="SignIn.html" class="mobile-signin">SIGN IN</a>
+        <!-- Dashboard link for mobile - only visible to authenticated founders -->
+        <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="display: none;">DASHBOARD</a>
+        <div class="mobile-auth-loading" id="mobile-auth-loading" style="display: none;">
+          <i class="fas fa-spinner fa-spin"></i>
+        </div>
+        <a href="SignIn.html" class="mobile-signin" id="mobile-signin" style="display: none;">SIGN IN</a>
+        <!-- Mobile user menu - only visible to authenticated founders -->
+        <div class="mobile-user-menu" id="mobile-user-menu" style="display: none;">
+          <span class="mobile-user-email" id="mobile-user-email"></span>
+          <button class="mobile-signout-btn" id="mobile-signout-btn">SIGN OUT</button>
+        </div>
       </div>
     </nav>
     
-    <!-- Desktop Sign In Button -->
-    <button class="btn-signIn desktop-signin"><a href="SignIn.html">SIGN IN</a></button>
+    <!-- Desktop Sign In/User Button -->
+    <div class="auth-button-container">
+      <div class="auth-loading" id="auth-loading" style="display: none;">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+      <button class="btn-signIn desktop-signin" id="desktop-signin" style="display: none;">
+        <a href="SignIn.html">SIGN IN</a>
+      </button>
+      <div class="user-menu" id="user-menu" style="display: none;">
+        <span class="user-email" id="user-email"></span>
+        <button class="btn-signout" id="btn-signout">SIGN OUT</button>
+      </div>
+    </div>
   </header>
 
   <div class="video-blur-wrapper">
@@ -168,11 +191,150 @@
   </script>
   
   <script>
-    // Mobile hamburger menu functionality
+    // Mobile hamburger menu functionality and authentication
     document.addEventListener('DOMContentLoaded', function() {
       const hamburgerBtn = document.getElementById('hamburger-btn');
       const mobileNav = document.getElementById('mobile-nav');
       const mobileNavLinks = document.querySelectorAll('.mobile-nav-content a');
+      
+      // Navigation elements
+      const navDashboard = document.getElementById('nav-dashboard');
+      const mobileDashboard = document.getElementById('mobile-dashboard');
+      const desktopSignin = document.getElementById('desktop-signin');
+      const mobileSignin = document.getElementById('mobile-signin');
+      const userMenu = document.getElementById('user-menu');
+      const userEmail = document.getElementById('user-email');
+      const btnSignout = document.getElementById('btn-signout');
+      const mobileUserMenu = document.getElementById('mobile-user-menu');
+      const mobileUserEmail = document.getElementById('mobile-user-email');
+      const mobileSignoutBtn = document.getElementById('mobile-signout-btn');
+      const authLoading = document.getElementById('auth-loading');
+      const mobileAuthLoading = document.getElementById('mobile-auth-loading');
+
+      // Show loading state initially
+      showLoadingState();
+
+      // Check authentication status on page load
+      checkAuthStatus();
+
+      // Sign out functionality
+      btnSignout.addEventListener('click', async function() {
+        try {
+          const response = await fetch('/api/auth/signout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+
+          if (response.ok) {
+            // Update UI to show signed out state
+            updateNavigationState(false);
+            // Redirect to home page
+            window.location.href = '/';
+          } else {
+            console.error('Sign out failed');
+          }
+        } catch (error) {
+          console.error('Sign out error:', error);
+        }
+      });
+
+      // Mobile sign out functionality
+      mobileSignoutBtn.addEventListener('click', async function() {
+        try {
+          const response = await fetch('/api/auth/signout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+
+          if (response.ok) {
+            // Update UI to show signed out state
+            updateNavigationState(false);
+            // Close mobile menu
+            hamburgerBtn.classList.remove('active');
+            mobileNav.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            // Redirect to home page
+            window.location.href = '/';
+          } else {
+            console.error('Sign out failed');
+          }
+        } catch (error) {
+          console.error('Sign out error:', error);
+        }
+      });
+
+      async function checkAuthStatus() {
+        try {
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          if (data.authenticated && data.user) {
+            // User is signed in - show dashboard and user menu
+            updateNavigationState(true, data.user.email);
+          } else {
+            // User is not signed in - show sign in button
+            updateNavigationState(false);
+          }
+        } catch (error) {
+          console.error('Auth status check failed:', error);
+          // Default to signed out state on error
+          updateNavigationState(false);
+        }
+      }
+
+      function showLoadingState() {
+        // Hide all auth elements
+        desktopSignin.style.display = 'none';
+        mobileSignin.style.display = 'none';
+        userMenu.style.display = 'none';
+        mobileUserMenu.style.display = 'none';
+        navDashboard.style.display = 'none';
+        mobileDashboard.style.display = 'none';
+        
+        // Show loading spinners
+        authLoading.style.display = 'inline-block';
+        mobileAuthLoading.style.display = 'block';
+      }
+
+      function updateNavigationState(isAuthenticated, userEmail = '') {
+        // Hide loading spinners
+        authLoading.style.display = 'none';
+        mobileAuthLoading.style.display = 'none';
+        
+        if (isAuthenticated) {
+          // Show dashboard links
+          navDashboard.style.display = 'inline-block';
+          mobileDashboard.style.display = 'block';
+          
+          // Hide sign in buttons
+          desktopSignin.style.display = 'none';
+          mobileSignin.style.display = 'none';
+          
+          // Show user menu
+          userMenu.style.display = 'flex';
+          userEmail.textContent = userEmail;
+          
+          // Show mobile user menu
+          mobileUserMenu.style.display = 'flex';
+          mobileUserEmail.textContent = userEmail;
+        } else {
+          // Hide dashboard links
+          navDashboard.style.display = 'none';
+          mobileDashboard.style.display = 'none';
+          
+          // Show sign in buttons
+          desktopSignin.style.display = 'inline-block';
+          mobileSignin.style.display = 'block';
+          
+          // Hide user menu
+          userMenu.style.display = 'none';
+          mobileUserMenu.style.display = 'none';
+        }
+      }
 
       // Toggle mobile menu
       hamburgerBtn.addEventListener('click', function() {
@@ -222,7 +384,10 @@
       <!-- Column 1: Brand -->
       <div class="footer-column">
         <div class="footer-brand">
-          <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="footer-logo" />
+          <div class="footer-brand-header">
+            <h2 class="footer-brand-text">OROBOR</h2>
+            <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="footer-logo" />
+          </div>
           <h3 class="footer-tagline">Tennis Strings Reborn</h3>
           <p class="footer-mission">Transforming discarded tennis strings into sustainable fashion through innovative recycling technology.</p>
         </div>
@@ -292,12 +457,6 @@
     <div class="footer-bottom">
       <div class="footer-bottom-content">
         <p class="copyright">© 2024 Orobor. All rights reserved.</p>
-        <div class="footer-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Accessibility</a>
-        </div>
-        <p class="footer-powered">Powered by 100% Renewable Energy</p>
       </div>
     </div>
   </footer>

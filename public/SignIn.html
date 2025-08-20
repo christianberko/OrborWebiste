@@ -14,8 +14,10 @@
       <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="orobor-logo-svg orobor-logo-brown" />
       <span>OROBOR</span>
     </div>
-    <form class="signin-form">
+    <form class="signin-form" id="signinForm">
       <h2>Sign In</h2>
+      <div id="errorMessage" class="error-message" style="display: none;"></div>
+      <div id="successMessage" class="success-message" style="display: none;"></div>
       <div class="input-group">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="Enter your email" required>
@@ -24,8 +26,110 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
       </div>
-      <button type="submit" class="btn-signin">Sign In</button>
+      <button type="submit" class="btn-signin" id="signinBtn">
+        <span class="btn-text">Sign In</span>
+        <span class="btn-loading" style="display: none;">
+          <i class="fas fa-spinner fa-spin"></i> Signing in...
+        </span>
+      </button>
     </form>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const signinForm = document.getElementById('signinForm');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const signinBtn = document.getElementById('signinBtn');
+      const btnText = document.querySelector('.btn-text');
+      const btnLoading = document.querySelector('.btn-loading');
+      const errorMessage = document.getElementById('errorMessage');
+      const successMessage = document.getElementById('successMessage');
+
+      // Check if user is already authenticated
+      checkAuthStatus();
+
+      signinForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        setLoading(true);
+        hideMessages();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        try {
+          const response = await fetch('/api/auth/signin', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            showSuccess('Successfully signed in! Redirecting...');
+            // Redirect to dashboard or main page after successful sign-in
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 1500);
+          } else {
+            showError(data.error || 'Sign-in failed. Please try again.');
+          }
+        } catch (error) {
+          console.error('Sign-in error:', error);
+          showError('Network error. Please check your connection and try again.');
+        } finally {
+          setLoading(false);
+        }
+      });
+
+      function setLoading(loading) {
+        if (loading) {
+          btnText.style.display = 'none';
+          btnLoading.style.display = 'inline-block';
+          signinBtn.disabled = true;
+        } else {
+          btnText.style.display = 'inline-block';
+          btnLoading.style.display = 'none';
+          signinBtn.disabled = false;
+        }
+      }
+
+      function showError(message) {
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+      }
+
+      function showSuccess(message) {
+        successMessage.textContent = message;
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+      }
+
+      function hideMessages() {
+        errorMessage.style.display = 'none';
+        successMessage.style.display = 'none';
+      }
+
+      async function checkAuthStatus() {
+        try {
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          if (data.authenticated) {
+            // User is already signed in, redirect to main page
+            window.location.href = '/';
+          }
+        } catch (error) {
+          console.error('Auth status check failed:', error);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
