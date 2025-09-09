@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orobor - Sign Out</title>
+  <meta name="description" content="Sign out of your Orobor account.">
+  <link rel="stylesheet" href="/css/signin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="signin-container">
+    <div class="signin-brand">
+      <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="orobor-logo-svg orobor-logo-brown" />
+      <span>OROBOR</span>
+    </div>
+    <div class="signin-form">
+      <h2>Sign Out</h2>
+      <div id="errorMessage" class="error-message" style="display: none;"></div>
+      <div id="successMessage" class="success-message" style="display: none;"></div>
+      <p style="text-align: center; color: #181818; font-size: 1.1rem; margin-bottom: 2rem; font-weight: 500;">
+        Are you sure you want to logout?
+      </p>
+      <div style="display: flex; gap: 1rem; width: 100%;">
+        <button type="button" class="btn-signin" id="cancelBtn" style="background: #e0e0e0; color: #181818; flex: 1;">
+          <span class="btn-text">Cancel</span>
+        </button>
+        <button type="button" class="btn-signin" id="logoutBtn" style="flex: 1;">
+          <span class="btn-text">Logout</span>
+          <span class="btn-loading" style="display: none;">
+            <i class="fas fa-spinner fa-spin"></i> Signing out...
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoutBtn = document.getElementById('logoutBtn');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const btnText = logoutBtn.querySelector('.btn-text');
+      const btnLoading = logoutBtn.querySelector('.btn-loading');
+      const errorMessage = document.getElementById('errorMessage');
+      const successMessage = document.getElementById('successMessage');
+
+      // Check if user is authenticated
+      checkAuthStatus();
+
+      cancelBtn.addEventListener('click', function() {
+        // Go back to the previous page or home
+        window.history.back() || (window.location.href = '/');
+      });
+
+      logoutBtn.addEventListener('click', async function() {
+        // Show loading state
+        setLoading(true);
+        hideMessages();
+
+        try {
+          const response = await fetch('/api/auth/signout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          });
+
+          if (response.ok) {
+            showSuccess('Successfully signed out! Redirecting...');
+            // Redirect to home page after successful sign-out
+            setTimeout(() => {
+              window.location.href = '/';
+            }, 1500);
+          } else {
+            const data = await response.json();
+            showError(data.error || 'Sign-out failed. Please try again.');
+          }
+        } catch (error) {
+          console.error('Sign-out error:', error);
+          showError('Network error. Please check your connection and try again.');
+        } finally {
+          setLoading(false);
+        }
+      });
+
+      function setLoading(loading) {
+        if (loading) {
+          btnText.style.display = 'none';
+          btnLoading.style.display = 'inline-block';
+          logoutBtn.disabled = true;
+          cancelBtn.disabled = true;
+        } else {
+          btnText.style.display = 'inline-block';
+          btnLoading.style.display = 'none';
+          logoutBtn.disabled = false;
+          cancelBtn.disabled = false;
+        }
+      }
+
+      function showError(message) {
+        errorMessage.textContent = message;
+        errorMessage.style.display = 'block';
+        successMessage.style.display = 'none';
+      }
+
+      function showSuccess(message) {
+        successMessage.textContent = message;
+        successMessage.style.display = 'block';
+        errorMessage.style.display = 'none';
+      }
+
+      function hideMessages() {
+        errorMessage.style.display = 'none';
+        successMessage.style.display = 'none';
+      }
+
+      async function checkAuthStatus() {
+        try {
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          if (!data.authenticated) {
+            // User is not signed in, redirect to sign in page
+            window.location.href = '/SignIn.html';
+          }
+        } catch (error) {
+          console.error('Auth status check failed:', error);
+          // If auth check fails, redirect to sign in page
+          window.location.href = '/SignIn.html';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

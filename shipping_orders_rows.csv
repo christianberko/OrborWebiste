@@ -1,0 +1,2 @@
+id,shipper_phone,tracking_number,ups_shipment_id,shipper_name,shipper_email,shipper_address,shipper_city,shipper_state,shipper_zip,shipper_country,service_type,service_name,total_charges,currency,order_date,shipped_date,status,shipper_company
+2acac712-3b94-426a-8924-6c65081e2281,2404615368,1ZXXXXXXXXXXXXXXXX,1ZXXXXXXXXXXXXXXXX,Christian,,10006 Branch View Court,Silver Spring,MD,20903,US,03,UPS Ground,22.93,USD,2025-08-21 22:37:12.024+00,2025-08-21 22:37:12.024+00,created,

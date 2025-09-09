@@ -3,297 +3,751 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Orobor - Founder Dashboard</title>
-  <meta name="description" content="Orobor Founder Dashboard - Manage your sustainable tennis string recycling operations.">
-  <link rel="stylesheet" href="/css/index.css">
+  <title>Orobor - Admin Dashboard</title>
+  <meta name="description" content="Orobor Admin Dashboard - Monitor shipping orders and analytics.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    .dashboard-container {
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
+      background-color: #1a1a2e !important;
       min-height: 100vh;
-      background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
-      padding: 2rem;
+      font-family: 'Montserrat', sans-serif;
+      transition: none !important;
     }
 
-    .dashboard-header {
-      background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    body.menu-open {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
+      background-color: #1a1a2e !important;
+      transition: none !important;
     }
 
-    .dashboard-title {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .dashboard-title h1 {
-      color: #8c4f00;
-      font-size: 2.5rem;
-      font-weight: 700;
-    }
-
-    .dashboard-subtitle {
-      color: #666;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
-
-    .dashboard-nav {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .dashboard-nav a {
-      padding: 0.75rem 1.5rem;
-      background: #f8f9fa;
-      color: #8c4f00;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      border: 2px solid transparent;
-    }
-
-    .dashboard-nav a:hover,
-    .dashboard-nav a.active {
-      background: #8c4f00;
-      color: white;
-      border-color: #8c4f00;
-    }
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .dashboard-card {
-      background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease;
-    }
-
-    .dashboard-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .card-icon {
-      width: 50px;
-      height: 50px;
-      background: linear-gradient(45deg, #c9a063, #8c4f00);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.5rem;
-    }
-
-    .card-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #8c4f00;
-    }
-
-    .card-value {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #8c4f00;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-label {
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    .dashboard-actions {
-      background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .actions-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #8c4f00;
-      margin-bottom: 1.5rem;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .action-btn {
+    /* Header Styling */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.1) !important;
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
       padding: 1rem 2rem;
-      background: linear-gradient(45deg, #c9a063, #8c4f00);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header-center {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.1);
       color: white;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 8px;
+      padding: 0.75rem 1.5rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .orobor-logo-white {
+      height: 40px;
+      filter: brightness(0) invert(1);
+    }
+
+    .desktop-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .desktop-nav a {
+      color: white !important;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+
+    .desktop-nav a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .btn-signIn {
+      background: linear-gradient(135deg, #3498db, #2980b9) !important;
+      color: white !important;
+      padding: 0.75rem 1.5rem !important;
+      border-radius: 25px !important;
+      text-decoration: none !important;
+      font-weight: 600 !important;
+      transition: all 0.3s ease !important;
+      border: none !important;
+      cursor: pointer;
+    }
+
+    .btn-signIn:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3) !important;
+    }
+
+    @media (max-width: 768px) {
+      .header-center h2 {
+        display: none;
+      }
+      
+      .back-btn,
+      .btn-signIn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+      }
+      
+      header {
+        padding: 1rem;
+      }
+    }
+
+    /* Dashboard Content */
+    .dashboard-container {
+      margin-top: 100px;
+      padding: 2rem;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Hide analytics UI per request */
+
+    /* Orders Section */
+    .orders-section {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 2rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .section-controls input,
+    .section-controls select {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      color: white;
+      font-size: 0.9rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .section-controls input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .section-controls input:focus,
+    .section-controls select:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
     }
 
     .action-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(140, 79, 0, 0.3);
+      box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
     }
 
     .action-btn.secondary {
-      background: #f8f9fa;
-      color: #8c4f00;
-      border: 2px solid #8c4f00;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .action-btn.secondary:hover {
-      background: #8c4f00;
-      color: white;
+      background: rgba(255, 255, 255, 0.2);
     }
 
+    /* Table Styling */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: rgba(52, 152, 219, 0.2);
+      color: white;
+      font-weight: 600;
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    td {
+      padding: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    tr:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-created {
+      background: rgba(52, 152, 219, 0.2);
+      color: #3498db;
+      border: 1px solid rgba(52, 152, 219, 0.3);
+    }
+
+    .status-shipped {
+      background: rgba(155, 89, 182, 0.2);
+      color: #9b59b6;
+      border: 1px solid rgba(155, 89, 182, 0.3);
+    }
+
+    .status-delivered {
+      background: rgba(46, 125, 50, 0.2);
+      color: #2e7d32;
+      border: 1px solid rgba(46, 125, 50, 0.3);
+    }
+
+    .status-failed {
+      background: rgba(198, 40, 40, 0.2);
+      color: #c62828;
+      border: 1px solid rgba(198, 40, 40, 0.3);
+    }
+
+    /* Loading Spinner */
+    .loading-container {
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .spinner {
+      color: #3498db;
+      font-size: 2rem;
+    }
+
+    /* Pagination */
+    .pagination-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .pagination-info {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .pagination-buttons {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
       .dashboard-container {
         padding: 1rem;
+        margin-top: 80px;
       }
-      
-      .dashboard-nav {
+
+      .dashboard-hero-title {
+        font-size: 2rem;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .section-controls {
         flex-direction: column;
       }
-      
-      .action-buttons {
+
+      .section-controls input,
+      .section-controls select {
+        width: 100%;
+      }
+
+      .pagination-container {
         flex-direction: column;
+      }
+
+      .table-container {
+        font-size: 0.8rem;
+      }
+
+      th, td {
+        padding: 0.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="dashboard-container">
-    <div class="dashboard-header">
-      <div class="dashboard-title">
-        <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" style="height: 40px; filter: sepia(1) saturate(8) hue-rotate(5deg) brightness(0.7);" />
-        <h1>Founder Dashboard</h1>
+  <!-- Header with Back Button -->
+  <header>
+    <div class="nav-container">
+      <button class="back-btn" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      
+      <div class="header-center">
+        <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="orobor-logo-white">
+        <h2 style="color: white; margin: 0; font-weight: 600;">Admin Dashboard</h2>
       </div>
-      <p class="dashboard-subtitle">Welcome back! Here's your overview of Orobor's operations.</p>
-      <div class="dashboard-nav">
-        <a href="#" class="active">Overview</a>
-        <a href="#">Collections</a>
-        <a href="#">Analytics</a>
-        <a href="#">Settings</a>
-        <a href="/" style="margin-left: auto;">← Back to Site</a>
-      </div>
+      
+      <button class="btn-signIn" onclick="signOut()">
+        <i class="fas fa-sign-out-alt"></i> Sign Out
+      </button>
     </div>
+  </header>
 
-    <div class="dashboard-grid">
-      <div class="dashboard-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="fas fa-recycle"></i>
+  <div class="dashboard-container">
+    <!-- Analytics Cards -->
+    <div class="dashboard-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+      <div class="dashboard-card" style="background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="card-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
+          <div class="card-icon" style="width: 52px; height: 52px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem; box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);">
+            <i class="fas fa-dollar-sign"></i>
           </div>
-          <h3 class="card-title">Strings Collected</h3>
+          <h3 class="card-title" style="font-size: 1rem; font-weight: 600; color: white;">Spent on Labels (This Month)</h3>
         </div>
-        <div class="card-value">2,847</div>
-        <div class="card-label">kg this month</div>
+        <div class="card-value" id="analytics-monthly-spend" style="font-size: 2rem; font-weight: 700; color: white;">$0.00</div>
+        <div class="card-label" id="analytics-monthly-count" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">0 labels</div>
       </div>
 
-      <div class="dashboard-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="fas fa-leaf"></i>
-          </div>
-          <h3 class="card-title">CO₂ Saved</h3>
-        </div>
-        <div class="card-value">1,423</div>
-        <div class="card-label">kg this month</div>
-      </div>
-
-      <div class="dashboard-card">
-        <div class="card-header">
-          <div class="card-icon">
+      <div class="dashboard-card" style="background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="card-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
+          <div class="card-icon" style="width: 52px; height: 52px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem; box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);">
             <i class="fas fa-map-marker-alt"></i>
           </div>
-          <h3 class="card-title">Active Locations</h3>
+          <h3 class="card-title" style="font-size: 1rem; font-weight: 600; color: white;">Top State (All Time)</h3>
         </div>
-        <div class="card-value">24</div>
-        <div class="card-label">collection points</div>
+        <div class="card-value" id="analytics-top-state" style="font-size: 2rem; font-weight: 700; color: white;">-</div>
+        <div class="card-label" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">by labels created</div>
       </div>
 
-      <div class="dashboard-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <i class="fas fa-tshirt"></i>
+      <div class="dashboard-card" style="background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(20px); border-radius: 20px; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="card-header" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
+          <div class="card-icon" style="width: 52px; height: 52px; background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem; box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);">
+            <i class="fas fa-shipping-fast"></i>
           </div>
-          <h3 class="card-title">Products Created</h3>
+          <h3 class="card-title" style="font-size: 1rem; font-weight: 600; color: white;">Total Labels (All Time)</h3>
         </div>
-        <div class="card-value">156</div>
-        <div class="card-label">items this month</div>
+        <div class="card-value" id="analytics-total-orders" style="font-size: 2rem; font-weight: 700; color: white;">0</div>
+        <div class="card-label" style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">across all orders</div>
       </div>
     </div>
 
-    <div class="dashboard-actions">
-      <h3 class="actions-title">Quick Actions</h3>
-      <div class="action-buttons">
-        <a href="#" class="action-btn">
+    <!-- Orders Section -->
+    <section class="orders-section">
+      <div class="section-header">
+        <h2 class="section-title">Recent Shipping Orders</h2>
+        <div class="section-controls">
+          <input type="text" id="search-orders" placeholder="Search orders...">
+          <select id="status-filter">
+            <option value="all">All Status</option>
+            <option value="created">Created</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="failed">Failed</option>
+          </select>
+          <button id="refresh-orders" class="action-btn"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+      </div>
+      
+      <div id="orders-loading" class="loading-container" style="display: none;">
+        <i class="fas fa-spinner fa-spin spinner"></i>
+        <p style="margin-top: 1rem; color: rgba(255, 255, 255, 0.7);">Loading orders...</p>
+      </div>
+      
+      <div id="orders-table-container" class="table-container">
+        <table id="orders-table">
+          <thead>
+            <tr>
+              <th>Tracking #</th>
+              <th>Shipper</th>
+              <th>From</th>
+              <th>Service</th>
+              <th>Cost</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="orders-tbody">
+            <!-- Orders will be loaded here -->
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Pagination removed; show all orders -->
+    </section>
+
+    <!-- Quick Actions Section -->
+    <section class="orders-section">
+      <div class="section-header">
+        <h2 class="section-title">Quick Actions</h2>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a href="/partner.html" class="action-btn">
           <i class="fas fa-plus"></i>
-          Add Collection Point
+          Create Shipping Label
         </a>
-        <a href="#" class="action-btn">
-          <i class="fas fa-chart-line"></i>
-          View Analytics
+        <a href="#" class="action-btn" onclick="exportOrders()">
+          <i class="fas fa-download"></i>
+          Export Orders
         </a>
-        <a href="#" class="action-btn">
-          <i class="fas fa-users"></i>
-          Manage Team
+        <a href="/collection.html" class="action-btn">
+          <i class="fas fa-map-marker-alt"></i>
+          View Collection Points
         </a>
-        <a href="#" class="action-btn secondary">
-          <i class="fas fa-cog"></i>
-          Settings
+        <a href="/" class="action-btn secondary">
+          <i class="fas fa-home"></i>
+          Back to Site
         </a>
       </div>
-    </div>
+    </section>
   </div>
 
   <script>
+    let currentPage = 1;
+    let currentSearch = '';
+    let currentStatus = 'all';
+
+    // Back button functionality
+    function goBack() {
+      // Try to go back in history, or fallback to home page
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = '/';
+      }
+    }
+
     // Check authentication on page load
     document.addEventListener('DOMContentLoaded', function() {
       checkAuthStatus();
+      setupEventListeners();
     });
+
+    function setupEventListeners() {
+      const searchInput = document.getElementById('search-orders');
+      const statusFilter = document.getElementById('status-filter');
+      const refreshBtn = document.getElementById('refresh-orders');
+      
+      searchInput.addEventListener('input', debounce((e) => {
+        currentSearch = e.target.value;
+        loadOrders();
+      }, 300));
+      
+      statusFilter.addEventListener('change', (e) => {
+        currentStatus = e.target.value;
+        loadOrders();
+      });
+      
+      refreshBtn.addEventListener('click', () => {
+        loadOrders();
+      });
+    }
 
     async function checkAuthStatus() {
       try {
         const response = await fetch('/api/auth/status');
+        if (!response.ok) {
+          console.warn('Auth status not OK, redirecting to sign-in');
+          window.location.href = '/signin';
+          return;
+        }
+        const data = await response.json();
+        if (!data.authenticated) {
+          window.location.href = '/signin';
+          return;
+        }
+        // Authenticated: load founder data
+        loadOrders();
+        loadAnalytics();
+      } catch (error) {
+        console.error('Auth check failed:', error);
+        window.location.href = '/signin';
+      }
+    }
+
+    async function loadAnalytics() {
+      try {
+        const response = await fetch('/api/founder/analytics');
+        const data = await response.json();
+        if (!data.success) return;
+        const a = data.analytics || {};
+        document.getElementById('analytics-monthly-spend').textContent = `$${(a.monthly?.totalSpentThisMonth || 0).toFixed(2)}`;
+        document.getElementById('analytics-monthly-count').textContent = `${a.monthly?.ordersThisMonth || 0} labels`;
+        document.getElementById('analytics-top-state').textContent = a.topStateOverall || '-';
+        document.getElementById('analytics-total-orders').textContent = a.totalOrders || 0;
+      } catch (e) {
+        console.error('Analytics load failed:', e);
+      }
+    }
+
+    async function loadOrders() {
+      const loading = document.getElementById('orders-loading');
+      const tableContainer = document.getElementById('orders-table-container');
+      
+      loading.style.display = 'block';
+      tableContainer.style.display = 'none';
+      
+      try {
+        console.log('🔍 Loading orders (founder endpoint)...');
+        console.log('📡 Fetching from:', `/api/founder/orders`);
+        const response = await fetch(`/api/founder/orders`);
+        console.log('📡 Response status:', response.status);
+        
+        const data = await response.json();
+        console.log('📊 Response data:', data);
+        
+        if (data.success) {
+          console.log('✅ Orders loaded successfully:', data.orders?.length || 0);
+          displayOrders(data.orders);
+        } else {
+          console.error('❌ API returned success: false', data);
+          document.getElementById('orders-tbody').innerHTML = 
+            `<tr><td colspan="7" style="text-align: center; padding: 2rem; color: rgba(255, 255, 255, 0.7);">API Error: ${data.error || 'Unknown error'}</td></tr>`;
+        }
+      } catch (error) {
+        console.error('❌ Error loading orders:', error);
+        document.getElementById('orders-tbody').innerHTML = 
+          `<tr><td colspan="7" style="text-align: center; padding: 2rem; color: rgba(255, 255, 255, 0.7);">Network Error: ${error.message}</td></tr>`;
+      } finally {
+        loading.style.display = 'none';
+        tableContainer.style.display = 'block';
+      }
+    }
+
+    function displayOrders(orders) {
+      const tbody = document.getElementById('orders-tbody');
+      
+      console.log('🎯 displayOrders called with:', orders);
+      console.log('🎯 Orders array length:', orders?.length);
+      console.log('🎯 First order structure:', orders?.[0]);
+      
+      if (!orders || orders.length === 0) {
+        console.log('⚠️ No orders to display');
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: rgba(255, 255, 255, 0.7);">No orders found</td></tr>';
+        return;
+      }
+      
+      console.log('📋 Processing', orders.length, 'orders for display');
+      
+      try {
+        tbody.innerHTML = orders.map((order, index) => {
+          console.log(`📋 Processing order ${index + 1}:`, order);
+          
+          // Handle potential undefined/null values safely
+          const trackingNumber = order.tracking_number || 'N/A';
+          const shipperName = order.shipper_name || 'Unknown';
+          const shipperCompany = order.shipper_company || '';
+          const shipperCity = order.shipper_city || 'Unknown';
+          const shipperState = order.shipper_state || 'Unknown';
+          const serviceName = order.service_name || 'UPS Ground';
+          const totalCharges = parseFloat(order.total_charges || 0).toFixed(2);
+          const orderDate = order.order_date || new Date().toISOString();
+          const status = order.status || 'created';
+          
+          return `
+            <tr>
+              <td style="font-family: monospace; font-weight: 600;">${trackingNumber}</td>
+              <td>
+                <div style="font-weight: 600;">${shipperName}</div>
+                ${shipperCompany ? `<div style="font-size: 0.9em; color: rgba(255, 255, 255, 0.6);">${shipperCompany}</div>` : ''}
+              </td>
+              <td>${shipperCity}, ${shipperState}</td>
+              <td>
+                <span style="background: rgba(52, 152, 219, 0.2); color: #3498db; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85rem; border: 1px solid rgba(52, 152, 219, 0.3);">
+                  ${serviceName}
+                </span>
+              </td>
+              <td style="font-weight: 600;">$${totalCharges}</td>
+              <td>${formatDate(orderDate)}</td>
+              <td>
+                <span class="status-badge status-${status}">
+                  ${status.charAt(0).toUpperCase() + status.slice(1)}
+                </span>
+              </td>
+            </tr>
+          `;
+        }).join('');
+        
+        console.log('✅ Orders table HTML generated successfully');
+        
+      } catch (error) {
+        console.error('❌ Error generating orders HTML:', error);
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 2rem; color: rgba(255, 255, 255, 0.7);">Error displaying orders</td></tr>';
+      }
+    }
+
+    // Pagination removed per request
+
+    function formatDate(dateString) {
+      try {
+        if (!dateString) return 'Unknown Date';
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return 'Invalid Date';
+        return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      } catch (error) {
+        console.error('❌ Error formatting date:', dateString, error);
+        return 'Date Error';
+      }
+    }
+
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    async function exportOrders() {
+      try {
+        const response = await fetch('/api/founder/orders?limit=1000');
         const data = await response.json();
         
-        if (!data.authenticated) {
-          // Redirect to sign-in if not authenticated
+        if (data.success) {
+          const csv = convertToCSV(data.orders);
+          downloadCSV(csv, 'shipping-orders.csv');
+        }
+      } catch (error) {
+        console.error('Error exporting orders:', error);
+        alert('Failed to export orders');
+      }
+    }
+
+    function convertToCSV(orders) {
+      const headers = ['Tracking Number', 'Shipper Name', 'Company', 'City', 'State', 'Service', 'Cost', 'Date', 'Status'];
+      const rows = orders.map(order => [
+        order.tracking_number,
+        order.shipper_name,
+        order.shipper_company || '',
+        order.shipper_city,
+        order.shipper_state,
+        order.service_name,
+        order.total_charges,
+        order.order_date,
+        order.status
+      ]);
+      
+      return [headers, ...rows].map(row => row.map(field => `"${field}"`).join(',')).join('\n');
+    }
+
+    function downloadCSV(csv, filename) {
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+
+    async function signOut() {
+      try {
+        const response = await fetch('/api/auth/signout', { method: 'POST' });
+        if (response.ok) {
           window.location.href = '/signin';
         }
       } catch (error) {
-        console.error('Auth check failed:', error);
-        // Redirect to sign-in on error
-        window.location.href = '/signin';
+        console.error('Sign out failed:', error);
       }
     }
   </script>
 </body>
 </html>
+

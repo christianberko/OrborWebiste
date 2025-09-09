@@ -25,7 +25,7 @@
       <a href="/collection.html">COLLECTION LOCATIONS</a>
       <a href="#">SEND STRINGS</a>
       <!-- Dashboard link - only visible to authenticated founders -->
-      <a href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="display: none;">DASHBOARD</a>
+      <a href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="visibility: hidden;">DASHBOARD</a>
     </nav>
     
     <!-- Mobile Hamburger Button -->
@@ -43,31 +43,24 @@
         <a href="/collection.html">COLLECTION LOCATIONS</a>
         <a href="#">SEND STRINGS</a>
         <!-- Dashboard link for mobile - only visible to authenticated founders -->
-        <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="display: none;">DASHBOARD</a>
+        <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="visibility: hidden;">DASHBOARD</a>
         <div class="mobile-auth-loading" id="mobile-auth-loading" style="display: none;">
           <i class="fas fa-spinner fa-spin"></i>
         </div>
-        <a href="SignIn.html" class="mobile-signin" id="mobile-signin" style="display: none;">SIGN IN</a>
-        <!-- Mobile user menu - only visible to authenticated founders -->
-        <div class="mobile-user-menu" id="mobile-user-menu" style="display: none;">
-          <span class="mobile-user-email" id="mobile-user-email"></span>
-          <button class="mobile-signout-btn" id="mobile-signout-btn">SIGN OUT</button>
-        </div>
+        <button class="mobile-profile-icon-btn" id="mobile-profile-icon-btn">
+          <i class="fas fa-user"></i> PROFILE
+        </button>
       </div>
     </nav>
     
-    <!-- Desktop Sign In/User Button -->
+    <!-- Desktop Profile Icon -->
     <div class="auth-button-container">
       <div class="auth-loading" id="auth-loading" style="display: none;">
         <i class="fas fa-spinner fa-spin"></i>
       </div>
-      <button class="btn-signIn desktop-signin" id="desktop-signin" style="display: none;">
-        <a href="SignIn.html">SIGN IN</a>
+      <button class="profile-icon-btn" id="profile-icon-btn">
+        <i class="fas fa-user"></i>
       </button>
-      <div class="user-menu" id="user-menu" style="display: none;">
-        <span class="user-email" id="user-email"></span>
-        <button class="btn-signout" id="btn-signout">SIGN OUT</button>
-      </div>
     </div>
   </header>
 
@@ -78,18 +71,25 @@
       <p>Fill out the form below to generate a shipping label for your tennis strings</p>
     </div>
 
-    <form id="ups-shipping-form" class="shipping-form">
+    <form id="ups-shipping-form" class="shipping-form" novalidate>
       <!-- Sender Information (Shipper & Ship From - usually the same) -->
       <div class="form-section">
         <h2><i class="fas fa-user"></i> Sender Information</h2>
         <div class="form-grid">
           <div class="form-group">
             <label for="sender-name">Your Name/Company *</label>
-            <input type="text" id="sender-name" name="sender-name" required>
+            <input type="text" id="sender-name" name="sender-name" required 
+                   pattern="^[a-zA-Z0-9\s\-\.&']{2,50}$"
+                   title="Please enter a valid name or company (2-50 characters, letters, numbers, spaces, hyphens, periods, ampersands, and apostrophes only)">
+            <div class="error-message" id="sender-name-error"></div>
           </div>
           <div class="form-group">
             <label for="sender-phone">Phone Number *</label>
-            <input type="tel" id="sender-phone" name="sender-phone" required>
+            <input type="tel" id="sender-phone" name="sender-phone" required 
+                   pattern="^\(\d{3}\) \d{3}-\d{4}$"
+                   title="Please enter phone number in format (XXX) XXX-XXXX"
+                   placeholder="(555) 123-4567">
+            <div class="error-message" id="sender-phone-error"></div>
           </div>
         </div>
         
@@ -98,11 +98,17 @@
           <div class="form-grid">
             <div class="form-group full-width">
               <label for="sender-address">Street Address *</label>
-              <input type="text" id="sender-address" name="sender-address" required>
+              <input type="text" id="sender-address" name="sender-address" required 
+                     pattern="^[a-zA-Z0-9\s\-\.#]{5,100}$"
+                     title="Please enter a valid street address (5-100 characters, letters, numbers, spaces, hyphens, periods, and # only)">
+              <div class="error-message" id="sender-address-error"></div>
             </div>
             <div class="form-group">
               <label for="sender-city">City *</label>
-              <input type="text" id="sender-city" name="sender-city" required>
+              <input type="text" id="sender-city" name="sender-city" required 
+                     pattern="^[a-zA-Z\s\-\.]{2,50}$"
+                     title="Please enter a valid city name (2-50 characters, letters, spaces, hyphens, and periods only)">
+              <div class="error-message" id="sender-city-error"></div>
             </div>
             <div class="form-group">
               <label for="sender-state">State *</label>
@@ -159,102 +165,117 @@
                 <option value="WI">Wisconsin</option>
                 <option value="WY">Wyoming</option>
               </select>
+              <div class="error-message" id="sender-state-error"></div>
             </div>
             <div class="form-group">
               <label for="sender-zip">ZIP Code *</label>
-              <input type="text" id="sender-zip" name="sender-zip" required>
+              <input type="text" id="sender-zip" name="sender-zip" required 
+                     pattern="^[0-9]{5}(-[0-9]{4})?$"
+                     title="Please enter a valid ZIP code (5 digits or 5+4 format)">
+              <div class="error-message" id="sender-zip-error"></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Recipient Information -->
-      <div class="form-section">
-        <h2><i class="fas fa-map-marker-alt"></i> Recipient Information</h2>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="recipient-name">Recipient Name *</label>
-            <input type="text" id="recipient-name" name="recipient-name" required>
-          </div>
-          <div class="form-group">
-            <label for="recipient-phone">Phone Number *</label>
-            <input type="tel" id="recipient-phone" name="recipient-phone" required>
-          </div>
-        </div>
-        
-        <div class="address-section">
-          <h3>Recipient Address</h3>
-          <div class="form-grid">
-            <div class="form-group full-width">
-              <label for="recipient-address">Street Address *</label>
-              <input type="text" id="recipient-address" name="recipient-address" required>
-            </div>
-            <div class="form-group">
-              <label for="recipient-city">City *</label>
-              <input type="text" id="recipient-city" name="recipient-city" required>
-            </div>
-            <div class="form-group">
-              <label for="recipient-state">State *</label>
-              <select id="recipient-state" name="recipient-state" required>
-                <option value="">Select State</option>
-                <option value="AL">Alabama</option>
-                <option value="AK">Alaska</option>
-                <option value="AZ">Arizona</option>
-                <option value="AR">Arkansas</option>
-                <option value="CA">California</option>
-                <option value="CO">Colorado</option>
-                <option value="CT">Connecticut</option>
-                <option value="DE">Delaware</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="HI">Hawaii</option>
-                <option value="ID">Idaho</option>
-                <option value="IL">Illinois</option>
-                <option value="IN">Indiana</option>
-                <option value="IA">Iowa</option>
-                <option value="KS">Kansas</option>
-                <option value="KY">Kentucky</option>
-                <option value="LA">Louisiana</option>
-                <option value="ME">Maine</option>
-                <option value="MD">Maryland</option>
-                <option value="MA">Massachusetts</option>
-                <option value="MI">Michigan</option>
-                <option value="MN">Minnesota</option>
-                <option value="MS">Mississippi</option>
-                <option value="MO">Missouri</option>
-                <option value="MT">Montana</option>
-                <option value="NE">Nebraska</option>
-                <option value="NV">Nevada</option>
-                <option value="NH">New Hampshire</option>
-                <option value="NJ">New Jersey</option>
-                <option value="NM">New Mexico</option>
-                <option value="NY">New York</option>
-                <option value="NC">North Carolina</option>
-                <option value="ND">North Dakota</option>
-                <option value="OH">Ohio</option>
-                <option value="OK">Oklahoma</option>
-                <option value="OR">Oregon</option>
-                <option value="PA">Pennsylvania</option>
-                <option value="RI">Rhode Island</option>
-                <option value="SC">South Carolina</option>
-                <option value="SD">South Dakota</option>
-                <option value="TN">Tennessee</option>
-                <option value="TX">Texas</option>
-                <option value="UT">Utah</option>
-                <option value="VT">Vermont</option>
-                <option value="VA">Virginia</option>
-                <option value="WA">Washington</option>
-                <option value="WV">West Virginia</option>
-                <option value="WI">Wisconsin</option>
-                <option value="WY">Wyoming</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="recipient-zip">ZIP Code *</label>
-              <input type="text" id="recipient-zip" name="recipient-zip" required>
-            </div>
-          </div>
-        </div>
+             <!-- Recipient Information - Pre-filled -->
+       <div class="form-section">
+         <h2><i class="fas fa-map-marker-alt"></i> Shipping Destination</h2>
+         <div class="destination-info">
+           <p><strong>Your items will be shipped to:</strong></p>
+           <div class="hardcoded-address">
+             <p><strong>Orobor Recycling Facility</strong></p>
+             <p>313 Industrial Park Extension</p>
+             <p>Belington, WV 25260</p>
+             <p>United States</p>
+           </div>
+         </div>
+         
+         <!-- Pre-filled recipient information (hidden from user but used in form) -->
+         <div class="form-grid" style="display: none;">
+           <div class="form-group">
+             <label for="recipient-name">Recipient Name *</label>
+             <input type="text" id="recipient-name" name="recipient-name" value="Orobor Recycling Facility" required readonly>
+           </div>
+           <div class="form-group">
+             <label for="recipient-phone">Phone Number *</label>
+             <input type="tel" id="recipient-phone" name="recipient-phone" value="3045551234" required readonly>
+           </div>
+         </div>
+         
+         <div class="address-section" style="display: none;">
+           <h3>Recipient Address</h3>
+           <div class="form-grid">
+             <div class="form-group full-width">
+               <label for="recipient-address">Street Address *</label>
+               <input type="text" id="recipient-address" name="recipient-address" value="313 Industrial Park Extension" required readonly>
+             </div>
+             <div class="form-group">
+               <label for="recipient-city">City *</label>
+               <input type="text" id="recipient-city" name="recipient-city" value="Belington" required readonly>
+             </div>
+             <div class="form-group">
+               <label for="recipient-state">State *</label>
+               <select id="recipient-state" name="recipient-state" required readonly>
+                 <option value="">Select State</option>
+                 <option value="AL">Alabama</option>
+                 <option value="AK">Alaska</option>
+                 <option value="AZ">Arizona</option>
+                 <option value="AR">Arkansas</option>
+                 <option value="CA">California</option>
+                 <option value="CO">Colorado</option>
+                 <option value="CT">Connecticut</option>
+                 <option value="DE">Delaware</option>
+                 <option value="FL">Florida</option>
+                 <option value="GA">Georgia</option>
+                 <option value="HI">Hawaii</option>
+                 <option value="ID">Idaho</option>
+                 <option value="IL">Illinois</option>
+                 <option value="IN">Indiana</option>
+                 <option value="IA">Iowa</option>
+                 <option value="KS">Kansas</option>
+                 <option value="KY">Kentucky</option>
+                 <option value="LA">Louisiana</option>
+                 <option value="ME">Maine</option>
+                 <option value="MD">Maryland</option>
+                 <option value="MA">Massachusetts</option>
+                 <option value="MI">Michigan</option>
+                 <option value="MN">Minnesota</option>
+                 <option value="MS">Mississippi</option>
+                 <option value="MO">Missouri</option>
+                 <option value="MT">Montana</option>
+                 <option value="NE">Nebraska</option>
+                 <option value="NV">Nevada</option>
+                 <option value="NH">New Hampshire</option>
+                 <option value="NJ">New Jersey</option>
+                 <option value="NM">New Mexico</option>
+                 <option value="NY">New York</option>
+                 <option value="NC">North Carolina</option>
+                 <option value="ND">North Dakota</option>
+                 <option value="OH">Ohio</option>
+                 <option value="OK">Oklahoma</option>
+                 <option value="OR">Oregon</option>
+                 <option value="PA">Pennsylvania</option>
+                 <option value="RI">Rhode Island</option>
+                 <option value="SC">South Carolina</option>
+                 <option value="SD">South Dakota</option>
+                 <option value="TN">Tennessee</option>
+                 <option value="TX">Texas</option>
+                 <option value="UT">Utah</option>
+                 <option value="VT">Vermont</option>
+                 <option value="VA">Virginia</option>
+                 <option value="WA">Washington</option>
+                 <option value="WV" selected>West Virginia</option>
+                 <option value="WI">Wisconsin</option>
+                 <option value="WY">Wyoming</option>
+               </select>
+             </div>
+             <div class="form-group">
+               <label for="recipient-zip">ZIP Code *</label>
+               <input type="text" id="recipient-zip" name="recipient-zip" value="25260" required readonly>
+             </div>
+           </div>
+         </div>
       </div>
 
       <!-- Package Information -->
@@ -263,22 +284,28 @@
         <div class="form-grid">
           <div class="form-group">
             <label for="package-description">Description</label>
-            <input type="text" id="package-description" name="package-description" placeholder="e.g., Tennis Strings" value="Tennis Strings">
+            <input type="text" id="package-description" name="package-description" placeholder="e.g., Tennis Strings" value="Tennis Strings"
+                   pattern="^[a-zA-Z0-9\s\-\.]{1,100}$"
+                   title="Please enter a valid description (1-100 characters, letters, numbers, spaces, hyphens, and periods only)">
+            <div class="error-message" id="package-description-error"></div>
           </div>
           <div class="form-group">
             <label for="service-type">Service Type *</label>
             <select id="service-type" name="service-type" required>
+              <option value="">Select Service Type</option>
               <option value="03">Ground (3-5 days)</option>
               <option value="02">2nd Day Air</option>
               <option value="01">Next Day Air</option>
               <option value="12">3 Day Select</option>
             </select>
+            <div class="error-message" id="service-type-error"></div>
           </div>
-                     <div class="form-group">
-             <label for="package-weight">Weight (lbs) *</label>
-             <input type="number" id="package-weight" name="package-weight" min="0.1" step="0.1" required placeholder="1.0">
-           </div>
-
+          <div class="form-group">
+            <label for="package-weight">Weight (lbs) *</label>
+            <input type="number" id="package-weight" name="package-weight" min="0.1" max="1000" step="0.1" required placeholder="1.0"
+                   title="Please enter a valid weight between 0.1 and 1000 lbs">
+            <div class="error-message" id="package-weight-error"></div>
+          </div>
         </div>
 
         <div class="dimensions-section">
@@ -286,15 +313,21 @@
           <div class="form-grid">
             <div class="form-group">
               <label for="package-length">Length *</label>
-              <input type="number" id="package-length" name="package-length" min="0.1" step="0.1" required placeholder="12">
+              <input type="number" id="package-length" name="package-length" min="0.1" max="200" step="0.1" required placeholder="12"
+                     title="Please enter a valid length between 0.1 and 200 inches">
+              <div class="error-message" id="package-length-error"></div>
             </div>
             <div class="form-group">
               <label for="package-width">Width *</label>
-              <input type="number" id="package-width" name="package-width" min="0.1" step="0.1" required placeholder="8">
+              <input type="number" id="package-width" name="package-width" min="0.1" max="200" step="0.1" required placeholder="8"
+                     title="Please enter a valid width between 0.1 and 200 inches">
+              <div class="error-message" id="package-width-error"></div>
             </div>
             <div class="form-group">
               <label for="package-height">Height *</label>
-              <input type="number" id="package-height" name="package-height" min="0.1" step="0.1" required placeholder="2">
+              <input type="number" id="package-height" name="package-height" min="0.1" max="200" step="0.1" required placeholder="2"
+                     title="Please enter a valid height between 0.1 and 200 inches">
+              <div class="error-message" id="package-height-error"></div>
             </div>
           </div>
         </div>
@@ -302,33 +335,48 @@
 
       <!-- Form Actions -->
       <div class="form-actions">
-        <button type="button" id="preview-btn" class="btn-secondary">
-          <i class="fas fa-eye"></i> Preview Request
-        </button>
         <button type="submit" id="create-label-btn" class="btn-primary">
           <i class="fas fa-shipping-fast"></i> Create Shipping Label
         </button>
       </div>
     </form>
 
-    <!-- Preview Modal -->
-    <div id="preview-modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>UPS API Request Preview</h2>
-          <span class="close">&times;</span>
-        </div>
-        <div class="modal-body">
-          <pre id="request-preview"></pre>
-        </div>
-      </div>
-    </div>
+
+
+    <!-- Removed Preview Modal -->
 
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="loading-overlay">
       <div class="loading-spinner">
         <i class="fas fa-spinner fa-spin"></i>
         <p>Creating shipping label...</p>
+      </div>
+    </div>
+
+    <!-- Shipping Label Modal -->
+    <div id="shipping-label-modal" class="shipping-label-modal" style="display: none;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Shipping Label Created Successfully!</h3>
+          <span class="close" onclick="closeShippingModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div class="label-info">
+            <p><strong>Tracking Number:</strong> <span id="tracking-number"></span></p>
+            <p><strong>Shipping Cost:</strong> <span id="shipping-cost"></span></p>
+          </div>
+          <div class="label-container">
+            <img id="shipping-label-image" src="" alt="Shipping Label" />
+          </div>
+          <div class="button-group">
+            <button class="btn-download" onclick="downloadShippingLabel()">
+              <i class="fas fa-download"></i> Download Label
+            </button>
+            <button class="btn-print" onclick="printShippingLabel()">
+              <i class="fas fa-print"></i> Print Label
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -343,70 +391,56 @@
       // Navigation elements
       const navDashboard = document.getElementById('nav-dashboard');
       const mobileDashboard = document.getElementById('mobile-dashboard');
-      const desktopSignin = document.getElementById('desktop-signin');
-      const mobileSignin = document.getElementById('mobile-signin');
-      const userMenu = document.getElementById('user-menu');
-      const userEmail = document.getElementById('user-email');
-      const btnSignout = document.getElementById('btn-signout');
-      const mobileUserMenu = document.getElementById('mobile-user-menu');
-      const mobileUserEmail = document.getElementById('mobile-user-email');
-      const mobileSignoutBtn = document.getElementById('mobile-signout-btn');
+      const profileIconBtn = document.getElementById('profile-icon-btn');
+      const mobileProfileIconBtn = document.getElementById('mobile-profile-icon-btn');
       const authLoading = document.getElementById('auth-loading');
       const mobileAuthLoading = document.getElementById('mobile-auth-loading');
 
-      // Show loading state initially
-      showLoadingState();
-
-      // Check authentication status on page load
+      // Check authentication status on page load (for dashboard visibility only)
       checkAuthStatus();
 
-      // Sign out functionality
-      btnSignout.addEventListener('click', async function() {
+      // Profile icon click functionality
+      profileIconBtn.addEventListener('click', async function() {
         try {
-          const response = await fetch('/api/auth/signout', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          });
-
-          if (response.ok) {
-            // Update UI to show signed out state
-            updateNavigationState(false);
-            // Redirect to home page
-            window.location.href = '/';
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          if (data.authenticated) {
+            // User is signed in, redirect to logout page
+            window.location.href = '/logout.html';
           } else {
-            console.error('Sign out failed');
+            // User is not signed in, redirect to sign in page
+            window.location.href = '/SignIn.html';
           }
         } catch (error) {
-          console.error('Sign out error:', error);
+          console.error('Auth status check failed:', error);
+          // Default to sign in page on error
+          window.location.href = '/SignIn.html';
         }
       });
 
-      // Mobile sign out functionality
-      mobileSignoutBtn.addEventListener('click', async function() {
+      // Mobile profile icon click functionality
+      mobileProfileIconBtn.addEventListener('click', async function() {
         try {
-          const response = await fetch('/api/auth/signout', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          });
-
-          if (response.ok) {
-            // Update UI to show signed out state
-            updateNavigationState(false);
-            // Close mobile menu
-            hamburgerBtn.classList.remove('active');
-            mobileNav.classList.remove('active');
-            document.body.classList.remove('menu-open');
-            // Redirect to home page
-            window.location.href = '/';
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          // Close mobile menu first
+          hamburgerBtn.classList.remove('active');
+          mobileNav.classList.remove('active');
+          document.body.classList.remove('menu-open');
+          
+          if (data.authenticated) {
+            // User is signed in, redirect to logout page
+            window.location.href = '/logout.html';
           } else {
-            console.error('Sign out failed');
+            // User is not signed in, redirect to sign in page
+            window.location.href = '/SignIn.html';
           }
         } catch (error) {
-          console.error('Sign out error:', error);
+          console.error('Auth status check failed:', error);
+          // Default to sign in page on error
+          window.location.href = '/SignIn.html';
         }
       });
 
@@ -430,13 +464,9 @@
       }
 
       function showLoadingState() {
-        // Hide all auth elements
-        desktopSignin.style.display = 'none';
-        mobileSignin.style.display = 'none';
-        userMenu.style.display = 'none';
-        mobileUserMenu.style.display = 'none';
-        navDashboard.style.display = 'none';
-        mobileDashboard.style.display = 'none';
+        // Hide dashboard links (using visibility to prevent layout shift)
+        navDashboard.style.visibility = 'hidden';
+        mobileDashboard.style.visibility = 'hidden';
         
         // Show loading spinners
         authLoading.style.display = 'inline-block';
@@ -444,39 +474,21 @@
       }
 
       function updateNavigationState(isAuthenticated, userEmail = '') {
-        // Hide loading spinners
+        // Hide loading spinners (if any were shown)
         authLoading.style.display = 'none';
         mobileAuthLoading.style.display = 'none';
         
         if (isAuthenticated) {
-          // Show dashboard links
-          navDashboard.style.display = 'inline-block';
-          mobileDashboard.style.display = 'block';
-          
-          // Hide sign in buttons
-          desktopSignin.style.display = 'none';
-          mobileSignin.style.display = 'none';
-          
-          // Show user menu
-          userMenu.style.display = 'flex';
-          userEmail.textContent = userEmail;
-          
-          // Show mobile user menu
-          mobileUserMenu.style.display = 'flex';
-          mobileUserEmail.textContent = userEmail;
+          // Show dashboard links (using visibility to prevent layout shift)
+          navDashboard.style.visibility = 'visible';
+          mobileDashboard.style.visibility = 'visible';
         } else {
-          // Hide dashboard links
-          navDashboard.style.display = 'none';
-          mobileDashboard.style.display = 'none';
-          
-          // Show sign in buttons
-          desktopSignin.style.display = 'inline-block';
-          mobileSignin.style.display = 'block';
-          
-          // Hide user menu
-          userMenu.style.display = 'none';
-          mobileUserMenu.style.display = 'none';
+          // Hide dashboard links (using visibility to prevent layout shift)
+          navDashboard.style.visibility = 'hidden';
+          mobileDashboard.style.visibility = 'hidden';
         }
+        
+        // Profile icons are always visible (already set on page load)
       }
 
       // Toggle mobile menu
@@ -487,71 +499,286 @@
         // Prevent body scroll when menu is open
         if (mobileNav.classList.contains('active')) {
           document.body.classList.add('menu-open');
+          // Ensure mobile nav is properly positioned
+          mobileNav.style.transform = 'translateX(0)';
         } else {
           document.body.classList.remove('menu-open');
+          // Reset mobile nav position
+          mobileNav.style.transform = 'translateX(100%)';
         }
       });
 
-      // Close mobile menu when clicking on a link
+            // Close mobile menu when clicking on a link
       mobileNavLinks.forEach(link => {
         link.addEventListener('click', function() {
           hamburgerBtn.classList.remove('active');
           mobileNav.classList.remove('active');
           document.body.classList.remove('menu-open');
+          // Reset mobile nav position
+          mobileNav.style.transform = 'translateX(100%)';
         });
       });
-
+      
       // Close mobile menu when clicking outside
       mobileNav.addEventListener('click', function(e) {
         if (e.target === mobileNav) {
           hamburgerBtn.classList.remove('active');
           mobileNav.classList.remove('active');
           document.body.classList.remove('menu-open');
+          // Reset mobile nav position
+          mobileNav.style.transform = 'translateX(100%)';
         }
       });
-
+      
       // Close mobile menu on escape key
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
           hamburgerBtn.classList.remove('active');
           mobileNav.classList.remove('active');
           document.body.classList.remove('menu-open');
+          // Reset mobile nav position
+          mobileNav.style.transform = 'translateX(100%)';
         }
       });
 
              // UPS Shipping Form Functionality
        const form = document.getElementById('ups-shipping-form');
-       const previewBtn = document.getElementById('preview-btn');
        const createLabelBtn = document.getElementById('create-label-btn');
-       const previewModal = document.getElementById('preview-modal');
-       const requestPreview = document.getElementById('request-preview');
        const loadingOverlay = document.getElementById('loading-overlay');
-       const closeModal = document.querySelector('.close');
 
-
-      // Preview button functionality
-      previewBtn.addEventListener('click', function() {
-        const formData = collectFormData();
-        const upsRequest = buildUPSRequest(formData);
-        requestPreview.textContent = JSON.stringify(upsRequest, null, 2);
-        previewModal.style.display = 'block';
-      });
-
-      // Close modal
-      closeModal.addEventListener('click', function() {
-        previewModal.style.display = 'none';
-      });
-
-      // Close modal when clicking outside
-      window.addEventListener('click', function(event) {
-        if (event.target === previewModal) {
-          previewModal.style.display = 'none';
+      // Form validation functions
+      function validateField(field, validationRules) {
+        const value = field.value.trim();
+        const errorElement = document.getElementById(field.id + '-error');
+        
+        // Clear previous error
+        clearFieldError(field);
+        
+        // Check if required field is empty
+        if (validationRules.required && !value) {
+          showFieldError(field, 'This field is required');
+          return false;
         }
-      });
-
+        
+        // Check pattern validation
+        if (validationRules.pattern && value && !validationRules.pattern.test(value)) {
+          showFieldError(field, validationRules.message || 'Invalid format');
+          return false;
+        }
+        
+        // Check min/max validation for numbers
+        if (validationRules.min !== undefined && value && parseFloat(value) < validationRules.min) {
+          showFieldError(field, `Value must be at least ${validationRules.min}`);
+          return false;
+        }
+        
+        if (validationRules.max !== undefined && value && parseFloat(value) > validationRules.max) {
+          showFieldError(field, `Value must be no more than ${validationRules.max}`);
+          return false;
+        }
+        
+        // Check length validation
+        if (validationRules.minLength && value && value.length < validationRules.minLength) {
+          showFieldError(field, `Must be at least ${validationRules.minLength} characters`);
+          return false;
+        }
+        
+        if (validationRules.maxLength && value && value.length > validationRules.maxLength) {
+          showFieldError(field, `Must be no more than ${validationRules.maxLength} characters`);
+          return false;
+        }
+        
+        // If all validations pass, show success state
+        if (value) {
+          showFieldSuccess(field);
+        }
+        
+        return true;
+      }
+      
+      function showFieldError(field, message) {
+        const errorElement = document.getElementById(field.id + '-error');
+        if (errorElement) {
+          errorElement.textContent = message;
+          errorElement.style.display = 'block';
+        }
+        field.classList.add('error');
+      }
+      
+      function clearFieldError(field) {
+        const errorElement = document.getElementById(field.id + '-error');
+        if (errorElement) {
+          errorElement.textContent = '';
+          errorElement.style.display = 'none';
+        }
+        field.classList.remove('error');
+        field.classList.remove('success');
+      }
+      
+      function showFieldSuccess(field) {
+        field.classList.remove('error');
+        field.classList.add('success');
+      }
+      
+      function validateForm() {
+        let isValid = true;
+        
+        // Validation rules for each field
+        const validationRules = {
+          'sender-name': { required: true, minLength: 2, maxLength: 50, pattern: /^[a-zA-Z0-9\s\-\.&']+$/, message: 'Please enter a valid name or company' },
+          'sender-phone': { required: true, pattern: /^\(\d{3}\) \d{3}-\d{4}$/, message: 'Please enter phone number in format (XXX) XXX-XXXX' },
+          'sender-address': { required: true, minLength: 5, maxLength: 100, pattern: /^[a-zA-Z0-9\s\-\.#]+$/, message: 'Please enter a valid street address' },
+          'sender-city': { required: true, minLength: 2, maxLength: 50, pattern: /^[a-zA-Z\s\-\.]+$/, message: 'Please enter a valid city name' },
+          'sender-state': { required: true, message: 'Please select a state' },
+          'sender-zip': { required: true, pattern: /^[0-9]{5}(-[0-9]{4})?$/, message: 'Please enter a valid ZIP code' },
+          'package-description': { required: false, minLength: 1, maxLength: 100, pattern: /^[a-zA-Z0-9\s\-\.]+$/, message: 'Please enter a valid description' },
+          'service-type': { required: true, message: 'Please select a service type' },
+          'package-weight': { required: true, min: 0.1, max: 1000, message: 'Please enter a valid weight' },
+          'package-length': { required: true, min: 0.1, max: 200, message: 'Please enter a valid length' },
+          'package-width': { required: true, min: 0.1, max: 200, message: 'Please enter a valid width' },
+          'package-height': { required: true, min: 0.1, max: 200, message: 'Please enter a valid height' }
+        };
+        
+        // Validate each field
+        Object.keys(validationRules).forEach(fieldName => {
+          const field = document.getElementById(fieldName);
+          if (field) {
+            if (!validateField(field, validationRules[fieldName])) {
+              isValid = false;
+            }
+          }
+        });
+        
+        // Additional business logic validation
+        if (isValid) {
+          isValid = validatePackageDimensions();
+        }
+        
+        return isValid;
+      }
+      
+      function validatePackageDimensions() {
+        const length = parseFloat(document.getElementById('package-length').value);
+        const width = parseFloat(document.getElementById('package-width').value);
+        const height = parseFloat(document.getElementById('package-height').value);
+        const weight = parseFloat(document.getElementById('package-weight').value);
+        
+        let isValid = true;
+        
+        // Check if dimensions are reasonable for shipping
+        if (length + width + height > 165) {
+          showFieldError(document.getElementById('package-length'), 'Package dimensions exceed UPS maximum girth + length (165 inches)');
+          showFieldError(document.getElementById('package-width'), 'Package dimensions exceed UPS maximum girth + length (165 inches)');
+          showFieldError(document.getElementById('package-height'), 'Package dimensions exceed UPS maximum girth + length (165 inches)');
+          isValid = false;
+        }
+        
+        // Check if weight is reasonable for dimensions
+        const volume = length * width * height;
+        const density = weight / volume;
+        
+        if (density > 0.5) { // More than 0.5 lbs per cubic inch is very dense
+          showFieldError(document.getElementById('package-weight'), 'Weight seems too high for the given dimensions. Please verify.');
+          isValid = false;
+        }
+        
+        if (density < 0.001) { // Less than 0.001 lbs per cubic inch is very light
+          showFieldError(document.getElementById('package-weight'), 'Weight seems too low for the given dimensions. Please verify.');
+          isValid = false;
+        }
+        
+        return isValid;
+      }
+      
+      // Add real-time validation to form fields
+      function setupFieldValidation() {
+        const fields = form.querySelectorAll('input, select');
+        
+        fields.forEach(field => {
+          // Validate on blur (when field loses focus)
+          field.addEventListener('blur', function() {
+            const fieldName = this.name;
+            if (fieldName) {
+              const validationRules = {
+                'sender-name': { required: true, minLength: 2, maxLength: 50, pattern: /^[a-zA-Z0-9\s\-\.&']+$/, message: 'Please enter a valid name or company' },
+                'sender-phone': { required: true, pattern: /^\(\d{3}\) \d{3}-\d{4}$/, message: 'Please enter phone number in format (XXX) XXX-XXXX' },
+                'sender-address': { required: true, minLength: 5, maxLength: 100, pattern: /^[a-zA-Z0-9\s\-\.#]+$/, message: 'Please enter a valid street address' },
+                'sender-city': { required: true, minLength: 2, maxLength: 50, pattern: /^[a-zA-Z\s\-\.]+$/, message: 'Please enter a valid city name' },
+                'sender-state': { required: true, message: 'Please select a state' },
+                'sender-zip': { required: true, pattern: /^[0-9]{5}(-[0-9]{4})?$/, message: 'Please enter a valid ZIP code' },
+                'package-description': { required: false, minLength: 1, maxLength: 100, pattern: /^[a-zA-Z0-9\s\-\.]+$/, message: 'Please enter a valid description' },
+                'service-type': { required: true, message: 'Please select a service type' },
+                'package-weight': { required: true, min: 0.1, max: 1000, message: 'Please enter a valid weight' },
+                'package-length': { required: true, min: 0.1, max: 200, message: 'Please enter a valid length' },
+                'package-width': { required: true, min: 0.1, max: 200, message: 'Please enter a valid width' },
+                'package-height': { required: true, min: 0.1, max: 200, message: 'Please enter a valid height' }
+              };
+              
+              if (validationRules[fieldName]) {
+                validateField(this, validationRules[fieldName]);
+              }
+            }
+          });
+          
+          // Clear error on input
+          field.addEventListener('input', function() {
+            clearFieldError(this);
+          });
+        });
+      }
+      
+      // Initialize field validation
+      setupFieldValidation();
+      
+      // Add phone number formatting
+      const phoneField = document.getElementById('sender-phone');
+      if (phoneField) {
+        phoneField.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+          
+          // Format as (XXX) XXX-XXXX
+          if (value.length >= 6) {
+            value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+          } else if (value.length >= 3) {
+            value = value.replace(/(\d{3})(\d{0,3})/, '($1) $2');
+          }
+          
+          e.target.value = value;
+        });
+      }
+      
+      // Add ZIP code formatting
+      const zipField = document.getElementById('sender-zip');
+      if (zipField) {
+        zipField.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+          
+          // Format as XXXXX or XXXXX-XXXX
+          if (value.length >= 5) {
+            value = value.replace(/(\d{5})(\d{0,4})/, '$1$2');
+            if (value.length > 5) {
+              value = value.replace(/(\d{5})(\d{4})/, '$1-$2');
+            }
+          }
+          
+          e.target.value = value;
+        });
+      }
+      
       // Form submission
       form.addEventListener('submit', async function(e) {
         e.preventDefault();
+        
+        // Validate form before submission
+        if (!validateForm()) {
+          showNotification('Please correct the errors in the form before submitting.', 'error');
+          // Scroll to first error
+          const firstError = form.querySelector('.error');
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          return;
+        }
         
         const formData = collectFormData();
         const upsRequest = buildUPSRequest(formData);
@@ -569,44 +796,83 @@
             body: JSON.stringify(upsRequest)
           });
           
-          const result = await response.json();
+          // Check if response is ok first
+          if (!response.ok) {
+            // Try to get error message from response
+            let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+            try {
+              const errorData = await response.json();
+              errorMessage = errorData.error || errorData.message || errorMessage;
+            } catch (parseError) {
+              // If we can't parse JSON, use the status text
+              console.warn('Could not parse error response as JSON:', parseError);
+            }
+            throw new Error(errorMessage);
+          }
           
-                     if (response.ok) {
-             // Handle successful label creation
-             alert('Shipping label created successfully!');
-             console.log('Label data:', result);
-             
-             // Display the label image if available
-             if (result.labelImage) {
-               const labelWindow = window.open('', '_blank');
-               labelWindow.document.write(`
-                 <html>
-                   <head><title>UPS Shipping Label</title></head>
-                   <body style="margin: 0; padding: 20px; text-align: center;">
-                     <h2>UPS Shipping Label</h2>
-                     <p><strong>Tracking Number:</strong> ${result.trackingNumber}</p>
-                     <p><strong>Total Charges:</strong> ${result.totalCharges} ${result.currency}</p>
-                     <img src="data:image/gif;base64,${result.labelImage}" style="max-width: 100%; border: 1px solid #ccc;">
-                     <br><br>
-                     <button onclick="window.print()">Print Label</button>
-                   </body>
-                 </html>
-               `);
-             }
-           } else {
-             // Handle error
-             const errorMessage = result.error || result.details || 'Unknown error occurred';
-             alert('Error creating shipping label: ' + errorMessage);
-             console.error('UPS API Error:', result);
-           }
+          const result = await response.json();
+          console.log('Backend Response:', result);
+          console.log('Response success field:', result.success);
+          console.log('Response labelImage exists:', !!result.labelImage);
+          console.log('Response trackingNumber exists:', !!result.trackingNumber);
+          
+          // Check if backend indicates success
+          if (result.success && result.labelImage && result.trackingNumber) {
+            // Success - we have all the data we need
+            showNotification('Shipping label created successfully!', 'success');
+            downloadAndDisplayLabel(result.labelImage, result.trackingNumber, result.totalCharges || '0.00');
+          } else {
+            // This is an error - backend should have sent an error message
+            const errorMessage = result.error || result.message || 'Unknown error occurred';
+            throw new Error(errorMessage);
+          }
+          
         } catch (error) {
-          console.error('Network error:', error);
-          alert('Network error occurred while creating the label.');
+          console.error('Error creating shipping label:', error);
+          let errorMessage = 'Unknown error occurred while creating the label.';
+          
+          if (error.message) {
+            errorMessage = error.message;
+          }
+          
+          showNotification('Error: ' + errorMessage, 'error');
         } finally {
           // Hide loading overlay
           loadingOverlay.style.display = 'none';
         }
       });
+
+      // Helper function to download and display label
+      function downloadAndDisplayLabel(labelImage, trackingNumber, totalCharges) {
+        // Create download link
+        const link = document.createElement('a');
+        link.href = `data:image/gif;base64,${labelImage}`;
+        link.download = `shipping-label-${trackingNumber}.gif`;
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Also show the label in modal for viewing
+        displayShippingLabel({
+          ShipmentResponse: {
+            ShipmentResults: {
+              PackageResults: [{
+                ShippingLabel: {
+                  GraphicImage: labelImage
+                },
+                TrackingNumber: trackingNumber
+              }],
+              ShipmentCharges: {
+                TotalCharges: {
+                  MonetaryValue: totalCharges || '0.00'
+                }
+              }
+            }
+          }
+        });
+      }
 
       function collectFormData() {
         const formData = {};
@@ -751,7 +1017,232 @@
         };
         return packaging[code] || 'Package';
       }
+
+
     });
+
+    // Shipping Label Modal Functions
+    let currentShippingLabelData = null;
+
+    // Function to display shipping label modal
+    function displayShippingLabel(upsResponse) {
+      try {
+        const shipmentResults = upsResponse.ShipmentResponse.ShipmentResults;
+        const packageResults = shipmentResults.PackageResults[0];
+        const base64Image = packageResults.ShippingLabel.GraphicImage;
+        const trackingNumber = packageResults.TrackingNumber;
+        const shippingCost = shipmentResults.ShipmentCharges.TotalCharges.MonetaryValue;
+        
+        // Store the data for download/print functions
+        currentShippingLabelData = {
+          base64Image: base64Image,
+          trackingNumber: trackingNumber,
+          shippingCost: shippingCost
+        };
+        
+        // Update modal content
+        document.getElementById('tracking-number').textContent = trackingNumber;
+        document.getElementById('shipping-cost').textContent = `$${shippingCost}`;
+        document.getElementById('shipping-label-image').src = `data:image/gif;base64,${base64Image}`;
+        
+        // Show modal
+        document.getElementById('shipping-label-modal').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        
+      } catch (error) {
+        console.error('Error displaying shipping label:', error);
+        alert('Error displaying shipping label. Please try again.');
+      }
+    }
+
+    // Function to close shipping label modal
+    function closeShippingModal() {
+      document.getElementById('shipping-label-modal').style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restore scrolling
+      currentShippingLabelData = null;
+    }
+
+    // Function to download shipping label
+    function downloadShippingLabel() {
+      if (!currentShippingLabelData) {
+        alert('No shipping label data available.');
+        return;
+      }
+      
+      try {
+        const link = document.createElement('a');
+        link.href = `data:image/gif;base64,${currentShippingLabelData.base64Image}`;
+        link.download = `shipping-label-${currentShippingLabelData.trackingNumber}.gif`;
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Show success message
+        showNotification('Shipping label downloaded successfully!', 'success');
+        
+      } catch (error) {
+        console.error('Error downloading shipping label:', error);
+        alert('Error downloading shipping label. Please try again.');
+      }
+    }
+
+    // Function to print shipping label
+    function printShippingLabel() {
+      if (!currentShippingLabelData) {
+        alert('No shipping label data available.');
+        return;
+      }
+      
+      try {
+        const printWindow = window.open('', '_blank');
+        const htmlContent = 
+          '<html>' +
+          '<head>' +
+          '<title>Print Shipping Label</title>' +
+          '<style>' +
+          'body { margin: 0; padding: 20px; font-family: Arial, sans-serif; }' +
+          '.label-info { margin-bottom: 20px; }' +
+          '.label-info p { margin: 5px 0; }' +
+          'img { max-width: 100%; height: auto; }' +
+          '@media print { body { padding: 0; } .no-print { display: none; } }' +
+          '</style>' +
+          '</head>' +
+          '<body>' +
+          '<div class="label-info">' +
+          '<p><strong>Tracking Number:</strong> ' + currentShippingLabelData.trackingNumber + '</p>' +
+          '<p><strong>Shipping Cost:</strong> $' + currentShippingLabelData.shippingCost + '</p>' +
+          '</div>' +
+          '<img src="data:image/gif;base64,' + currentShippingLabelData.base64Image + '" alt="Shipping Label" />' +
+          '</body>' +
+          '</html>';
+        
+        printWindow.document.write(htmlContent);
+        printWindow.document.close();
+        
+        // Trigger print after a short delay
+        setTimeout(function() {
+          printWindow.print();
+        }, 500);
+        
+      } catch (error) {
+        console.error('Error printing shipping label:', error);
+        alert('Error printing shipping label. Please try again.');
+      }
+    }
+
+    // Function to show notifications
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      notification.className = `notification notification-${type}`;
+      notification.textContent = message;
+      
+      // Style the notification
+      Object.assign(notification.style, {
+        position: 'fixed',
+        top: '20px',
+        right: '20px',
+        padding: '12px 24px',
+        borderRadius: '8px',
+        color: 'white',
+        fontSize: '14px',
+        fontWeight: '500',
+        zIndex: '10000',
+        opacity: '0',
+        transform: 'translateX(100%)',
+        transition: 'all 0.3s ease'
+      });
+      
+      // Set background color based on type
+      const colors = {
+        info: '#3498db',
+        success: '#27ae60',
+        error: '#e74c3c',
+        warning: '#f39c12'
+      };
+      notification.style.backgroundColor = colors[type] || colors.info;
+      
+      // Add to DOM
+      document.body.appendChild(notification);
+      
+      // Animate in
+      setTimeout(() => {
+        notification.style.opacity = '1';
+        notification.style.transform = 'translateX(0)';
+      }, 100);
+      
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 5000);
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('shipping-label-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeShippingModal();
+      }
+    });
+
+    // Close modal on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('shipping-label-modal').style.display === 'flex') {
+        closeShippingModal();
+      }
+    });
+
+
+
+    // UPS API Response Handler
+    async function sendStringsToUPS(formData) {
+      try {
+        // Show loading state
+        showNotification('Creating shipping label...', 'info');
+        
+        const response = await fetch('/api/ups/ship', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const upsResponse = await response.json();
+        
+        // Check if the UPS response was successful
+        if (upsResponse.ShipmentResponse && 
+            upsResponse.ShipmentResponse.Response && 
+            upsResponse.ShipmentResponse.Response.ResponseStatus && 
+            upsResponse.ShipmentResponse.Response.ResponseStatus.Code === "1") {
+          
+          // Success! Show the shipping label modal
+          displayShippingLabel(upsResponse);
+          showNotification('Shipping label created successfully!', 'success');
+          
+        } else {
+          // Handle UPS API error
+          const errorMessage = upsResponse.ShipmentResponse?.Response?.ResponseStatus?.Description || 
+                              upsResponse.ShipmentResponse?.Response?.Errors?.[0]?.Message || 
+                              'Unknown UPS API error';
+          throw new Error(errorMessage);
+        }
+        
+      } catch (error) {
+        console.error('UPS API Error:', error);
+        showNotification('Failed to create shipping label: ' + error.message, 'error');
+      }
+    }
   </script>
 </body>
 </html>

@@ -27,7 +27,7 @@
       <a href="collection.html">COLLECTION LOCATIONS</a>
       <a href="partner.html">SEND STRINGS</a>
       <!-- Dashboard link - only visible to authenticated founders -->
-      <a href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="display: none;">DASHBOARD</a>
+      <a href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="visibility: hidden;">DASHBOARD</a>
     </nav>
     
     <!-- Mobile Hamburger Button -->
@@ -45,37 +45,50 @@
         <a href="collection.html">COLLECTION LOCATIONS</a>
         <a href="#">SEND STRINGS</a>
         <!-- Dashboard link for mobile - only visible to authenticated founders -->
-        <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="display: none;">DASHBOARD</a>
+        <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="visibility: hidden;">DASHBOARD</a>
         <div class="mobile-auth-loading" id="mobile-auth-loading" style="display: none;">
           <i class="fas fa-spinner fa-spin"></i>
         </div>
-        <a href="SignIn.html" class="mobile-signin" id="mobile-signin" style="display: none;">SIGN IN</a>
-        <!-- Mobile user menu - only visible to authenticated founders -->
-        <div class="mobile-user-menu" id="mobile-user-menu" style="display: none;">
-          <span class="mobile-user-email" id="mobile-user-email"></span>
-          <button class="mobile-signout-btn" id="mobile-signout-btn">SIGN OUT</button>
-        </div>
+        <button class="mobile-profile-icon-btn" id="mobile-profile-icon-btn">
+          <i class="fas fa-user"></i> PROFILE
+        </button>
       </div>
     </nav>
     
-    <!-- Desktop Sign In/User Button -->
+    <!-- Desktop Profile Icon -->
     <div class="auth-button-container">
       <div class="auth-loading" id="auth-loading" style="display: none;">
         <i class="fas fa-spinner fa-spin"></i>
       </div>
-      <button class="btn-signIn desktop-signin" id="desktop-signin" style="display: none;">
-        <a href="SignIn.html">SIGN IN</a>
+      <button class="profile-icon-btn" id="profile-icon-btn">
+        <i class="fas fa-user"></i>
       </button>
-      <div class="user-menu" id="user-menu" style="display: none;">
-        <span class="user-email" id="user-email"></span>
-        <button class="btn-signout" id="btn-signout">SIGN OUT</button>
-      </div>
     </div>
   </header>
 
-  <div class="map-header">
-    <h1>String Collection Partners</h1>
+  <!-- Collection Hero Section -->
+  <section class="collection-hero-section">
+    <div class="collection-hero-container">
+      <div class="collection-hero-content">
+        <h1 class="collection-hero-title fade-in">String Collection Partners</h1>
+        <p class="collection-hero-subtitle fade-in">Discover tennis facilities partnering with Orobor to create a sustainable future through string recycling</p>
+        <div class="collection-hero-stats fade-in">
+          <div class="stat-item scale-in">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Collection Locations</span>
+          </div>
+          <div class="stat-item scale-in">
+            <span class="stat-number">15</span>
+            <span class="stat-label">States Covered</span>
+          </div>
+          <!-- <div class="stat-item scale-in">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Drop-off Access</span>
+          </div> -->
+        </div>
+      </div>
   </div>
+  </section>
 
   <div class="container">
     <!-- Full-screen map -->
@@ -130,7 +143,11 @@
     
     <!-- Backdrop for panel -->
     <div class="panel-backdrop" id="panel-backdrop"></div>
+    
+
   </div>
+
+
 
   <div class="partner-section-cards">
     <div class="cards-header">
@@ -139,28 +156,43 @@
     </div>
     
     <div class="benefits-grid">
-      <div class="benefit-card">
+      <div class="benefit-card" data-impact="environmental">
+        <div class="card-header">
         <div class="benefit-icon">
           <i class="fas fa-leaf"></i>
+          </div>
+          <h3>Environmental Impact</h3>
         </div>
-        <h3>Environmental Impact</h3>
-        <p>Help reduce tennis string waste and support sustainable fashion while making a real difference for our planet.</p>
+        
+        <div class="card-content">
+          <p>Help reduce tennis string waste and support sustainable fashion while making a real difference for our planet. Every string collected prevents toxic emissions and reduces landfill waste.</p>
+        </div>
       </div>
       
-      <div class="benefit-card">
+      <div class="benefit-card" data-impact="community">
+        <div class="card-header">
         <div class="benefit-icon">
           <i class="fas fa-users"></i>
+          </div>
+          <h3>Community Engagement</h3>
         </div>
-        <h3>Community Engagement</h3>
-        <p>Attract eco-conscious players and build a sustainable community around your tennis facility.</p>
+        
+        <div class="card-content">
+          <p>Attract eco-conscious players and build a sustainable community around your tennis facility. Create meaningful connections through shared environmental values.</p>
+        </div>
       </div>
       
-      <div class="benefit-card">
+      <div class="benefit-card" data-impact="recognition">
+        <div class="card-header">
         <div class="benefit-icon">
           <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Brand Recognition</h3>
         </div>
-        <h3>Brand Recognition</h3>
-        <p>Position your facility as a leader in tennis sustainability and enhance your reputation.</p>
+        
+        <div class="card-content">
+          <p>Position your facility as a leader in tennis sustainability and enhance your reputation. Stand out as an innovative, environmentally conscious business.</p>
+        </div>
       </div>
     </div>
     
@@ -169,6 +201,10 @@
       <i class="fas fa-arrow-right"></i>
     </a>
   </div>
+    
+  <!-- GSAP Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -185,70 +221,56 @@
       // Navigation elements
       const navDashboard = document.getElementById('nav-dashboard');
       const mobileDashboard = document.getElementById('mobile-dashboard');
-      const desktopSignin = document.getElementById('desktop-signin');
-      const mobileSignin = document.getElementById('mobile-signin');
-      const userMenu = document.getElementById('user-menu');
-      const userEmail = document.getElementById('user-email');
-      const btnSignout = document.getElementById('btn-signout');
-      const mobileUserMenu = document.getElementById('mobile-user-menu');
-      const mobileUserEmail = document.getElementById('mobile-user-email');
-      const mobileSignoutBtn = document.getElementById('mobile-signout-btn');
+      const profileIconBtn = document.getElementById('profile-icon-btn');
+      const mobileProfileIconBtn = document.getElementById('mobile-profile-icon-btn');
       const authLoading = document.getElementById('auth-loading');
       const mobileAuthLoading = document.getElementById('mobile-auth-loading');
 
-      // Show loading state initially
-      showLoadingState();
-
-      // Check authentication status on page load
+      // Check authentication status on page load (for dashboard visibility only)
       checkAuthStatus();
 
-      // Sign out functionality
-      btnSignout.addEventListener('click', async function() {
+      // Profile icon click functionality
+      profileIconBtn.addEventListener('click', async function() {
         try {
-          const response = await fetch('/api/auth/signout', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          });
-
-          if (response.ok) {
-            // Update UI to show signed out state
-            updateNavigationState(false);
-            // Redirect to home page
-            window.location.href = '/';
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          if (data.authenticated) {
+            // User is signed in, redirect to logout page
+            window.location.href = '/logout.html';
           } else {
-            console.error('Sign out failed');
+            // User is not signed in, redirect to sign in page
+            window.location.href = '/SignIn.html';
           }
         } catch (error) {
-          console.error('Sign out error:', error);
+          console.error('Auth status check failed:', error);
+          // Default to sign in page on error
+          window.location.href = '/SignIn.html';
         }
       });
 
-      // Mobile sign out functionality
-      mobileSignoutBtn.addEventListener('click', async function() {
+      // Mobile profile icon click functionality
+      mobileProfileIconBtn.addEventListener('click', async function() {
         try {
-          const response = await fetch('/api/auth/signout', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          });
-
-          if (response.ok) {
-            // Update UI to show signed out state
-            updateNavigationState(false);
-            // Close mobile menu
-            hamburgerBtn.classList.remove('active');
-            mobileNav.classList.remove('active');
-            document.body.classList.remove('menu-open');
-            // Redirect to home page
-            window.location.href = '/';
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          // Close mobile menu first
+          hamburgerBtn.classList.remove('active');
+          mobileNav.classList.remove('active');
+          document.body.classList.remove('menu-open');
+          
+          if (data.authenticated) {
+            // User is signed in, redirect to logout page
+            window.location.href = '/logout.html';
           } else {
-            console.error('Sign out failed');
+            // User is not signed in, redirect to sign in page
+            window.location.href = '/SignIn.html';
           }
         } catch (error) {
-          console.error('Sign out error:', error);
+          console.error('Auth status check failed:', error);
+          // Default to sign in page on error
+          window.location.href = '/SignIn.html';
         }
       });
 
@@ -272,13 +294,9 @@
       }
 
       function showLoadingState() {
-        // Hide all auth elements
-        desktopSignin.style.display = 'none';
-        mobileSignin.style.display = 'none';
-        userMenu.style.display = 'none';
-        mobileUserMenu.style.display = 'none';
-        navDashboard.style.display = 'none';
-        mobileDashboard.style.display = 'none';
+        // Hide dashboard links (using visibility to prevent layout shift)
+        navDashboard.style.visibility = 'hidden';
+        mobileDashboard.style.visibility = 'hidden';
         
         // Show loading spinners
         authLoading.style.display = 'inline-block';
@@ -286,39 +304,21 @@
       }
 
       function updateNavigationState(isAuthenticated, userEmail = '') {
-        // Hide loading spinners
+        // Hide loading spinners (if any were shown)
         authLoading.style.display = 'none';
         mobileAuthLoading.style.display = 'none';
         
         if (isAuthenticated) {
-          // Show dashboard links
-          navDashboard.style.display = 'inline-block';
-          mobileDashboard.style.display = 'block';
-          
-          // Hide sign in buttons
-          desktopSignin.style.display = 'none';
-          mobileSignin.style.display = 'none';
-          
-          // Show user menu
-          userMenu.style.display = 'flex';
-          userEmail.textContent = userEmail;
-          
-          // Show mobile user menu
-          mobileUserMenu.style.display = 'flex';
-          mobileUserEmail.textContent = userEmail;
+          // Show dashboard links (using visibility to prevent layout shift)
+          navDashboard.style.visibility = 'visible';
+          mobileDashboard.style.visibility = 'visible';
         } else {
-          // Hide dashboard links
-          navDashboard.style.display = 'none';
-          mobileDashboard.style.display = 'none';
-          
-          // Show sign in buttons
-          desktopSignin.style.display = 'inline-block';
-          mobileSignin.style.display = 'block';
-          
-          // Hide user menu
-          userMenu.style.display = 'none';
-          mobileUserMenu.style.display = 'none';
+          // Hide dashboard links (using visibility to prevent layout shift)
+          navDashboard.style.visibility = 'hidden';
+          mobileDashboard.style.visibility = 'hidden';
         }
+        
+        // Profile icons are always visible (already set on page load)
       }
 
       // Toggle mobile menu
@@ -360,300 +360,131 @@
           document.body.classList.remove('menu-open');
         }
       });
+
+      // Initialize GSAP animations
+      initCollectionAnimations();
     });
-      </script>
 
-    <script>
-      // Global variables to store shipping label data
-      let currentShippingLabelData = null;
-      let currentTrackingNumber = null;
-
-      // Function to display shipping label modal
-      function displayShippingLabelModal(upsResponse) {
-        try {
-          // Extract data from UPS response
-          const shipmentResults = upsResponse.ShipmentResponse.ShipmentResults;
-          const packageResults = shipmentResults.PackageResults[0];
-          const base64Image = packageResults.ShippingLabel.GraphicImage;
-          const trackingNumber = packageResults.TrackingNumber;
-          const totalCharges = shipmentResults.ShipmentCharges.TotalCharges.MonetaryValue;
-          
-          // Store data globally
-          currentShippingLabelData = base64Image;
-          currentTrackingNumber = trackingNumber;
-          
-          // Update modal content
-          document.getElementById('trackingNumber').textContent = trackingNumber;
-          document.getElementById('shippingCost').textContent = `$${totalCharges}`;
-          document.getElementById('shippingLabelImage').src = `data:image/gif;base64,${base64Image}`;
-          
-          // Show modal
-          document.getElementById('shippingLabelModal').style.display = 'flex';
-          
-          // Prevent body scroll
-          document.body.style.overflow = 'hidden';
-          
-        } catch (error) {
-          console.error('Error displaying shipping label modal:', error);
-          alert('Error displaying shipping label. Please try again.');
-        }
-      }
-
-      // Function to close shipping label modal
-      function closeShippingModal() {
-        document.getElementById('shippingLabelModal').style.display = 'none';
-        document.body.style.overflow = 'auto';
+    // GSAP Animations for Collection Page
+    function initCollectionAnimations() {
+      // Register ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
+      
+      console.log('Initializing Collection GSAP animations...');
+      
+      // Check if elements exist before animating
+      const heroTitle = document.querySelector('.collection-hero-title');
+      const heroSubtitle = document.querySelector('.collection-hero-subtitle');
+      const heroStats = document.querySelector('.collection-hero-stats');
+      
+      if (heroTitle && heroSubtitle && heroStats) {
+        // Set initial states
+        gsap.set([heroTitle, heroSubtitle, heroStats], { opacity: 0, y: 50 });
         
-        // Clear stored data
-        currentShippingLabelData = null;
-        currentTrackingNumber = null;
-      }
-
-      // Function to download shipping label
-      function downloadShippingLabel() {
-        if (!currentShippingLabelData) {
-          alert('No shipping label data available.');
-          return;
+        const statItems = document.querySelectorAll('.collection-hero-stats .stat-item');
+        if (statItems.length > 0) {
+          gsap.set(statItems, { opacity: 0, scale: 0.8 });
         }
         
-        try {
-          // Create download link
-          const link = document.createElement('a');
-          link.href = `data:image/gif;base64,${currentShippingLabelData}`;
-          link.download = `shipping-label-${currentTrackingNumber}.gif`;
-          
-          // Trigger download
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          
-          // Show success message
-          showNotification('Shipping label downloaded successfully!', 'success');
-          
-        } catch (error) {
-          console.error('Error downloading shipping label:', error);
-          alert('Error downloading shipping label. Please try again.');
+        // Hero section animations - using gsap.to() to avoid disappearing text
+        const heroTL = gsap.timeline();
+        heroTL.to(heroTitle, { duration: 1, y: 0, opacity: 1, ease: "power2.out" })
+              .to(heroSubtitle, { duration: 0.8, y: 0, opacity: 1, ease: "power2.out" }, "-=0.5")
+              .to(heroStats, { duration: 0.8, y: 0, opacity: 1, ease: "power2.out" }, "-=0.3");
+        
+        // Animate stat items if they exist
+        if (statItems.length > 0) {
+          heroTL.to(statItems, { duration: 0.6, scale: 1, opacity: 1, stagger: 0.2, ease: "back.out(1.7)" }, "-=0.3");
         }
-      }
 
-      // Function to print shipping label
-      function printShippingLabel() {
-        if (!currentShippingLabelData) {
-          alert('No shipping label data available.');
-          return;
-        }
-        
-        try {
-          // Open print window
-          const printWindow = window.open('', '_blank');
-          printWindow.document.write(`
-            <html>
-              <head>
-                <title>Print Shipping Label</title>
-                <style>
-                  body {
-                    margin: 0;
-                    padding: 20px;
-                    font-family: Arial, sans-serif;
-                  }
-                  .print-header {
-                    text-align: center;
-                    margin-bottom: 20px;
-                  }
-                  .label-image {
-                    width: 100%;
-                    max-width: 600px;
-                    height: auto;
-                    display: block;
-                    margin: 0 auto;
-                    border: 1px solid #ddd;
-                  }
-                  .label-info {
-                    text-align: center;
-                    margin-top: 20px;
-                    font-size: 14px;
-                    color: #666;
-                  }
-                  @media print {
-                    body { padding: 0; }
-                    .print-header, .label-info { display: none; }
-                  }
-                </style>
-              </head>
-              <body>
-                <div class="print-header">
-                  <h2>Shipping Label</h2>
-                  <p>Tracking Number: ${currentTrackingNumber}</p>
-                </div>
-                <img src="data:image/gif;base64,${currentShippingLabelData}" class="label-image" />
-                <div class="label-info">
-                  <p>Generated on: ${new Date().toLocaleString()}</p>
-                </div>
-                <script>
-                  window.onload = function() {
-                    setTimeout(function() {
-                      window.print();
-                      window.close();
-                    }, 500);
-                  }
-                </script>
-              </body>
-            </html>
-          `);
-          printWindow.document.close();
-          
-        } catch (error) {
-          console.error('Error printing shipping label:', error);
-          alert('Error printing shipping label. Please try again.');
-        }
-      }
-
-      // Function to show notification
-      function showNotification(message, type = 'info') {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.textContent = message;
-        
-        // Add styles
-        notification.style.cssText = `
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          padding: 15px 20px;
-          border-radius: 6px;
-          color: white;
-          font-weight: 500;
-          z-index: 10001;
-          animation: slideInRight 0.3s ease-out;
-          max-width: 300px;
-        `;
-        
-        // Set background color based on type
-        if (type === 'success') {
-          notification.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
-        } else if (type === 'error') {
-          notification.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
-        } else {
-          notification.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
-        }
-        
-        // Add to page
-        document.body.appendChild(notification);
-        
-        // Remove after 3 seconds
-        setTimeout(() => {
-          notification.style.animation = 'slideOutRight 0.3s ease-in';
-          setTimeout(() => {
-            if (notification.parentNode) {
-              notification.parentNode.removeChild(notification);
+        // Counter animation for stats
+        const statNumbers = document.querySelectorAll('.collection-hero-stats .stat-number');
+        if (statNumbers.length > 0) {
+          // Store original values and set to 0
+          statNumbers.forEach(el => {
+            const original = el.textContent;
+            el.setAttribute('data-original', original);
+            if (original !== '24/7') { // Don't animate the 24/7 text
+              el.textContent = '0';
             }
-          }, 300);
-        }, 3000);
+          });
+
+          // Animate counters
+          gsap.to(statNumbers, {
+            duration: 2,
+            delay: 0.5,
+            innerText: function(index, target) {
+              const original = target.getAttribute('data-original');
+              if (original === '24/7') return original; // Skip 24/7
+              const numValue = parseInt(original.replace('+', '')) || 1;
+              return numValue;
+            },
+            snap: { innerText: 1 },
+            onUpdate: function() {
+              this.targets().forEach(target => {
+                const original = target.getAttribute('data-original');
+                if (original === '24/7') return; // Skip 24/7
+                const currentValue = Math.round(target.innerText);
+                target.textContent = original.includes('+') ? currentValue + '+' : currentValue;
+              });
+            },
+            ease: "power2.out"
+          });
+        }
       }
 
-      // Close modal when clicking outside
-      document.addEventListener('click', function(event) {
-        const modal = document.getElementById('shippingLabelModal');
-        if (event.target === modal) {
-          closeShippingModal();
-        }
-      });
+      // Animate benefit cards
+      const benefitCards = document.querySelectorAll('.benefit-card');
+      if (benefitCards.length > 0) {
+        gsap.set(benefitCards, { opacity: 0, y: 30 });
+        benefitCards.forEach((card, index) => {
+          gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: index * 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        });
+      }
 
-      // Close modal with Escape key
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-          const modal = document.getElementById('shippingLabelModal');
-          if (modal.style.display === 'flex') {
-            closeShippingModal();
-          }
-        }
-      });
+      console.log('Collection GSAP animations initialized successfully');
+    }
 
-      // Add CSS animations for notifications
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes slideInRight {
-          from {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-        
-        @keyframes slideOutRight {
-          from {
-            transform: translateX(0);
-            opacity: 1;
-          }
-          to {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-        }
-      `;
-      document.head.appendChild(style);
-    </script>
-
-    <!-- Shipping Label Modal -->
-  <div id="shippingLabelModal" class="shipping-label-modal" style="display: none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Shipping Label Created Successfully!</h3>
-        <span class="close" onclick="closeShippingModal()">&times;</span>
-      </div>
-      <div class="modal-body">
-        <div class="label-info">
-          <p><strong>Tracking Number:</strong> <span id="trackingNumber"></span></p>
-          <p><strong>Shipping Cost:</strong> <span id="shippingCost"></span></p>
-        </div>
-        <div class="label-container">
-          <img id="shippingLabelImage" alt="Shipping Label" />
-        </div>
-        <div class="button-group">
-          <button class="btn-download" onclick="downloadShippingLabel()">
-            <i class="fas fa-download"></i> Download Label
-          </button>
-          <button class="btn-print" onclick="printShippingLabel()">
-            <i class="fas fa-print"></i> Print Label
-          </button>
-          <button class="btn-close" onclick="closeShippingModal()">
-            <i class="fas fa-times"></i> Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  </script>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
-              <!-- Column 1: Brand -->
-        <div class="footer-column">
-          <div class="footer-brand">
-            <div class="footer-brand-header">
-              <h2 class="footer-brand-text">OROBOR</h2>
-              <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="footer-logo" />
-            </div>
-            <h3 class="footer-tagline">Tennis Strings Reborn</h3>
-            <p class="footer-mission">Transforming discarded tennis strings into sustainable fashion through innovative recycling technology.</p>
+      <!-- Column 1: Brand -->
+      <div class="footer-column">
+        <div class="footer-brand">
+          <div class="footer-brand-header">
+            <h2 class="footer-brand-text">OROBOR</h2>
+            <img src="/imgs/OroborLogo.svg" alt="Orobor Logo" class="footer-logo" />
           </div>
+          <h3 class="footer-tagline">Tennis Strings Reborn</h3>
+          <p class="footer-mission">Transforming discarded tennis strings into sustainable fashion through innovative recycling technology.</p>
+        </div>
         <div class="footer-social">
-          <a href="#" class="social-link" aria-label="Facebook">
+          <!-- <a href="#" class="social-link" aria-label="Facebook">
             <i class="fab fa-facebook-f"></i>
           </a>
           <a href="#" class="social-link" aria-label="Instagram">
             <i class="fab fa-instagram"></i>
-          </a>
-          <a href="#" class="social-link" aria-label="LinkedIn">
+          </a> -->
+          <a href="https://www.linkedin.com/company/orobor/posts/?feedView=all"  target="_blank" class="social-link" aria-label="LinkedIn">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          <a href="#" class="social-link" aria-label="Twitter">
+          <!-- <a href="#" class="social-link" aria-label="Twitter">
             <i class="fab fa-twitter"></i>
-          </a>
+          </a> -->
         </div>
       </div>
 
@@ -671,36 +502,15 @@
           </div>
           <div class="contact-item">
             <i class="fas fa-envelope"></i>
-            <span>info@orobor.com</span>
+            <span>jakob@orobor.com <br>
+              jonah@orobor.com
+              
           </div>
-          <div class="contact-item">
-            <i class="fas fa-recycle"></i>
-            <span>Collection Hotline:<br>1-800-OROBOR</span>
-          </div>
+
         </div>
       </div>
 
-      <!-- Column 3: Hours & Location -->
-      <div class="footer-column">
-        <h4 class="footer-heading">Hours & Location</h4>
-        <div class="footer-hours">
-          <div class="hours-item">
-            <strong>Main Office:</strong><br>
-            Mon-Fri: 9AM-6PM<br>
-            Sat: 10AM-4PM<br>
-            Sun: Closed
-          </div>
-          <div class="hours-item">
-            <strong>Collection Drop-off:</strong><br>
-            24/7 at partner locations
-          </div>
-          <div class="hours-item">
-            <strong>Processing Facility:</strong><br>
-            Mon-Fri: 8AM-8PM<br>
-            Sat-Sun: Closed
-          </div>
-        </div>
-      </div>
+
     </div>
 
     <!-- Bottom Bar -->
@@ -710,240 +520,5 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    // Global variables to store shipping label data
-    let currentShippingLabelData = null;
-    let currentTrackingNumber = null;
-
-    // Function to display shipping label modal
-    function displayShippingLabelModal(upsResponse) {
-      try {
-        // Extract data from UPS response
-        const shipmentResults = upsResponse.ShipmentResponse.ShipmentResults;
-        const packageResults = shipmentResults.PackageResults[0];
-        const base64Image = packageResults.ShippingLabel.GraphicImage;
-        const trackingNumber = packageResults.TrackingNumber;
-        const totalCharges = shipmentResults.ShipmentCharges.TotalCharges.MonetaryValue;
-        
-        // Store data globally
-        currentShippingLabelData = base64Image;
-        currentTrackingNumber = trackingNumber;
-        
-        // Update modal content
-        document.getElementById('trackingNumber').textContent = trackingNumber;
-        document.getElementById('shippingCost').textContent = `$${totalCharges}`;
-        document.getElementById('shippingLabelImage').src = `data:image/gif;base64,${base64Image}`;
-        
-        // Show modal
-        document.getElementById('shippingLabelModal').style.display = 'flex';
-        
-        // Prevent body scroll
-        document.body.style.overflow = 'hidden';
-        
-      } catch (error) {
-        console.error('Error displaying shipping label modal:', error);
-        alert('Error displaying shipping label. Please try again.');
-      }
-    }
-
-    // Function to close shipping label modal
-    function closeShippingModal() {
-      document.getElementById('shippingLabelModal').style.display = 'none';
-      document.body.style.overflow = 'auto';
-      
-      // Clear stored data
-      currentShippingLabelData = null;
-      currentTrackingNumber = null;
-    }
-
-    // Function to download shipping label
-    function downloadShippingLabel() {
-      if (!currentShippingLabelData) {
-        alert('No shipping label data available.');
-        return;
-      }
-      
-      try {
-        // Create download link
-        const link = document.createElement('a');
-        link.href = `data:image/gif;base64,${currentShippingLabelData}`;
-        link.download = `shipping-label-${currentTrackingNumber}.gif`;
-        
-        // Trigger download
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // Show success message
-        showNotification('Shipping label downloaded successfully!', 'success');
-        
-      } catch (error) {
-        console.error('Error downloading shipping label:', error);
-        alert('Error downloading shipping label. Please try again.');
-      }
-    }
-
-    // Function to print shipping label
-    function printShippingLabel() {
-      if (!currentShippingLabelData) {
-        alert('No shipping label data available.');
-        return;
-      }
-      
-      try {
-        // Open print window
-        const printWindow = window.open('', '_blank');
-        printWindow.document.write(`
-          <html>
-            <head>
-              <title>Print Shipping Label</title>
-              <style>
-                body {
-                  margin: 0;
-                  padding: 20px;
-                  font-family: Arial, sans-serif;
-                }
-                .print-header {
-                  text-align: center;
-                  margin-bottom: 20px;
-                }
-                .label-image {
-                  width: 100%;
-                  max-width: 600px;
-                  height: auto;
-                  display: block;
-                  margin: 0 auto;
-                  border: 1px solid #ddd;
-                }
-                .label-info {
-                  text-align: center;
-                  margin-top: 20px;
-                  font-size: 14px;
-                  color: #666;
-                }
-                @media print {
-                  body { padding: 0; }
-                  .print-header, .label-info { display: none; }
-                }
-              </style>
-            </head>
-            <body>
-              <div class="print-header">
-                <h2>Shipping Label</h2>
-                <p>Tracking Number: ${currentTrackingNumber}</p>
-              </div>
-              <img src="data:image/gif;base64,${currentShippingLabelData}" class="label-image" />
-              <div class="label-info">
-                <p>Generated on: ${new Date().toLocaleString()}</p>
-              </div>
-              <script>
-                window.onload = function() {
-                  setTimeout(function() {
-                    window.print();
-                    window.close();
-                  }, 500);
-                }
-              </script>
-            </body>
-          </html>
-        `);
-        printWindow.document.close();
-        
-      } catch (error) {
-        console.error('Error printing shipping label:', error);
-        alert('Error printing shipping label. Please try again.');
-      }
-    }
-
-    // Function to show notification
-    function showNotification(message, type = 'info') {
-      // Create notification element
-      const notification = document.createElement('div');
-      notification.className = `notification notification-${type}`;
-      notification.textContent = message;
-      
-      // Add styles
-      notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 20px;
-        border-radius: 6px;
-        color: white;
-        font-weight: 500;
-        z-index: 10001;
-        animation: slideInRight 0.3s ease-out;
-        max-width: 300px;
-      `;
-      
-      // Set background color based on type
-      if (type === 'success') {
-        notification.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
-      } else if (type === 'error') {
-        notification.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
-      } else {
-        notification.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
-      }
-      
-      // Add to page
-      document.body.appendChild(notification);
-      
-      // Remove after 3 seconds
-      setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.3s ease-in';
-        setTimeout(() => {
-          if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-          }
-        }, 300);
-      }, 3000);
-    }
-
-    // Close modal when clicking outside
-    document.addEventListener('click', function(event) {
-      const modal = document.getElementById('shippingLabelModal');
-      if (event.target === modal) {
-        closeShippingModal();
-      }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        const modal = document.getElementById('shippingLabelModal');
-        if (modal.style.display === 'flex') {
-          closeShippingModal();
-        }
-      }
-    });
-
-    // Add CSS animations for notifications
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideInRight {
-        from {
-          transform: translateX(100%);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-      
-      @keyframes slideOutRight {
-        from {
-          transform: translateX(0);
-          opacity: 1;
-        }
-        to {
-          transform: translateX(100%);
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  </script>
 </body>
 </html>

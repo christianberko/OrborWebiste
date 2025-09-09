@@ -24,9 +24,9 @@
       <a href="index.html">HOME</a>
       <a href="OurTeam.html">OUR TEAM</a>
       <a href="collection.html">COLLECTION LOCATIONS</a>
-      <a href="#">SEND STRING</a>
+      <a href="partner.html">SEND STRING</a>
       <!-- Dashboard link - only visible to authenticated founders -->
-      <a href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="display: none;">DASHBOARD</a>
+      <a href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="visibility: hidden;">DASHBOARD</a>
     </nav>
     
     <!-- Mobile Hamburger Button -->
@@ -44,150 +44,441 @@
         <a href="collection.html">COLLECTION LOCATIONS</a>
         <a href="#">SEND STRING</a>
         <!-- Dashboard link for mobile - only visible to authenticated founders -->
-        <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="display: none;">DASHBOARD</a>
+        <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="visibility: hidden;">DASHBOARD</a>
         <div class="mobile-auth-loading" id="mobile-auth-loading" style="display: none;">
           <i class="fas fa-spinner fa-spin"></i>
         </div>
-        <a href="SignIn.html" class="mobile-signin" id="mobile-signin" style="display: none;">SIGN IN</a>
-        <!-- Mobile user menu - only visible to authenticated founders -->
-        <div class="mobile-user-menu" id="mobile-user-menu" style="display: none;">
-          <span class="mobile-user-email" id="mobile-user-email"></span>
-          <button class="mobile-signout-btn" id="mobile-signout-btn">SIGN OUT</button>
-        </div>
+        <button class="mobile-profile-icon-btn" id="mobile-profile-icon-btn">
+          <i class="fas fa-user"></i> PROFILE
+        </button>
       </div>
     </nav>
     
-    <!-- Desktop Sign In/User Button -->
+    <!-- Desktop Profile Icon -->
     <div class="auth-button-container">
       <div class="auth-loading" id="auth-loading" style="display: none;">
         <i class="fas fa-spinner fa-spin"></i>
       </div>
-      <button class="btn-signIn desktop-signin" id="desktop-signin" style="display: none;">
-        <a href="SignIn.html">SIGN IN</a>
+      <button class="profile-icon-btn" id="profile-icon-btn">
+        <i class="fas fa-user"></i>
       </button>
-      <div class="user-menu" id="user-menu" style="display: none;">
-        <span class="user-email" id="user-email"></span>
-        <button class="btn-signout" id="btn-signout">SIGN OUT</button>
-      </div>
     </div>
-  </header>
-
-  <div class="video-blur-wrapper">
-    <video autoplay muted loop playsinline id="background-video">
-      <source src="./imgs/strings.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-  <main class="ourteam-main">
-    <h1  data-aos="fade-zoom-in"
-    data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1000" class="team-header">Our Team</h1>
-    <div class="team-split-layout">
-      <div class="team-images-col">
-        <img  data-aos="fade-zoom-in"
-        data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1000" src="/imgs/jakob.webp" alt="Jakob" class="team-img" />
-        <img  data-aos="fade-zoom-in"
-        data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="2000"  src="/imgs/jonah.webp" alt="Jonah" class="team-img" />
-        <img  data-aos="fade-zoom-in"
-        data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1750" src="/imgs/lu.webp" alt="Lu" class="team-img" />
+    </header>
+  
+  <!-- Magazine Editorial Style Team Section -->
+  <main class="team-magazine-main">
+    <!-- Hero Section -->
+    <section class="team-hero-section">
+      <div class="team-hero-container">
+        <div class="team-hero-content">
+          <h1 class="team-hero-title fade-in">Meet the Team</h1>
+          <p class="team-hero-subtitle fade-in">The passionate minds behind Orobor's mission to transform tennis string waste into sustainable fashion</p>
+          <div class="team-hero-stats fade-in">
+            <div class="stat-item scale-in">
+              <span class="stat-number">17+</span>
+              <span class="stat-label">Years Combined Tennis Experience</span>
+            </div>
+            <!-- <div class="stat-item scale-in">
+              <span class="stat-number">3</span>
+              <span class="stat-label">Universities Represented</span>
+            </div> -->
+            <div class="stat-item scale-in">
+              <span class="stat-number">1</span>
+              <span class="stat-label">Shared Vision</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="team-text-col">
+    </section>
+
+    <!-- Team Members - Magazine Style -->
+    <section class="team-members-section">
+      <!-- Jakob - Full Width Feature -->
+      <article class="team-member-feature" data-member="jakob">
+        <div class="member-hero-image">
+          <img src="/imgs/jakob.webp" alt="Jakob Esterowitz" class="member-image-hero" />
+          <div class="image-overlay">
+            <div class="member-quote fade-in">
+              <blockquote>"When not working on the company's mission, he does nothing, because he is always working on the mission."</blockquote>
+            </div>
+          </div>
+        </div>
         
+        <div class="member-content-feature">
+          <div class="member-header slide-up">
+            <span class="member-role">Founder & CEO</span>
+            <h2 class="member-name-large">Jakob Esterowitz</h2>
+            <div class="member-credentials">Mechanical Engineering & Technology Innovation, Boston University</div>
+          </div>
+          
+          <div class="member-story slide-up">
+            <div class="story-column">
+              <p class="story-lead">Jakob's passion for sustainability stems from his 17 years on the court, witnessing the waste generated by discarded tennis strings.</p>
+              <p>As a student of Mechanical Engineering and Technology Innovation at Boston University, Jakob brings both technical expertise and entrepreneurial vision to Orobor. His deep understanding of materials science and manufacturing processes drives the research and development of innovative recycling methods.</p>
+            </div>
+            <div class="story-column">
+              <p>Jakob leads the technical transformation of tennis string waste into high-quality polyester, ensuring that every step of the process meets the highest standards for sustainable manufacturing. His commitment to the mission is absolute—a dedication that defines both his professional and personal life.</p>
+              <div class="member-highlights">
+                <h4>Key Contributions:</h4>
+                <ul>
+                  <li>R&D Leadership for recycling technology</li>
+                  <li>Technical innovation in materials processing</li>
+                  <li>17 years of tennis experience informing product development</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
 
-        <div 
-        data-aos="fade-zoom-in"
-        data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1000">
-         
-          <div class="team-name">Jakob Esterowitz</div>
-          <div class="team-title">Founder/CEO</div>
-          <div class="team-desc">
-            Jakob studies Mechanical Engineering and Technology Innovation at Boston University. 
-            His passion for sustainability stems from his 17 years on the court, witnessing the waste generated by 
-            discarded tennis strings. Jakob leads the research and development of innovative recycling methods to 
-            transform tennis string waste into high-quality polyester. When not working on the company’s mission, he does nothing, 
-            because he is always working on the mission.
+      <!-- Jonah - Split Layout -->
+      <article class="team-member-split" data-member="jonah">
+        <div class="member-content-split">
+          <div class="member-header-split slide-right">
+            <span class="member-role">Founder & COO</span>
+            <h2 class="member-name-split">Jonah Dickson</h2>
+            <div class="member-credentials">Master's Global Marketing Management, Boston University Tennis Team</div>
+          </div>
+          
+          <div class="member-story-split fade-in">
+            <p class="story-lead">Having grown up surrounded by fashion in New York and Los Angeles, Jonah developed a deep passion for fashion and its cultural influence on a global scale.</p>
+            <p>Currently pursuing a Master's degree in Global Marketing Management at Boston University, where he is also a member of the tennis team, Jonah brings a unique perspective that bridges athletics, fashion, and business strategy.</p>
+            <p>Inspired by innovation, Jonah focuses on building strong partnerships and ensuring Orobor develops into the brand it's meant to be—one that represents both sustainability and style.</p>
+            
+            <div class="member-expertise">
+              <h4>Areas of Expertise:</h4>
+              <div class="expertise-tags">
+                <span class="tag">Global Marketing</span>
+                <span class="tag">Brand Strategy</span>
+                <span class="tag">Partnership Development</span>
+                <span class="tag">Fashion Industry</span>
+              </div>
+            </div>
           </div>
         </div>
-      
-        <div class="team-member-text" data-aos="fade-zoom-in"
-        data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="2000" >
-          <div class="team-name">Jonah Dickson</div>
-          <div class="team-title">Founder/COO</div>
-          <div class="team-desc">
-            Jonah is currently pursuing a Master's degree in Global Marketing Management at Boston University, where he is also a
-             member of the tennis team. Having grown up surrounded by fashion in New York and Los Angeles, Jonah developed a deep 
-             passion for fashion and its cultural influence on a global scale. Inspired by innovation, Jonah is focused on building 
-             strong partnerships and making sure we are building the brand we want to be. 
+        
+        <div class="member-image-split">
+          <img src="/imgs/jonah.webp" alt="Jonah Dickson" class="member-image slide-left" />
+          <div class="image-accent"></div>
+        </div>
+      </article>
+
+      <!-- Ouwen - Editorial Layout -->
+      <article class="team-member-editorial" data-member="ouwen">
+        <div class="editorial-layout">
+          <div class="editorial-image-section">
+            <img src="/imgs/lu.webp" alt="Ouwen Lu" class="member-image-editorial fade-in" />
+            <div class="image-caption slide-up">
+              <p>"Leveraging experience to promote the sustainability of sports and contribute positively to the world."</p>
+            </div>
+          </div>
+          
+          <div class="editorial-content">
+            <div class="member-header-editorial slide-right">
+              <span class="member-role">Chief Financial Officer</span>
+              <h2 class="member-name-editorial">Ouwen Lu</h2>
+              <div class="member-credentials">Finance & Entrepreneurship, Boston University | Master of Finance, Washington University</div>
+            </div>
+            
+            <div class="editorial-story fade-in">
+              <div class="story-intro">
+                <p class="story-lead">A graduate who has seamlessly blended his passion for sports with business acumen, bringing financial expertise and entrepreneurial vision to Orobor.</p>
+              </div>
+              
+              <div class="story-main">
+                <p>Beyond the court, Ouwen's entrepreneurial initiatives speak to his commitment to the athletic community. SportEdge, his platform supporting tens of thousands of student-athletes in balancing academics and sports, demonstrates his understanding of the challenges facing modern athletes.</p>
+                
+                <p>Through the Boston Chinese Tennis Association, which has united thousands, Ouwen has enriched the athletic and academic journeys of countless individuals. This community-building experience directly informs his approach to Orobor's financial strategy and growth planning.</p>
+                
+                <div class="achievements-grid">
+                  <div class="achievement">
+                    <h4>SportEdge Platform</h4>
+                    <p>Supporting tens of thousands of student-athletes</p>
+                  </div>
+                  <div class="achievement">
+                    <h4>Boston Chinese Tennis Association</h4>
+                    <p>United thousands in the tennis community</p>
+                  </div>
+                  <div class="achievement">
+                    <h4>Financial Leadership</h4>
+                    <p>Driving sustainable growth at Orobor</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="team-member-text" data-aos="fade-zoom-in"
-        data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1500" >
-          <div class="team-name">Ouwen Lu</div>
-          <div class="team-title">CFO</div>
-          <div class="team-desc">
-            Ouwen Lu, a graduate of Boston University with a focus on Finance & Entrepreneurship and a Master of Finance from Washington 
-            University in St. Louis, has seamlessly blended his passion for sports with business acumen.  Beyond the court, Ouwen's 
-            entrepreneurial initiatives like SportEdge, which supports tens of thousands of student-athletes in balancing academics and sports, 
-            and the Boston Chinese Tennis Association, which has united thousands, have enriched the athletic and academic journeys of many. Now, 
-            he's poised to leverage his experience to promote the sustainability of sports and contribute positively to the world.
+      </article>
+    </section>
+
+    <!-- Team Unity Section -->
+    <section class="team-unity-section">
+      <div class="unity-container">
+        <h2 class="unity-title fade-in">United by Purpose</h2>
+        <p class="unity-description fade-in">Three distinct backgrounds, one shared vision: transforming the tennis industry through sustainable innovation.</p>
+        <div class="unity-visual">
+          <div class="team-pillars">
+            <div class="pillar scale-in">
+              <div class="pillar-icon"><i class="fas fa-cogs"></i></div>
+              <h3>Innovation</h3>
+              <p>Technical excellence in recycling technology</p>
+            </div>
+            <div class="pillar scale-in">
+              <div class="pillar-icon"><i class="fas fa-handshake"></i></div>
+              <h3>Partnership</h3>
+              <p>Building bridges between sports and sustainability</p>
+            </div>
+            <div class="pillar scale-in">
+              <div class="pillar-icon"><i class="fas fa-chart-line"></i></div>
+              <h3>Growth</h3>
+              <p>Strategic financial planning for global impact</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Mobile: Image-Text Pairs -->
-    <div class="team-mobile-layout">
-      <!-- Jakob -->
-      <div class="team-mobile-pair">
-        <img data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1000" src="/imgs/jakob.webp" alt="Jakob" class="team-img-mobile" />
-        <div class="team-text-mobile" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1000">
-          <div class="team-name">Jakob Esterowitz</div>
-          <div class="team-title">Founder/CEO</div>
-          <div class="team-desc">
-            Jakob studies Mechanical Engineering and Technology Innovation at Boston University. 
-            His passion for sustainability stems from his 17 years on the court, witnessing the waste generated by 
-            discarded tennis strings. Jakob leads the research and development of innovative recycling methods to 
-            transform tennis string waste into high-quality polyester. When not working on the company's mission, he does nothing, 
-            because he is always working on the mission.
-          </div>
-        </div>
-      </div>
-
-      <!-- Jonah -->
-      <div class="team-mobile-pair">
-        <img data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="2000" src="/imgs/jonah.webp" alt="Jonah" class="team-img-mobile" />
-        <div class="team-text-mobile" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="2000">
-          <div class="team-name">Jonah Dickson</div>
-          <div class="team-title">Founder/COO</div>
-          <div class="team-desc">
-            Jonah is currently pursuing a Master's degree in Global Marketing Management at Boston University, where he is also a
-             member of the tennis team. Having grown up surrounded by fashion in New York and Los Angeles, Jonah developed a deep 
-             passion for fashion and its cultural influence on a global scale. Inspired by innovation, Jonah is focused on building 
-             strong partnerships and making sure we are building the brand we want to be. 
-          </div>
-        </div>
-      </div>
-
-      <!-- Ouwen -->
-      <div class="team-mobile-pair">
-        <img data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1750" src="/imgs/lu.webp" alt="Lu" class="team-img-mobile" />
-        <div class="team-text-mobile" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="1750">
-          <div class="team-name">Ouwen Lu</div>
-          <div class="team-title">CFO</div>
-          <div class="team-desc">
-            Ouwen Lu, a graduate of Boston University with a focus on Finance & Entrepreneurship and a Master of Finance from Washington 
-            University in St. Louis, has seamlessly blended his passion for sports with business acumen.  Beyond the court, Ouwen's 
-            entrepreneurial initiatives like SportEdge, which supports tens of thousands of student-athletes in balancing academics and sports, 
-            and the Boston Chinese Tennis Association, which has united thousands, have enriched the athletic and academic journeys of many. Now, 
-            he's poised to leverage his experience to promote the sustainability of sports and contribute positively to the world.
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
   </main>
 
-  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <!-- GSAP Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  
   <script>
-    AOS.init();
+    // Simple GSAP Animations for Team Page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Register ScrollTrigger plugin
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Wait a bit more to ensure DOM is fully loaded
+      setTimeout(function() {
+        initGSAPAnimations();
+      }, 100);
+    });
+
+    function initGSAPAnimations() {
+      console.log('Initializing GSAP animations...');
+      
+      // Check if elements exist before animating
+      const heroTitle = document.querySelector('.team-hero-title');
+      const heroSubtitle = document.querySelector('.team-hero-subtitle');
+      const heroStats = document.querySelector('.team-hero-stats');
+      
+      if (heroTitle && heroSubtitle && heroStats) {
+        // Set initial states
+        gsap.set([heroTitle, heroSubtitle, heroStats], { opacity: 0, y: 50 });
+        
+        const statItems = document.querySelectorAll('.stat-item');
+        if (statItems.length > 0) {
+          gsap.set(statItems, { opacity: 0, scale: 0.8 });
+        }
+        
+        // Hero section animations - using gsap.to() to avoid disappearing text
+        const heroTL = gsap.timeline();
+        heroTL.to(heroTitle, { duration: 1, y: 0, opacity: 1, ease: "power2.out" })
+              .to(heroSubtitle, { duration: 0.8, y: 0, opacity: 1, ease: "power2.out" }, "-=0.5")
+              .to(heroStats, { duration: 0.8, y: 0, opacity: 1, ease: "power2.out" }, "-=0.3");
+        
+        // Animate stat items if they exist
+        if (statItems.length > 0) {
+          heroTL.to(statItems, { duration: 0.6, scale: 1, opacity: 1, stagger: 0.2, ease: "back.out(1.7)" }, "-=0.3");
+        }
+
+        // Counter animation for stats
+        const statNumbers = document.querySelectorAll('.stat-number');
+        if (statNumbers.length > 0) {
+          // Store original values and set to 0
+          statNumbers.forEach(el => {
+            const original = el.textContent;
+            el.setAttribute('data-original', original);
+            el.textContent = '0';
+          });
+
+          // Animate counters
+          gsap.to(statNumbers, {
+            duration: 2,
+            delay: 0.5,
+            innerText: function(index, target) {
+              const original = target.getAttribute('data-original');
+              const numValue = parseInt(original.replace('+', '')) || 1;
+              return numValue;
+            },
+            snap: { innerText: 1 },
+            onUpdate: function() {
+              this.targets().forEach(target => {
+                const original = target.getAttribute('data-original');
+                const currentValue = Math.round(target.innerText);
+                target.textContent = original.includes('+') ? currentValue + '+' : currentValue;
+              });
+            },
+            ease: "power2.out"
+          });
+        }
+      }
+
+      // Animate elements as they scroll into view
+      const fadeInElements = document.querySelectorAll('.fade-in');
+      if (fadeInElements.length > 0) {
+        gsap.set(fadeInElements, { opacity: 0 });
+        fadeInElements.forEach(element => {
+          gsap.to(element, {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        });
+      }
+
+      const slideUpElements = document.querySelectorAll('.slide-up');
+      if (slideUpElements.length > 0) {
+        gsap.set(slideUpElements, { opacity: 0, y: 30 });
+        slideUpElements.forEach(element => {
+          gsap.to(element, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        });
+      }
+
+      const slideLeftElements = document.querySelectorAll('.slide-left');
+      if (slideLeftElements.length > 0) {
+        gsap.set(slideLeftElements, { opacity: 0, x: 50 });
+        slideLeftElements.forEach(element => {
+          gsap.to(element, {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        });
+      }
+
+      const slideRightElements = document.querySelectorAll('.slide-right');
+      if (slideRightElements.length > 0) {
+        gsap.set(slideRightElements, { opacity: 0, x: -50 });
+        slideRightElements.forEach(element => {
+          gsap.to(element, {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: element,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        });
+      }
+
+      const scaleInElements = document.querySelectorAll('.scale-in');
+      if (scaleInElements.length > 0) {
+        gsap.set(scaleInElements, { opacity: 0, scale: 0.8 });
+        scaleInElements.forEach((element, index) => {
+          gsap.to(element, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            delay: index * 0.1,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: element.closest('.team-hero-stats') || element,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        });
+      }
+
+      // Animate tags with stagger
+      const tags = document.querySelectorAll('.tag');
+      if (tags.length > 0) {
+        gsap.set(tags, { opacity: 0, y: 20 });
+        const tagsContainer = document.querySelector('.expertise-tags');
+        if (tagsContainer) {
+          gsap.to(tags, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: tagsContainer,
+              start: "top 90%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        }
+      }
+
+      // Animate achievement cards
+      const achievements = document.querySelectorAll('.achievement');
+      if (achievements.length > 0) {
+        gsap.set(achievements, { opacity: 0, y: 30 });
+        const achievementsGrid = document.querySelector('.achievements-grid');
+        if (achievementsGrid) {
+          gsap.to(achievements, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: achievementsGrid,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        }
+      }
+
+      // Animate unity section pillars
+      const pillars = document.querySelectorAll('.pillar');
+      if (pillars.length > 0) {
+        gsap.set(pillars, { opacity: 0, scale: 0.8 });
+        const pillarsContainer = document.querySelector('.team-pillars');
+        if (pillarsContainer) {
+          gsap.to(pillars, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            stagger: 0.2,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: pillarsContainer,
+              start: "top 85%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        }
+      }
+
+      console.log('GSAP animations initialized successfully');
+    }
   </script>
   
   <script>
@@ -200,70 +491,56 @@
       // Navigation elements
       const navDashboard = document.getElementById('nav-dashboard');
       const mobileDashboard = document.getElementById('mobile-dashboard');
-      const desktopSignin = document.getElementById('desktop-signin');
-      const mobileSignin = document.getElementById('mobile-signin');
-      const userMenu = document.getElementById('user-menu');
-      const userEmail = document.getElementById('user-email');
-      const btnSignout = document.getElementById('btn-signout');
-      const mobileUserMenu = document.getElementById('mobile-user-menu');
-      const mobileUserEmail = document.getElementById('mobile-user-email');
-      const mobileSignoutBtn = document.getElementById('mobile-signout-btn');
+      const profileIconBtn = document.getElementById('profile-icon-btn');
+      const mobileProfileIconBtn = document.getElementById('mobile-profile-icon-btn');
       const authLoading = document.getElementById('auth-loading');
       const mobileAuthLoading = document.getElementById('mobile-auth-loading');
 
-      // Show loading state initially
-      showLoadingState();
-
-      // Check authentication status on page load
+      // Check authentication status on page load (for dashboard visibility only)
       checkAuthStatus();
 
-      // Sign out functionality
-      btnSignout.addEventListener('click', async function() {
+      // Profile icon click functionality
+      profileIconBtn.addEventListener('click', async function() {
         try {
-          const response = await fetch('/api/auth/signout', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          });
-
-          if (response.ok) {
-            // Update UI to show signed out state
-            updateNavigationState(false);
-            // Redirect to home page
-            window.location.href = '/';
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          if (data.authenticated) {
+            // User is signed in, redirect to logout page
+            window.location.href = '/logout.html';
           } else {
-            console.error('Sign out failed');
+            // User is not signed in, redirect to sign in page
+            window.location.href = '/SignIn.html';
           }
         } catch (error) {
-          console.error('Sign out error:', error);
+          console.error('Auth status check failed:', error);
+          // Default to sign in page on error
+          window.location.href = '/SignIn.html';
         }
       });
 
-      // Mobile sign out functionality
-      mobileSignoutBtn.addEventListener('click', async function() {
+      // Mobile profile icon click functionality
+      mobileProfileIconBtn.addEventListener('click', async function() {
         try {
-          const response = await fetch('/api/auth/signout', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          });
-
-          if (response.ok) {
-            // Update UI to show signed out state
-            updateNavigationState(false);
-            // Close mobile menu
-            hamburgerBtn.classList.remove('active');
-            mobileNav.classList.remove('active');
-            document.body.classList.remove('menu-open');
-            // Redirect to home page
-            window.location.href = '/';
+          const response = await fetch('/api/auth/status');
+          const data = await response.json();
+          
+          // Close mobile menu first
+          hamburgerBtn.classList.remove('active');
+          mobileNav.classList.remove('active');
+          document.body.classList.remove('menu-open');
+          
+          if (data.authenticated) {
+            // User is signed in, redirect to logout page
+            window.location.href = '/logout.html';
           } else {
-            console.error('Sign out failed');
+            // User is not signed in, redirect to sign in page
+            window.location.href = '/SignIn.html';
           }
         } catch (error) {
-          console.error('Sign out error:', error);
+          console.error('Auth status check failed:', error);
+          // Default to sign in page on error
+          window.location.href = '/SignIn.html';
         }
       });
 
@@ -287,13 +564,9 @@
       }
 
       function showLoadingState() {
-        // Hide all auth elements
-        desktopSignin.style.display = 'none';
-        mobileSignin.style.display = 'none';
-        userMenu.style.display = 'none';
-        mobileUserMenu.style.display = 'none';
-        navDashboard.style.display = 'none';
-        mobileDashboard.style.display = 'none';
+        // Hide dashboard links (using visibility to prevent layout shift)
+        navDashboard.style.visibility = 'hidden';
+        mobileDashboard.style.visibility = 'hidden';
         
         // Show loading spinners
         authLoading.style.display = 'inline-block';
@@ -301,39 +574,21 @@
       }
 
       function updateNavigationState(isAuthenticated, userEmail = '') {
-        // Hide loading spinners
+        // Hide loading spinners (if any were shown)
         authLoading.style.display = 'none';
         mobileAuthLoading.style.display = 'none';
         
         if (isAuthenticated) {
-          // Show dashboard links
-          navDashboard.style.display = 'inline-block';
-          mobileDashboard.style.display = 'block';
-          
-          // Hide sign in buttons
-          desktopSignin.style.display = 'none';
-          mobileSignin.style.display = 'none';
-          
-          // Show user menu
-          userMenu.style.display = 'flex';
-          userEmail.textContent = userEmail;
-          
-          // Show mobile user menu
-          mobileUserMenu.style.display = 'flex';
-          mobileUserEmail.textContent = userEmail;
+          // Show dashboard links (using visibility to prevent layout shift)
+          navDashboard.style.visibility = 'visible';
+          mobileDashboard.style.visibility = 'visible';
         } else {
-          // Hide dashboard links
-          navDashboard.style.display = 'none';
-          mobileDashboard.style.display = 'none';
-          
-          // Show sign in buttons
-          desktopSignin.style.display = 'inline-block';
-          mobileSignin.style.display = 'block';
-          
-          // Hide user menu
-          userMenu.style.display = 'none';
-          mobileUserMenu.style.display = 'none';
+          // Hide dashboard links (using visibility to prevent layout shift)
+          navDashboard.style.visibility = 'hidden';
+          mobileDashboard.style.visibility = 'hidden';
         }
+        
+        // Profile icons are always visible (already set on page load)
       }
 
       // Toggle mobile menu
@@ -392,18 +647,18 @@
           <p class="footer-mission">Transforming discarded tennis strings into sustainable fashion through innovative recycling technology.</p>
         </div>
         <div class="footer-social">
-          <a href="#" class="social-link" aria-label="Facebook">
+          <!-- <a href="#" class="social-link" aria-label="Facebook">
             <i class="fab fa-facebook-f"></i>
           </a>
           <a href="#" class="social-link" aria-label="Instagram">
             <i class="fab fa-instagram"></i>
-          </a>
-          <a href="#" class="social-link" aria-label="LinkedIn">
+          </a> -->
+          <a href="https://www.linkedin.com/company/orobor/posts/?feedView=all"  target="_blank" class="social-link" aria-label="LinkedIn">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          <a href="#" class="social-link" aria-label="Twitter">
+          <!-- <a href="#" class="social-link" aria-label="Twitter">
             <i class="fab fa-twitter"></i>
-          </a>
+          </a> -->
         </div>
       </div>
 
@@ -421,36 +676,15 @@
           </div>
           <div class="contact-item">
             <i class="fas fa-envelope"></i>
-            <span>info@orobor.com</span>
+            <span>jakob@orobor.com <br>
+              jonah@orobor.com
+              
           </div>
-          <div class="contact-item">
-            <i class="fas fa-recycle"></i>
-            <span>Collection Hotline:<br>1-800-OROBOR</span>
-          </div>
+
         </div>
       </div>
 
-      <!-- Column 3: Hours & Location -->
-      <div class="footer-column">
-        <h4 class="footer-heading">Hours & Location</h4>
-        <div class="footer-hours">
-          <div class="hours-item">
-            <strong>Main Office:</strong><br>
-            Mon-Fri: 9AM-6PM<br>
-            Sat: 10AM-4PM<br>
-            Sun: Closed
-          </div>
-          <div class="hours-item">
-            <strong>Collection Drop-off:</strong><br>
-            24/7 at partner locations
-          </div>
-          <div class="hours-item">
-            <strong>Processing Facility:</strong><br>
-            Mon-Fri: 8AM-8PM<br>
-            Sat-Sun: Closed
-          </div>
-        </div>
-      </div>
+
     </div>
 
     <!-- Bottom Bar -->

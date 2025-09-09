@@ -29,7 +29,7 @@
             <a  href="collection.html">COLLECTION LOCATIONS</a>
             <a  href="partner.html">SEND STRING</a>
             <!-- Dashboard link - only visible to authenticated founders -->
-            <a  href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="display: none;">DASHBOARD</a>
+            <a  href="/dashboard" class="nav-dashboard" id="nav-dashboard" style="visibility: hidden;">DASHBOARD</a>
           </nav>
           
           <!-- Mobile Hamburger Button -->
@@ -47,32 +47,25 @@
               <a href="collection.html">COLLECTION LOCATIONS</a>
               <a href="partner.html">SEND STRING</a>
               <!-- Dashboard link for mobile - only visible to authenticated founders -->
-              <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="display: none;">DASHBOARD</a>
+              <a href="/dashboard" class="mobile-dashboard" id="mobile-dashboard" style="visibility: hidden;">DASHBOARD</a>
               <div class="mobile-auth-loading" id="mobile-auth-loading" style="display: none;">
                 <i class="fas fa-spinner fa-spin"></i>
               </div>
-              <a href="SignIn.html" class="mobile-signin" id="mobile-signin" style="display: none;">SIGN IN</a>
-              <!-- Mobile user menu - only visible to authenticated founders -->
-              <div class="mobile-user-menu" id="mobile-user-menu" style="display: none;">
-                <span class="mobile-user-email" id="mobile-user-email"></span>
-                <button class="mobile-signout-btn" id="mobile-signout-btn">SIGN OUT</button>
-              </div>
+              <button class="mobile-profile-icon-btn" id="mobile-profile-icon-btn">
+                <i class="fas fa-user"></i> PROFILE
+              </button>
             </div>
           </nav>
-          
-          <!-- Desktop Sign In/User Button -->
-          <div  class="auth-button-container">
+        <!-- CHECK The JAVA SCRIPT of this section to see why the glitchy nav is happening -->
+          <!-- Desktop Profile Icon -->
+          <div class="auth-button-container">
             <div class="auth-loading" id="auth-loading" style="display: none;">
               <i class="fas fa-spinner fa-spin"></i>
             </div>
-            <button class="btn-signIn desktop-signin" id="desktop-signin" style="display: none;">
-              <a href="SignIn.html">SIGN IN</a>
+            <button class="profile-icon-btn" id="profile-icon-btn">
+              <i class="fas fa-user"></i>
             </button>
-            <div class="user-menu" id="user-menu" style="display: none;">
-              <span class="user-email" id="user-email"></span>
-              <button class="btn-signout" id="btn-signout">SIGN OUT</button>
-            </div>
-          </div>
+          </div> 
         </header>
         <main>
           <div class="content">
@@ -81,7 +74,7 @@
             </div> -->
             <h1 data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="2000">STRINGING FUTURES TOGETHER</h1>
             <p data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="2500" class="description">
-              Serving up a circular future one restring at a time.
+              Serving up a circular future one string at a time.
             </p>
             <div data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0" data-aos-duration="3000"class="buttons">
               <a href="#about" class="btn-about">About Us</a>
@@ -101,71 +94,204 @@
       </div>
     </section>
 
-    <!-- Process Section (Magazine/Editorial Layout) -->
-    <section class="process-section process-editorial">
-      <div class="process-editorial-container">
+    <!-- Process Section - Vertical Scroll-Triggered Animation -->
+    <section class="process-section process-vertical-section">
+      <!-- Parallax Background Elements -->
+      <div class="parallax-bg">
+        <div class="parallax-element parallax-circle-1"></div>
+        <div class="parallax-element parallax-circle-2"></div>
+        <div class="parallax-element parallax-line-1"></div>
+        <div class="parallax-element parallax-line-2"></div>
+      </div>
+      
+      <div class="process-container">
         <!-- Process Header -->
-        <div class="process-header-editorial">
-          <h1 class="process-main-title">Our Process</h1>
-          <p class="process-subtitle">From collection to creation, we're building a circular future</p>
-        </div>
-
-        <!-- Step 1: Collect -->
-        <div class="process-step step-collect">
-          <div class="step-image">
-            <img src="/imgs/Racquet.jpg" alt="Tennis Racket Collection" class="step-img" />
-            <div class="image-overlay"></div>
-            <div class="step-number">01</div>
+        <div class="process-header" data-animate="fade-up">
+          <h2 class="process-title">Our Process</h2>
+          <p class="process-subtitle">From waste to sustainable fashion</p>
+          <div class="process-progress-line">
+            <div class="progress-fill"></div>
           </div>
-          <div class="step-content">
-            <h2 class="step-title">Collect</h2>
-            <p class="step-description">
-              We partner with tennis facilities and players to collect used polyester tennis strings, 
-              ensuring they are diverted from landfills and repurposed for recycling into high-quality materials.
-            </p>
-            <div class="step-accent">
-              <span class="accent-line"></span>
-              <span class="accent-text">First Step</span>
+        </div>
+        
+        <!-- Process Steps -->
+        <div class="process-steps-vertical">
+          <!-- Step 1: Collect -->
+          <div class="process-step-vertical" data-step="1">
+            <div class="step-indicator">
+              <div class="step-icon-morph" data-icons='["fas fa-tennis-ball", "fas fa-hand-holding", "fas fa-handshake"]'>
+                <i class="fas fa-tennis-ball"></i>
+              </div>
+              <div class="step-number">01</div>
+              <div class="step-connector"></div>
+            </div>
+            
+            <div class="step-content-vertical" data-animate="slide-right" data-delay="200">
+              <div class="step-image-container">
+                <div class="step-image-wrapper">
+                  <img src="/imgs/Racquet.jpg" alt="Tennis racquet collection" />
+                  <div class="image-floating-elements">
+                    <div class="floating-icon floating-1"><i class="fas fa-recycle"></i></div>
+                    <div class="floating-icon floating-2"><i class="fas fa-leaf"></i></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="step-text-content">
+                <h3 class="step-title">Collect</h3>
+                <p class="step-description">We partner with tennis facilities, tournaments, and teams to collect used polyester tennis strings, ensuring they are diverted from landfills and repurposed for recycling into high-quality materials.</p>
+                
+                <div class="step-features-grid">
+                  <div class="feature-item" data-animate="fade-up" data-delay="400">
+                    <div class="feature-icon">
+                      <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="feature-content">
+                      <h4>Partnership Network</h4>
+                      <p>Collaborating with facilities nationwide</p>
+                    </div>
+                  </div>
+                  
+                  <div class="feature-item" data-animate="fade-up" data-delay="500">
+                    <div class="feature-icon">
+                      <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="feature-content">
+                      <h4>Waste Diversion</h4>
+                      <p>Preventing landfill accumulation</p>
+                    </div>
+                  </div>
+                  
+                  <!-- <div class="feature-item" data-animate="fade-up" data-delay="600">
+                    <div class="feature-icon">
+                      <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                      <h4>Local Collection</h4>
+                      <p>Strategic pickup locations</p>
+                    </div>
+                  </div> -->
+                </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Step 2: Repurpose -->
-        <div class="process-step step-repurpose">
-          <div class="step-content">
-            <h2 class="step-title">Repurpose</h2>
-            <p class="step-description">
-              Our advanced recycling technology breaks down the polyester strings and transforms them 
-              into virgin-quality materials ready for manufacturing sustainable clothing.
-            </p>
-            <div class="step-accent">
-              <span class="accent-line"></span>
-              <span class="accent-text">Transformation</span>
+          <!-- Step 2: Repurpose -->
+          <div class="process-step-vertical" data-step="2">
+            <div class="step-indicator">
+              <div class="step-icon-morph" data-icons='["fas fa-cogs", "fas fa-flask", "fas fa-atom"]'>
+                <i class="fas fa-cogs"></i>
+              </div>
+              <div class="step-number">02</div>
+              <div class="step-connector"></div>
+            </div>
+            
+            <div class="step-content-vertical" data-animate="slide-left" data-delay="300">
+              <div class="step-text-content">
+                <h3 class="step-title">Repurpose</h3>
+                <p class="step-description">We partner with the most advanced recyling facilities in the world.</p>
+                
+                <div class="step-features-grid">
+                  <div class="feature-item" data-animate="fade-up" data-delay="500">
+                    <div class="feature-icon">
+                      <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="feature-content">
+                      <h4>Advanced Processing</h4>
+                      <p>State-of-the-art machinery</p>
+                    </div>
+                  </div>
+                  
+                  <div class="feature-item" data-animate="fade-up" data-delay="600">
+                    <div class="feature-icon">
+                      <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="feature-content">
+                      <h4>Chemical Innovation</h4>
+                      <p>Breakthrough recycling methods</p>
+                    </div>
+                  </div>
+                  
+                  <div class="feature-item" data-animate="fade-up" data-delay="700">
+                    <div class="feature-icon">
+                      <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="feature-content">
+                      <h4>Quality Assurance</h4>
+                      <p>Virgin-grade material standards</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="step-image-container">
+                <div class="step-image-wrapper">
+                  <img src="/imgs/recycle.jpg" alt="Recycling process" />
+                  <div class="image-floating-elements">
+                    <div class="floating-icon floating-3"><i class="fas fa-atom"></i></div>
+                    <div class="floating-icon floating-4"><i class="fas fa-industry"></i></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="step-image">
-            <img src="/imgs/recycle.jpg" alt="Recycling Process" class="step-img" />
-            <div class="image-overlay"></div>
-            <div class="step-number">02</div>
-          </div>
-        </div>
 
-        <!-- Step 3: Collaborate -->
-        <div class="process-step step-collaborate">
-          <div class="step-image">
-            <img src="/imgs/clothes.jpg" alt="Sustainable Fashion" class="step-img" />
-            <div class="image-overlay"></div>
-            <div class="step-number">03</div>
-          </div>
-          <div class="step-content">
-            <h2 class="step-title">Collaborate</h2>
-            <p class="step-description">
-              The recycled materials are crafted into high-quality, sustainable fashion items, 
-              completing the circular economy and giving tennis strings a second life.
-            </p>
-            <div class="step-accent">
-              <span class="accent-line"></span>
-              <span class="accent-text">New Life</span>
+          <!-- Step 3: Collaborate -->
+          <div class="process-step-vertical" data-step="3">
+            <div class="step-indicator">
+              <div class="step-icon-morph" data-icons='["fas fa-tshirt", "fas fa-infinity", "fas fa-heart"]'>
+                <i class="fas fa-tshirt"></i>
+              </div>
+              <div class="step-number">03</div>
+            </div>
+            
+            <div class="step-content-vertical" data-animate="slide-right" data-delay="400">
+              <div class="step-image-container">
+                <div class="step-image-wrapper">
+                  <img src="/imgs/clothes.jpg" alt="Sustainable fashion" />
+                  <div class="image-floating-elements">
+                    <div class="floating-icon floating-5"><i class="fas fa-heart"></i></div>
+                    <div class="floating-icon floating-6"><i class="fas fa-infinity"></i></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="step-text-content">
+                <h3 class="step-title">Collaborate</h3>
+                <p class="step-description">The recycled materials are crafted into high-quality, sustainable fashion items, completing the circular economy and giving tennis strings a second life.</p>
+                
+                <div class="step-features-grid">
+                  <div class="feature-item" data-animate="fade-up" data-delay="600">
+                    <div class="feature-icon">
+                      <i class="fas fa-tshirt"></i>
+                    </div>
+                    <div class="feature-content">
+                      <h4>Sustainable Fashion</h4>
+                      <p>High-quality clothing production</p>
+                    </div>
+                  </div>
+                  
+                  <div class="feature-item" data-animate="fade-up" data-delay="700">
+                    <div class="feature-icon">
+                      <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="feature-content">
+                      <h4>Circular Economy</h4>
+                      <p>Closing the sustainability loop</p>
+                    </div>
+                  </div>
+                  
+                  <div class="feature-item" data-animate="fade-up" data-delay="800">
+                    <div class="feature-icon">
+                      <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="feature-content">
+                      <h4>Second Life</h4>
+                      <p>Giving materials new purpose</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -229,6 +355,53 @@
       </div>
     </section>
 
+    <!-- One for the Court Section -->
+    <section class="one-for-court-section">
+      <div class="one-for-court-container">
+        <div class="one-for-court-header">
+          <h2 class="one-for-court-title">One for the Court</h2>
+          <div class="one-for-court-underline"></div>
+        </div>
+        
+        <div class="one-for-court-content">
+          <div class="one-for-court-text">
+            <p class="one-for-court-intro">
+              At Orobor, we believe the game is bigger when everyone has the chance to play. That's why for every adult tee purchased, we donate a kids' tee to a young player who needs it most.
+            </p>
+            
+            <p class="one-for-court-description">
+              Through One for the Court, we work with nonprofit organizations around the world that use tennis to empower kids in underprivileged communities. Your purchase helps put apparel directly into the hands of the next generation, giving them the confidence and sense of belonging that comes with stepping onto the court.
+            </p>
+            
+            <p class="one-for-court-impact">
+              Every shirt is more than apparel — it's an opportunity to grow the game and extend its reach to places where it can have the greatest impact. Together, we are giving back to the sport that has given us so much.
+            </p>
+          </div>
+          
+          <div class="one-for-court-visual">
+            <div class="court-visual-container">
+              <div class="court-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <div class="court-stats">
+                <div class="stat-item">
+                  <span class="stat-number">1</span>
+                  <span class="stat-label">Adult Tee</span>
+                </div>
+                <div class="stat-arrow">
+                  <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">1</span>
+                  <span class="stat-label">Kids Tee</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Renewable Energy Section -->
     <section class="renewable-section">
       <div class="renewable-container">
@@ -238,7 +411,7 @@
           <span class="text-part highlight-text">100% ocean derived</span>
           <span class="text-part highlight-text">renewable electricity</span>
           <span class="text-part">—</span>
-          <span class="text-part">no fossil fuels</span>
+          <span class="text-part">No fossil fuels</span>
         </div>
         <div class="energy-icon">
           <i class="fa-solid fa-bolt"></i>
@@ -444,7 +617,277 @@
             }
           }, 16);
         }
+
+        // Process Section Vertical Scroll-Triggered Animations
+        initProcessAnimations();
+        
+        // One for the Court Section Animations
+        initOneForCourtAnimations();
       });
+
+      function initProcessAnimations() {
+        // Create intersection observer for scroll-triggered animations
+        const animationObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const element = entry.target;
+              const delay = element.getAttribute('data-delay') || 0;
+              
+              setTimeout(() => {
+                element.classList.add('animate-in');
+              }, parseInt(delay));
+              
+              animationObserver.unobserve(element);
+            }
+          });
+        }, {
+          threshold: 0.2,
+          rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observe all elements with data-animate attribute
+        document.querySelectorAll('[data-animate]').forEach(element => {
+          animationObserver.observe(element);
+        });
+
+        // Process progress line animation
+        const progressObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const progressFill = entry.target.querySelector('.progress-fill');
+              if (progressFill) {
+                setTimeout(() => {
+                  progressFill.style.width = '100%';
+                }, 500);
+              }
+              progressObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.5
+        });
+
+        const processHeader = document.querySelector('.process-header');
+        if (processHeader) {
+          progressObserver.observe(processHeader);
+        }
+
+        // Icon morphing animation
+        const morphIcons = document.querySelectorAll('.step-icon-morph');
+        morphIcons.forEach((iconContainer, index) => {
+          const iconsData = iconContainer.getAttribute('data-icons');
+          if (iconsData) {
+            try {
+              const icons = JSON.parse(iconsData);
+              let currentIconIndex = 0;
+              
+              // Start morphing after a delay based on step
+              setTimeout(() => {
+                const morphInterval = setInterval(() => {
+                  currentIconIndex = (currentIconIndex + 1) % icons.length;
+                  const iconElement = iconContainer.querySelector('i');
+                  
+                  // Add fade out effect
+                  iconElement.style.opacity = '0';
+                  iconElement.style.transform = 'scale(0.8) rotate(90deg)';
+                  
+                  setTimeout(() => {
+                    // Change icon class
+                    iconElement.className = icons[currentIconIndex];
+                    
+                    // Add fade in effect
+                    iconElement.style.opacity = '1';
+                    iconElement.style.transform = 'scale(1) rotate(0deg)';
+                  }, 200);
+                }, 3000); // Change icon every 3 seconds
+                
+                // Store interval for cleanup if needed
+                iconContainer.morphInterval = morphInterval;
+              }, index * 1000); // Stagger start times
+            } catch (e) {
+              console.error('Error parsing icons data:', e);
+            }
+          }
+        });
+
+        // Parallax effect for background elements
+        let ticking = false;
+        
+        function updateParallax() {
+          const scrollY = window.pageYOffset;
+          const processSection = document.querySelector('.process-vertical-section');
+          
+          if (processSection) {
+            const rect = processSection.getBoundingClientRect();
+            const sectionTop = rect.top + scrollY;
+            const sectionHeight = rect.height;
+            
+            // Only apply parallax when section is in view
+            if (scrollY + window.innerHeight > sectionTop && scrollY < sectionTop + sectionHeight) {
+              const parallaxElements = document.querySelectorAll('.parallax-element');
+              
+              parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1); // Different speeds for each element
+                const yPos = (scrollY - sectionTop) * speed;
+                
+                if (element.classList.contains('parallax-circle-1')) {
+                  element.style.transform = `translateY(${yPos * 0.3}px) rotate(${yPos * 0.1}deg)`;
+                } else if (element.classList.contains('parallax-circle-2')) {
+                  element.style.transform = `translateY(${-yPos * 0.2}px) rotate(${-yPos * 0.1}deg)`;
+                } else if (element.classList.contains('parallax-line-1')) {
+                  element.style.transform = `translateY(${yPos * 0.4}px) scaleY(${1 + yPos * 0.0005})`;
+                } else if (element.classList.contains('parallax-line-2')) {
+                  element.style.transform = `translateY(${-yPos * 0.3}px) scaleY(${1 + yPos * 0.0003})`;
+                }
+              });
+            }
+          }
+          
+          ticking = false;
+        }
+        
+        function requestTick() {
+          if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+          }
+        }
+        
+        // Throttled scroll listener for parallax
+        window.addEventListener('scroll', requestTick);
+
+        // Floating icons animation trigger
+        const floatingIconsObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const floatingElements = entry.target.querySelectorAll('.floating-icon');
+              floatingElements.forEach((icon, index) => {
+                setTimeout(() => {
+                  icon.style.opacity = '1';
+                  icon.style.transform = 'scale(1)';
+                }, index * 200);
+              });
+              floatingIconsObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.3
+        });
+
+        // Initially hide floating icons
+        document.querySelectorAll('.floating-icon').forEach(icon => {
+          icon.style.opacity = '0';
+          icon.style.transform = 'scale(0.5)';
+          icon.style.transition = 'all 0.6s ease';
+        });
+
+        // Observe image containers for floating icons
+        document.querySelectorAll('.step-image-wrapper').forEach(wrapper => {
+          floatingIconsObserver.observe(wrapper);
+        });
+      }
+
+      function initOneForCourtAnimations() {
+        // Create intersection observer for One for the Court section
+        const oneForCourtObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const section = entry.target;
+              
+              // Animate title
+              const title = section.querySelector('.one-for-court-title');
+              if (title) {
+                setTimeout(() => {
+                  title.style.opacity = '1';
+                  title.style.transform = 'translateY(0)';
+                }, 200);
+              }
+              
+              // Animate underline
+              const underline = section.querySelector('.one-for-court-underline');
+              if (underline) {
+                setTimeout(() => {
+                  underline.style.width = '100px';
+                }, 600);
+              }
+              
+              // Animate text content
+              const textElements = section.querySelectorAll('.one-for-court-intro, .one-for-court-description, .one-for-court-impact');
+              textElements.forEach((element, index) => {
+                setTimeout(() => {
+                  element.style.opacity = '1';
+                  element.style.transform = 'translateY(0)';
+                }, 800 + (index * 300));
+              });
+              
+              // Animate visual elements
+              const visualContainer = section.querySelector('.court-visual-container');
+              if (visualContainer) {
+                setTimeout(() => {
+                  visualContainer.style.opacity = '1';
+                  visualContainer.style.transform = 'translateY(0) scale(1)';
+                }, 1200);
+              }
+              
+              // Animate stats
+              const statItems = section.querySelectorAll('.stat-item');
+              statItems.forEach((item, index) => {
+                setTimeout(() => {
+                  item.style.opacity = '1';
+                  item.style.transform = 'translateY(0)';
+                }, 1500 + (index * 200));
+              });
+              
+              oneForCourtObserver.unobserve(section);
+            }
+          });
+        }, {
+          threshold: 0.3,
+          rootMargin: '0px 0px -100px 0px'
+        });
+
+        // Observe the One for the Court section
+        const oneForCourtSection = document.querySelector('.one-for-court-section');
+        if (oneForCourtSection) {
+          oneForCourtObserver.observe(oneForCourtSection);
+          
+          // Set initial states for animations
+          const title = oneForCourtSection.querySelector('.one-for-court-title');
+          const underline = oneForCourtSection.querySelector('.one-for-court-underline');
+          const textElements = oneForCourtSection.querySelectorAll('.one-for-court-intro, .one-for-court-description, .one-for-court-impact');
+          const visualContainer = oneForCourtSection.querySelector('.court-visual-container');
+          const statItems = oneForCourtSection.querySelectorAll('.stat-item');
+          
+          if (title) {
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(30px)';
+            title.style.transition = 'all 0.8s ease-out';
+          }
+          
+          if (underline) {
+            underline.style.width = '0';
+            underline.style.transition = 'width 0.6s ease-out';
+          }
+          
+          textElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.8s ease-out';
+          });
+          
+          if (visualContainer) {
+            visualContainer.style.opacity = '0';
+            visualContainer.style.transform = 'translateY(50px) scale(0.95)';
+            visualContainer.style.transition = 'all 1s ease-out';
+          }
+          
+          statItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'all 0.6s ease-out';
+          });
+        }
+      }
     </script>
 
     <!-- About Us Section (Magazine Layout) -->
@@ -485,70 +928,56 @@
         // Navigation elements
         const navDashboard = document.getElementById('nav-dashboard');
         const mobileDashboard = document.getElementById('mobile-dashboard');
-        const desktopSignin = document.getElementById('desktop-signin');
-        const mobileSignin = document.getElementById('mobile-signin');
-        const userMenu = document.getElementById('user-menu');
-        const userEmail = document.getElementById('user-email');
-        const btnSignout = document.getElementById('btn-signout');
-        const mobileUserMenu = document.getElementById('mobile-user-menu');
-        const mobileUserEmail = document.getElementById('mobile-user-email');
-        const mobileSignoutBtn = document.getElementById('mobile-signout-btn');
+        const profileIconBtn = document.getElementById('profile-icon-btn');
+        const mobileProfileIconBtn = document.getElementById('mobile-profile-icon-btn');
         const authLoading = document.getElementById('auth-loading');
         const mobileAuthLoading = document.getElementById('mobile-auth-loading');
 
-        // Show loading state initially
-        showLoadingState();
-
-        // Check authentication status on page load
+        // Check authentication status on page load (for dashboard visibility only)
         checkAuthStatus();
 
-        // Sign out functionality
-        btnSignout.addEventListener('click', async function() {
+        // Profile icon click functionality
+        profileIconBtn.addEventListener('click', async function() {
           try {
-            const response = await fetch('/api/auth/signout', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              }
-            });
-
-            if (response.ok) {
-              // Update UI to show signed out state
-              updateNavigationState(false);
-              // Redirect to home page
-              window.location.href = '/';
+            const response = await fetch('/api/auth/status');
+            const data = await response.json();
+            
+            if (data.authenticated) {
+              // User is signed in, redirect to logout page
+              window.location.href = '/logout.html';
             } else {
-              console.error('Sign out failed');
+              // User is not signed in, redirect to sign in page
+              window.location.href = '/SignIn.html';
             }
           } catch (error) {
-            console.error('Sign out error:', error);
+            console.error('Auth status check failed:', error);
+            // Default to sign in page on error
+            window.location.href = '/SignIn.html';
           }
         });
 
-        // Mobile sign out functionality
-        mobileSignoutBtn.addEventListener('click', async function() {
+        // Mobile profile icon click functionality
+        mobileProfileIconBtn.addEventListener('click', async function() {
           try {
-            const response = await fetch('/api/auth/signout', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              }
-            });
-
-            if (response.ok) {
-              // Update UI to show signed out state
-              updateNavigationState(false);
-              // Close mobile menu
-              hamburgerBtn.classList.remove('active');
-              mobileNav.classList.remove('active');
-              document.body.classList.remove('menu-open');
-              // Redirect to home page
-              window.location.href = '/';
+            const response = await fetch('/api/auth/status');
+            const data = await response.json();
+            
+            // Close mobile menu first
+            hamburgerBtn.classList.remove('active');
+            mobileNav.classList.remove('active');
+            document.body.classList.remove('menu-open');
+            
+            if (data.authenticated) {
+              // User is signed in, redirect to logout page
+              window.location.href = '/logout.html';
             } else {
-              console.error('Sign out failed');
+              // User is not signed in, redirect to sign in page
+              window.location.href = '/SignIn.html';
             }
           } catch (error) {
-            console.error('Sign out error:', error);
+            console.error('Auth status check failed:', error);
+            // Default to sign in page on error
+            window.location.href = '/SignIn.html';
           }
         });
 
@@ -572,13 +1001,9 @@
         }
 
         function showLoadingState() {
-          // Hide all auth elements
-          desktopSignin.style.display = 'none';
-          mobileSignin.style.display = 'none';
-          userMenu.style.display = 'none';
-          mobileUserMenu.style.display = 'none';
-          navDashboard.style.display = 'none';
-          mobileDashboard.style.display = 'none';
+          // Hide dashboard links (using visibility to prevent layout shift)
+          navDashboard.style.visibility = 'hidden';
+          mobileDashboard.style.visibility = 'hidden';
           
           // Show loading spinners
           authLoading.style.display = 'inline-block';
@@ -586,39 +1011,21 @@
         }
 
         function updateNavigationState(isAuthenticated, userEmail = '') {
-          // Hide loading spinners
+          // Hide loading spinners (if any were shown)
           authLoading.style.display = 'none';
           mobileAuthLoading.style.display = 'none';
           
           if (isAuthenticated) {
-            // Show dashboard links
-            navDashboard.style.display = 'inline-block';
-            mobileDashboard.style.display = 'block';
-            
-            // Hide sign in buttons
-            desktopSignin.style.display = 'none';
-            mobileSignin.style.display = 'none';
-            
-            // Show user menu
-            userMenu.style.display = 'flex';
-            userEmail.textContent = userEmail;
-            
-            // Show mobile user menu
-            mobileUserMenu.style.display = 'flex';
-            mobileUserEmail.textContent = userEmail;
+            // Show dashboard links (using visibility to prevent layout shift)
+            navDashboard.style.visibility = 'visible';
+            mobileDashboard.style.visibility = 'visible';
           } else {
-            // Hide dashboard links
-            navDashboard.style.display = 'none';
-            mobileDashboard.style.display = 'none';
-            
-            // Show sign in buttons
-            desktopSignin.style.display = 'inline-block';
-            mobileSignin.style.display = 'block';
-            
-            // Hide user menu
-            userMenu.style.display = 'none';
-            mobileUserMenu.style.display = 'none';
+            // Hide dashboard links (using visibility to prevent layout shift)
+            navDashboard.style.visibility = 'hidden';
+            mobileDashboard.style.visibility = 'hidden';
           }
+          
+          // Profile icons are always visible (already set on page load)
         }
 
         // Toggle mobile menu
@@ -677,13 +1084,18 @@
             <p class="footer-mission">Transforming discarded tennis strings into sustainable fashion through innovative recycling technology.</p>
           </div>
           <div class="footer-social">
-            <a href="https://www.linkedin.com/company/orobor/" class="social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
-              <i class="fab fa-linkedin-in"></i>
+            <!-- <a href="#" class="social-link" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
             </a>
-            <!-- <a href="https://www.instagram.com/orobor.co/" class="social-link" aria-label="Instagram">
+            <a href="#" class="social-link" aria-label="Instagram">
               <i class="fab fa-instagram"></i>
             </a> -->
-           
+            <a href="https://www.linkedin.com/company/orobor/posts/?feedView=all"  target="_blank" class="social-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <!-- <a href="#" class="social-link" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a> -->
           </div>
         </div>
 
@@ -693,7 +1105,7 @@
           <div class="footer-contact">
             <div class="contact-item">
               <i class="fas fa-map-marker-alt"></i>
-              <span>Boston, MA </span>
+              <span>Boston, MA</span>
             </div>
             <div class="contact-item">
               <i class="fas fa-phone"></i>
@@ -705,31 +1117,11 @@
                 jonah@orobor.com
                 
             </div>
-           
+
           </div>
         </div>
 
-        <!-- Column 3: Hours & Location -->
-        <div class="footer-column">
-          <h4 class="footer-heading">Hours & Location</h4>
-          <div class="footer-hours">
-            <div class="hours-item">
-              <strong>Main Office:</strong><br>
-              Mon-Fri: 9AM-6PM<br>
-              Sat: 10AM-4PM<br>
-              Sun: Closed
-            </div>
-            <div class="hours-item">
-              <strong>Collection Drop-off:</strong><br>
-              24/7 at partner locations
-            </div>
-            <div class="hours-item">
-              <strong>Processing Facility:</strong><br>
-              Mon-Fri: 8AM-8PM<br>
-              Sat-Sun: Closed
-            </div>
-          </div>
-        </div>
+
       </div>
 
       <!-- Bottom Bar -->
