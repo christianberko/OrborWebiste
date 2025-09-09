@@ -361,7 +361,272 @@
         }
       });
     });
-  </script>
+      </script>
+
+    <script>
+      // Global variables to store shipping label data
+      let currentShippingLabelData = null;
+      let currentTrackingNumber = null;
+
+      // Function to display shipping label modal
+      function displayShippingLabelModal(upsResponse) {
+        try {
+          // Extract data from UPS response
+          const shipmentResults = upsResponse.ShipmentResponse.ShipmentResults;
+          const packageResults = shipmentResults.PackageResults[0];
+          const base64Image = packageResults.ShippingLabel.GraphicImage;
+          const trackingNumber = packageResults.TrackingNumber;
+          const totalCharges = shipmentResults.ShipmentCharges.TotalCharges.MonetaryValue;
+          
+          // Store data globally
+          currentShippingLabelData = base64Image;
+          currentTrackingNumber = trackingNumber;
+          
+          // Update modal content
+          document.getElementById('trackingNumber').textContent = trackingNumber;
+          document.getElementById('shippingCost').textContent = `$${totalCharges}`;
+          document.getElementById('shippingLabelImage').src = `data:image/gif;base64,${base64Image}`;
+          
+          // Show modal
+          document.getElementById('shippingLabelModal').style.display = 'flex';
+          
+          // Prevent body scroll
+          document.body.style.overflow = 'hidden';
+          
+        } catch (error) {
+          console.error('Error displaying shipping label modal:', error);
+          alert('Error displaying shipping label. Please try again.');
+        }
+      }
+
+      // Function to close shipping label modal
+      function closeShippingModal() {
+        document.getElementById('shippingLabelModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        
+        // Clear stored data
+        currentShippingLabelData = null;
+        currentTrackingNumber = null;
+      }
+
+      // Function to download shipping label
+      function downloadShippingLabel() {
+        if (!currentShippingLabelData) {
+          alert('No shipping label data available.');
+          return;
+        }
+        
+        try {
+          // Create download link
+          const link = document.createElement('a');
+          link.href = `data:image/gif;base64,${currentShippingLabelData}`;
+          link.download = `shipping-label-${currentTrackingNumber}.gif`;
+          
+          // Trigger download
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          // Show success message
+          showNotification('Shipping label downloaded successfully!', 'success');
+          
+        } catch (error) {
+          console.error('Error downloading shipping label:', error);
+          alert('Error downloading shipping label. Please try again.');
+        }
+      }
+
+      // Function to print shipping label
+      function printShippingLabel() {
+        if (!currentShippingLabelData) {
+          alert('No shipping label data available.');
+          return;
+        }
+        
+        try {
+          // Open print window
+          const printWindow = window.open('', '_blank');
+          printWindow.document.write(`
+            <html>
+              <head>
+                <title>Print Shipping Label</title>
+                <style>
+                  body {
+                    margin: 0;
+                    padding: 20px;
+                    font-family: Arial, sans-serif;
+                  }
+                  .print-header {
+                    text-align: center;
+                    margin-bottom: 20px;
+                  }
+                  .label-image {
+                    width: 100%;
+                    max-width: 600px;
+                    height: auto;
+                    display: block;
+                    margin: 0 auto;
+                    border: 1px solid #ddd;
+                  }
+                  .label-info {
+                    text-align: center;
+                    margin-top: 20px;
+                    font-size: 14px;
+                    color: #666;
+                  }
+                  @media print {
+                    body { padding: 0; }
+                    .print-header, .label-info { display: none; }
+                  }
+                </style>
+              </head>
+              <body>
+                <div class="print-header">
+                  <h2>Shipping Label</h2>
+                  <p>Tracking Number: ${currentTrackingNumber}</p>
+                </div>
+                <img src="data:image/gif;base64,${currentShippingLabelData}" class="label-image" />
+                <div class="label-info">
+                  <p>Generated on: ${new Date().toLocaleString()}</p>
+                </div>
+                <script>
+                  window.onload = function() {
+                    setTimeout(function() {
+                      window.print();
+                      window.close();
+                    }, 500);
+                  }
+                </script>
+              </body>
+            </html>
+          `);
+          printWindow.document.close();
+          
+        } catch (error) {
+          console.error('Error printing shipping label:', error);
+          alert('Error printing shipping label. Please try again.');
+        }
+      }
+
+      // Function to show notification
+      function showNotification(message, type = 'info') {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.textContent = message;
+        
+        // Add styles
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          padding: 15px 20px;
+          border-radius: 6px;
+          color: white;
+          font-weight: 500;
+          z-index: 10001;
+          animation: slideInRight 0.3s ease-out;
+          max-width: 300px;
+        `;
+        
+        // Set background color based on type
+        if (type === 'success') {
+          notification.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+        } else if (type === 'error') {
+          notification.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+        } else {
+          notification.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
+        }
+        
+        // Add to page
+        document.body.appendChild(notification);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+          notification.style.animation = 'slideOutRight 0.3s ease-in';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 300);
+        }, 3000);
+      }
+
+      // Close modal when clicking outside
+      document.addEventListener('click', function(event) {
+        const modal = document.getElementById('shippingLabelModal');
+        if (event.target === modal) {
+          closeShippingModal();
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          const modal = document.getElementById('shippingLabelModal');
+          if (modal.style.display === 'flex') {
+            closeShippingModal();
+          }
+        }
+      });
+
+      // Add CSS animations for notifications
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes slideInRight {
+          from {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes slideOutRight {
+          from {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateX(100%);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
+
+    <!-- Shipping Label Modal -->
+  <div id="shippingLabelModal" class="shipping-label-modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Shipping Label Created Successfully!</h3>
+        <span class="close" onclick="closeShippingModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="label-info">
+          <p><strong>Tracking Number:</strong> <span id="trackingNumber"></span></p>
+          <p><strong>Shipping Cost:</strong> <span id="shippingCost"></span></p>
+        </div>
+        <div class="label-container">
+          <img id="shippingLabelImage" alt="Shipping Label" />
+        </div>
+        <div class="button-group">
+          <button class="btn-download" onclick="downloadShippingLabel()">
+            <i class="fas fa-download"></i> Download Label
+          </button>
+          <button class="btn-print" onclick="printShippingLabel()">
+            <i class="fas fa-print"></i> Print Label
+          </button>
+          <button class="btn-close" onclick="closeShippingModal()">
+            <i class="fas fa-times"></i> Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">
@@ -445,5 +710,240 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Global variables to store shipping label data
+    let currentShippingLabelData = null;
+    let currentTrackingNumber = null;
+
+    // Function to display shipping label modal
+    function displayShippingLabelModal(upsResponse) {
+      try {
+        // Extract data from UPS response
+        const shipmentResults = upsResponse.ShipmentResponse.ShipmentResults;
+        const packageResults = shipmentResults.PackageResults[0];
+        const base64Image = packageResults.ShippingLabel.GraphicImage;
+        const trackingNumber = packageResults.TrackingNumber;
+        const totalCharges = shipmentResults.ShipmentCharges.TotalCharges.MonetaryValue;
+        
+        // Store data globally
+        currentShippingLabelData = base64Image;
+        currentTrackingNumber = trackingNumber;
+        
+        // Update modal content
+        document.getElementById('trackingNumber').textContent = trackingNumber;
+        document.getElementById('shippingCost').textContent = `$${totalCharges}`;
+        document.getElementById('shippingLabelImage').src = `data:image/gif;base64,${base64Image}`;
+        
+        // Show modal
+        document.getElementById('shippingLabelModal').style.display = 'flex';
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        
+      } catch (error) {
+        console.error('Error displaying shipping label modal:', error);
+        alert('Error displaying shipping label. Please try again.');
+      }
+    }
+
+    // Function to close shipping label modal
+    function closeShippingModal() {
+      document.getElementById('shippingLabelModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+      
+      // Clear stored data
+      currentShippingLabelData = null;
+      currentTrackingNumber = null;
+    }
+
+    // Function to download shipping label
+    function downloadShippingLabel() {
+      if (!currentShippingLabelData) {
+        alert('No shipping label data available.');
+        return;
+      }
+      
+      try {
+        // Create download link
+        const link = document.createElement('a');
+        link.href = `data:image/gif;base64,${currentShippingLabelData}`;
+        link.download = `shipping-label-${currentTrackingNumber}.gif`;
+        
+        // Trigger download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Show success message
+        showNotification('Shipping label downloaded successfully!', 'success');
+        
+      } catch (error) {
+        console.error('Error downloading shipping label:', error);
+        alert('Error downloading shipping label. Please try again.');
+      }
+    }
+
+    // Function to print shipping label
+    function printShippingLabel() {
+      if (!currentShippingLabelData) {
+        alert('No shipping label data available.');
+        return;
+      }
+      
+      try {
+        // Open print window
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>Print Shipping Label</title>
+              <style>
+                body {
+                  margin: 0;
+                  padding: 20px;
+                  font-family: Arial, sans-serif;
+                }
+                .print-header {
+                  text-align: center;
+                  margin-bottom: 20px;
+                }
+                .label-image {
+                  width: 100%;
+                  max-width: 600px;
+                  height: auto;
+                  display: block;
+                  margin: 0 auto;
+                  border: 1px solid #ddd;
+                }
+                .label-info {
+                  text-align: center;
+                  margin-top: 20px;
+                  font-size: 14px;
+                  color: #666;
+                }
+                @media print {
+                  body { padding: 0; }
+                  .print-header, .label-info { display: none; }
+                }
+              </style>
+            </head>
+            <body>
+              <div class="print-header">
+                <h2>Shipping Label</h2>
+                <p>Tracking Number: ${currentTrackingNumber}</p>
+              </div>
+              <img src="data:image/gif;base64,${currentShippingLabelData}" class="label-image" />
+              <div class="label-info">
+                <p>Generated on: ${new Date().toLocaleString()}</p>
+              </div>
+              <script>
+                window.onload = function() {
+                  setTimeout(function() {
+                    window.print();
+                    window.close();
+                  }, 500);
+                }
+              </script>
+            </body>
+          </html>
+        `);
+        printWindow.document.close();
+        
+      } catch (error) {
+        console.error('Error printing shipping label:', error);
+        alert('Error printing shipping label. Please try again.');
+      }
+    }
+
+    // Function to show notification
+    function showNotification(message, type = 'info') {
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = `notification notification-${type}`;
+      notification.textContent = message;
+      
+      // Add styles
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 6px;
+        color: white;
+        font-weight: 500;
+        z-index: 10001;
+        animation: slideInRight 0.3s ease-out;
+        max-width: 300px;
+      `;
+      
+      // Set background color based on type
+      if (type === 'success') {
+        notification.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+      } else if (type === 'error') {
+        notification.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+      } else {
+        notification.style.background = 'linear-gradient(135deg, #3498db 0%, #2980b9 100%)';
+      }
+      
+      // Add to page
+      document.body.appendChild(notification);
+      
+      // Remove after 3 seconds
+      setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 3000);
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(event) {
+      const modal = document.getElementById('shippingLabelModal');
+      if (event.target === modal) {
+        closeShippingModal();
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        const modal = document.getElementById('shippingLabelModal');
+        if (modal.style.display === 'flex') {
+          closeShippingModal();
+        }
+      }
+    });
+
+    // Add CSS animations for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      
+      @keyframes slideOutRight {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
